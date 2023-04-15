@@ -1,0 +1,30 @@
+{
+  "name": "hra-rui-locations-processor",
+  "version": "1.0.0",
+  "description": "processor that creates rui_locations.jsonld data",
+  "main": "cli.js",
+  "bin": {
+    "hra-registration-processor": "src/cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubmapconsortium/hra-rui-locations-processor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hubmapconsortium/hra-rui-locations-processor/issues"
+  },
+  "homepage": "https://github.com/hubmapconsortium/hra-rui-locations-processor#readme",
+  "dependencies": {
+    "commander": "^10.0.1",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.5"
+  }
+}
