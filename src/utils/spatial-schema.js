@@ -3,14 +3,15 @@ import { z } from "zod";
 
 export const SpatialPlacementCommon = z.object({
   /** JSON-LD context */
-  "@context": z.string().optional(),
+  context: z.string().optional(),
   /** Identifier */
-  "@id": z.string(),
+  id: z.string(),
   /** Type name */
-  "@type": z.literal("SpatialPlacement"),
+  type: z.literal("SpatialPlacement"),
 
   /** Date placement was made */
-  placement_date: z.date(),
+  placement_date: z.string(),
+  // placement_date: z.coerce.date(),
   /** Scaling in x-dimension */
   x_scaling: z.number(),
   /** Scaling in y-dimension */
@@ -44,11 +45,11 @@ export const SpatialPlacementCommon = z.object({
 
 
 
-export const SpatialEntity = z.object({
+export const temp = z.object({
   /** Identifier */
-  "@id": z.string(),
+  id: z.string(),
   /** Type name */
-  "@type": z.literal("SpatialEntity"),
+  type: z.literal("SpatialEntity"),
   /** Entity label */
   label: z.string().optional(),
   /** Entity Comment */
@@ -75,16 +76,21 @@ export const SpatialEntity = z.object({
   /** Units dimensions are in */
   dimension_units: z.string().optional(),
 
+
+
   
 });
 
 export const SpatialPlacement = SpatialPlacementCommon.extend({
   /** Source entity */
-  source: z.string().or(SpatialEntity).optional(),
+  source: z.string().or(temp).optional(),
   /** Target entity */
-  target: z.string().or(SpatialEntity)
+  target: z.string().or(temp)
 });
 
-export const temp = SpatialEntity.extend({
+export const SpatialEntity = temp.extend({
   placement: SpatialPlacement
 })
+
+
+
