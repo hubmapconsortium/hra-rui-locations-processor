@@ -1,13 +1,15 @@
+# yaml-language-server: $schema=../../registrations.schema.json
+
 - provider_name: SEA-AD
-  consortiumn_name: SEA-AD
-  defaults: thumbnail
-  Donors:
+  consortium_name: SEA-AD
+  thumbnail: assets/blahblah
+  donors:
   - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
     label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
     description: "4 x 4 x 5 millimeter, 0.11 millimeter"
     link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"
     sex: Male
-    Blocks: 
+    blocks: 
     - id: https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock
       label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
       description: 4 x 4 x 5 millimeter, 0.11 millimeter
@@ -17,18 +19,15 @@
       # rui_locations:
       # - creator: Rebecca Hodge
       #   creator_first_name: Rebecca
-      Sections:
+      sections:
       - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
         label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
         description: "4 x 4 x 5 millimeter, 0.11 millimeter"
         link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"
-      Datasets:
+      datasets:
       - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
         label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
         description: "4 x 4 x 5 millimeter, 0.11 millimeter"
         link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"  
         technology: OTHER
         thumbnail: assets/sea-ad/thumbnails/SEA-AD_logo_800x800.jpg
-      
-
-

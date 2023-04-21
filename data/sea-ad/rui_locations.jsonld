@@ -1,3 +1,174 @@
 {
-  "-context": null
+  "$ref": "#/definitions/mySchema",
+  "definitions": {
+    "mySchema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "provider_name": {
+            "type": "string"
+          },
+          "provider_uuid": {
+            "type": "string"
+          },
+          "consortium_name": {
+            "type": "string"
+          },
+          "defaults": {
+            "type": "string"
+          },
+          "donors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "descripton": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "number"
+                },
+                "sex": {
+                  "type": "string"
+                },
+                "bmi": {
+                  "type": "number"
+                },
+                "blocks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "rui_location": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "descripton": {
+                        "type": "string"
+                      },
+                      "link": {
+                        "type": "string"
+                      },
+                      "section_count": {
+                        "type": "number"
+                      },
+                      "section_size": {
+                        "type": "number"
+                      },
+                      "section_unit": {
+                        "type": "string"
+                      },
+                      "sections": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "label": {
+                              "type": "string"
+                            },
+                            "descripton": {
+                              "type": "string"
+                            },
+                            "link": {
+                              "type": "string"
+                            },
+                            "section_number": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "label",
+                            "link"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "label": {
+                              "type": "string"
+                            },
+                            "descripton": {
+                              "type": "string"
+                            },
+                            "link": {
+                              "type": "string"
+                            },
+                            "technology": {
+                              "type": "string"
+                            },
+                            "thumbnail": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "label",
+                            "link",
+                            "technology",
+                            "thumbnail"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "label",
+                      "section_count",
+                      "section_size",
+                      "section_unit",
+                      "sections",
+                      "datasets"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "label",
+                "link",
+                "sex",
+                "blocks"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "provider_name",
+          "defaults",
+          "donors"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
 }

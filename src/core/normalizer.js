@@ -1,6 +1,7 @@
-import { dump, load } from 'js-yaml';
+import { load } from 'js-yaml';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
+import { Providers } from "../utils/data-schema.js";
 
 export function normalizeRegistrations(context) {
   const rawDataPath = resolve(context.doPath, 'registrations.yaml');
@@ -16,5 +17,7 @@ export function normalizeRegistrations(context) {
 }
 
 export function processRegistrations(data, ruiLocationsDir) {
-  return data;
+  const validatedData = Providers.parse(data);
+
+  return validatedData;
 }

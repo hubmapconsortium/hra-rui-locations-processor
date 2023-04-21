@@ -1,0 +1,230 @@
+{
+  "$ref": "#/definitions/mySchema",
+  "definitions": {
+    "mySchema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "provider_name": {
+            "type": "string"
+          },
+          "provider_uuid": {
+            "type": "string"
+          },
+          "consortium_name": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "default_dataset_technology": {
+            "type": "string"
+          },
+          "donors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "number"
+                },
+                "sex": {
+                  "type": "string",
+                  "enum": [
+                    "Male",
+                    "Female"
+                  ]
+                },
+                "bmi": {
+                  "type": "number"
+                },
+                "blocks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "rui_location": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "@id": {
+                                "type": "string"
+                              },
+                              "@type": {
+                                "type": "string",
+                                "const": "SpatialEntity"
+                              },
+                              "label": {
+                                "type": "string"
+                              },
+                              "comment": {
+                                "type": "string"
+                              },
+                              "creator": {
+                                "type": "string"
+                              },
+                              "creator_first_name": {
+                                "type": "string"
+                              },
+                              "creator_last_name": {
+                                "type": "string"
+                              },
+                              "creator_orcid": {
+                                "type": "string"
+                              },
+                              "creation_date": {
+                                "type": "string"
+                              },
+                              "ccf_annotations": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "x_dimension": {
+                                "type": "number"
+                              },
+                              "y_dimension": {
+                                "type": "number"
+                              },
+                              "z_dimension": {
+                                "type": "number"
+                              },
+                              "dimension_units": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "@id",
+                              "@type"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "link": {
+                        "type": "string"
+                      },
+                      "section_count": {
+                        "type": "number"
+                      },
+                      "section_size": {
+                        "type": "number"
+                      },
+                      "section_unit": {
+                        "type": "string"
+                      },
+                      "sections": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "label": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "link": {
+                              "type": "string"
+                            },
+                            "section_number": {
+                              "type": "number"
+                            },
+                            "datasets": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "label": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "link": {
+                                    "type": "string"
+                                  },
+                                  "technology": {
+                                    "type": "string"
+                                  },
+                                  "thumbnail": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "datasets": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/sections/items/properties/datasets/items"
+                        }
+                      }
+                    },
+                    "required": [
+                      "rui_location"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "id",
+                "label",
+                "link",
+                "blocks"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "provider_name",
+          "thumbnail",
+          "donors"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
