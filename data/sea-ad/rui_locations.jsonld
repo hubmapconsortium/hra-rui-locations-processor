@@ -17,7 +17,7 @@
               "id": "http://purl.org/ccf/1.5/a7fc1e43-5376-42f2-95a4-8a8bfefc3f29",
               "type": "SpatialEntity",
               "creator": "a b",
-              "creator_first_name": "a",
+              "creator_first_name": "test",
               "creator_last_name": "b",
               "creation_date": "2023-04-24",
               "ccf_annotations": [
