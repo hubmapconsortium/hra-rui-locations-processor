@@ -16,31 +16,31 @@
       section_count: 1
       section_size: 0.11
       section_unit: millimeter
-      rui_location:
-        id: "Rebecca Hodge"
-        type: SpatialEntity
-        creator_first_name: Rebecca
-        x_dimension: 4
-        y_dimension: 5
-        z_dimension: 5
-        placement:
-          id: ididi
-          type: SpatialPlacement
-          placement_date: "2023-02-20"
-          x_scaling: 1
-          y_scaling: 1
-          z_scaling: 1
-          scaling_units: "ratio"
-          x_rotation: 0
-          y_rotation: 6
-          z_rotation: -10
-          rotation_order: "XYZ"
-          rotation_units: "degree"
-          x_translation: 133.347
-          y_translation: 57.93
-          z_translation: 64.154
-          translation_units: "millimeter"
-          target: "http://purl.org/ccf/latest/ccf.owl#VHMAllenBrain"
+      rui_location: abc.json
+        # id: "Rebecca Hodge"
+        # type: SpatialEntity
+        # creator_first_name: Rebecca
+        # x_dimension: 4
+        # y_dimension: 5
+        # z_dimension: 5
+        # placement:
+        #   id: ididi
+        #   type: SpatialPlacement
+        #   placement_date: "2023-02-20"
+        #   x_scaling: 1
+        #   y_scaling: 1
+        #   z_scaling: 1
+        #   scaling_units: "ratio"
+        #   x_rotation: 0
+        #   y_rotation: 6
+        #   z_rotation: -10
+        #   rotation_order: "XYZ"
+        #   rotation_units: "degree"
+        #   x_translation: 133.347
+        #   y_translation: 57.93
+        #   z_translation: 64.154
+        #   translation_units: "millimeter"
+        #   target: "http://purl.org/ccf/latest/ccf.owl#VHMAllenBrain"
 
       sections:
       - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"

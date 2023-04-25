@@ -2,11 +2,11 @@ import { load } from 'js-yaml';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { Providers } from "../utils/data-schema.js";
+import { SpatialEntity } from "../utils/spatial-schema.js"
 
 export function normalizeRegistrations(context) {
-  const rawDataPath = resolve(context.doPath, 'registrations.yaml');
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
-  const data = load(readFileSync(rawDataPath));  
+  const data = loadFile(context.doPath, 'registrations.yaml', Providers);
   const normalized = processRegistrations(data, ruiLocationsDir);
 
   // const normalizedPath = resolve(context.doPath, 'normalized.yaml');
@@ -17,7 +17,26 @@ export function normalizeRegistrations(context) {
 }
 
 export function processRegistrations(data, ruiLocationsDir) {
-  const validatedData = Providers.parse(data);
+  for (const block of blockIter(data)) {
+    if (typeof block.rui_location === 'string') {
+      block.rui_location = loadFile(ruiLocationsDir, block.rui_location, SpatialEntity);
+    }
+  }
+  return data;
+}
 
-  return validatedData;
+function *blockIter(data) {
+  for (const provider of data) {
+    for (const donor of provider.donors) {
+      for (const block of donor.blocks) {
+        yield block;
+      }
+    }
+  }
+}
+
+function loadFile(dir, file, schema) {
+  const path = resolve(dir, file);
+  const yaml = load(readFileSync(path));
+  return schema.parse(yaml);
 }
