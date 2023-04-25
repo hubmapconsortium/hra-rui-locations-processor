@@ -77,11 +77,12 @@ export const Provider = z.object({
   /** Provider Name */
   provider_name: z.string(),
   /** Provider UUID */
-  provider_uuid: z.string().optional(),
+  provider_uuid: z.string(),
   /** Consortium Name */
-  consortium_name: z.string().optional(),
+  consortium_name: z.string(),
   /** Defaults: thumbnail technology */
   thumbnail: z.string(),
+  /** Default Thumbnail */
   default_dataset_technology: z.string().optional(),
   /** An array of Donor */
   donors: Donor.array().min(1),

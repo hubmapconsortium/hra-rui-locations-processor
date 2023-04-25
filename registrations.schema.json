@@ -18,6 +18,9 @@
           "thumbnail": {
             "type": "string"
           },
+          "label": {
+            "type": "string"
+          },
           "default_dataset_technology": {
             "type": "string"
           },
