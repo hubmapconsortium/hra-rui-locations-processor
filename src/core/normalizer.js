@@ -32,15 +32,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
 
       for (const [block, blockId] of enumerate(donor.blocks)) {
         ensureId(blockId, block, donor);
-        if (typeof block.rui_location === "string") {
-          block.rui_location = loadFile(
-            ruiLocationsDir,
-            block.rui_location,
-            SpatialEntity
-          );
-        }
-        const ruiLocation = block.rui_location;
-
+        const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
         ensureLabel(blockId, block, ruiLocation, donor, provider);
         ensureDescription(blockId, block, ruiLocation, donor);
 
@@ -101,6 +93,17 @@ function loadFile(dir, file, schema) {
   return schema.parse(yaml);
 }
 
+function ensureRuiLocation(block, ruiLocationsDir){
+  if (typeof block.rui_location === "string") {
+    block.rui_location = loadFile(
+      ruiLocationsDir,
+      block.rui_location,
+      SpatialEntity
+    );
+  }
+  return block.rui_location;
+}
+
 function ensureProviderDescription(description) {
   if (description) {
     const desc = description.split(" ")
@@ -154,7 +157,7 @@ function ensureLabel(objectIndex, object, objectType, ...ancestors) {
 
   }
   //If Object has label then validate if it starts with Registered ...
-  if (isValidLabel(object.label)) {
+  if (!isValidLabel(object.label)) {
     throw new Error(
       `Label invalid for ${objectType}[${objectIndex}]. Please correct the label`
     );
@@ -162,11 +165,8 @@ function ensureLabel(objectIndex, object, objectType, ...ancestors) {
 }
 
 function isValidLabel(label) {
-  const tempLabel = label.split(" ")
-  if (tempLabel[0] === "Registered") {
-    return true;
-  }
-  return false;
+  const tempLabel = label.split(" ");
+  return tempLabel[0] === "Registered";
 }
 
 function ensureDescription(objectIndex, object, objectType, ...ancestors) {
