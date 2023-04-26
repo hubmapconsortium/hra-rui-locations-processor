@@ -66,7 +66,7 @@ export const Donor = z.object({
   /** type of donor */
   '@type':z.string().optional(),
   /** label of the Donor */
-  label: z.string(),
+  label: z.string().optional(), //made it optional to test if it gets from root.
   /** descripton of the Donor */
   description: z.string().optional(),
   /** link of the Donor */

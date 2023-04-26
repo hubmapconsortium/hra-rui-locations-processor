@@ -41,13 +41,13 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         }
         const ruiLocation = block.rui_location;
 
-        ensureLabel(blockId, block, ruiLocation, donor);
+        ensureLabel(blockId, block, ruiLocation, donor, provider);
         ensureDescription(blockId, block, ruiLocation, donor);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           //
           ensureId(sectionId, section, block, donor);
-          ensureLabel(sectionId, section, ruiLocation, donor);
+          ensureLabel(sectionId, section, ruiLocation, donor, provider);
           ensureDescription(sectionId, section, ruiLocation, donor);
 
           console.log("jngrjgntrjn")
@@ -58,7 +58,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
               dataset["@type"] = "Dataset"
             }
             ensureId(datasetId, dataset, block, donor);
-            ensureLabel(datasetId, dataset, ruiLocation, donor);
+            ensureLabel(datasetId, dataset, ruiLocation, donor, provider);
             ensureDescription(datasetId, dataset, ruiLocation, donor);
           }
         }
@@ -101,12 +101,17 @@ function loadFile(dir, file, schema) {
   return schema.parse(yaml);
 }
 
-function ensureProviderDescription(description){ //  First check. If yes, then validate. If not then generate. If invalid, throw error.
-  console.log(description)
-  const desc = description.split(" ")
-  if(desc[0] === "Entered"){
-    console.log("Okay")
+function ensureProviderDescription(description) {
+  if (description) {
+    const desc = description.split(" ")
+    if (desc[0] === "Entered") {
+      console.log("Okay")
+      return
+    }
   }
+  throw new Error(
+    `Description incorrect for provider.`
+  );
 }
 
 function ensureId(objectIndex, object, objectType, ...ancestors) {
@@ -123,27 +128,48 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   }
 }
 
-function ensureLabel(objectIndex, object, objectType, ...ancestors) { //  First check. If yes, then validate. If not then generate. If invalid, throw error.
-  const tempLabel =  object.label.split(" ")
-  if(tempLabel[0] === "Registered"){
-    console.log("Yes");
-  }
-
-
+function ensureLabel(objectIndex, object, objectType, ...ancestors) {
+  // Any Label under block begins with Registered.
   if (!object.label) {
     for (const ancestor of ancestors) {
       if (ancestor.label) {
-        object.label = ancestor.label;
+        const temp = ancestor.label.split(' ');
+        object.label = `Registered ${temp.slice(1, 5).join(" ")}`
         return;
+      }
+    }
+    // If the label is  not found, the description from provider will be fetched and a new label will be created.
+    // From the provider description, "Entered" will be replaced with "Registered".
+    for (const ancestor of ancestors) {
+      if (ancestor.provider_name) {
+        const temp = ancestor.description.split(" ");
+        object.label = "Registered " + temp[1] + " " + temp[2] + " " + temp[3] + " " + temp[4]
+        console.log("sdfdfsd " + temp)
+        return
       }
     }
     throw new Error(
       `Label missing for ${objectType}[${objectIndex}]. Add an label to this object or it's parent Donor`
     );
+
+  }
+  //If Object has label then validate if it starts with Registered ...
+  if (isValidLabel(object.label)) {
+    throw new Error(
+      `Label invalid for ${objectType}[${objectIndex}]. Please correct the label`
+    );
   }
 }
 
-function ensureDescription(objectIndex, object, objectType, ...ancestors) {  //  First check. If yes, then validate. If not then generate. If invalid, throw error.
+function isValidLabel(label) {
+  const tempLabel = label.split(" ")
+  if (tempLabel[0] === "Registered") {
+    return true;
+  }
+  return false;
+}
+
+function ensureDescription(objectIndex, object, objectType, ...ancestors) {
   if (!object.description) {
     for (const ancestor of ancestors) {
       if (ancestor.description) {
@@ -158,7 +184,7 @@ function ensureDescription(objectIndex, object, objectType, ...ancestors) {  // 
 }
 
 function makeId(baseIri, objectType, objectIndex) {
-  console.log(baseIri)
+  // console.log(baseIri)
   const separator = baseIri.indexOf("#") !== -1 ? "_" : "#";
   return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
 }
