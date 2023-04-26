@@ -93,7 +93,7 @@ function loadFile(dir, file, schema) {
   return schema.parse(yaml);
 }
 
-function ensureRuiLocation(block, ruiLocationsDir){
+function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === "string") {
     block.rui_location = loadFile(
       ruiLocationsDir,
@@ -131,42 +131,57 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   }
 }
 
-function ensureLabel(objectIndex, object, objectType, ...ancestors) {
-  // Any Label under block begins with Registered.
-  if (!object.label) {
-    for (const ancestor of ancestors) {
-      if (ancestor.label) {
-        const temp = ancestor.label.split(' ');
-        object.label = `Registered ${temp.slice(1, 5).join(" ")}`
-        return;
-      }
-    }
-    // If the label is  not found, the description from provider will be fetched and a new label will be created.
-    // From the provider description, "Entered" will be replaced with "Registered".
+function ensureLabel(objectIndex, object, rui_location, ...ancestors) {
+  if (object.label) { // If it exists then validate
+    console.log("ensuderejefbjsbf")
     for (const ancestor of ancestors) {
       if (ancestor.provider_name) {
-        const temp = ancestor.description.split(" ");
-        object.label = `Registered ${temp.slice(1, 5).join(" ")}`
-        console.log("sdfdfsd " + temp)
-        return
+        provider_name = ancestor.provider_name;
+        break;
       }
     }
-    throw new Error(
-      `Label missing for ${objectType}[${objectIndex}]. Add an label to this object or it's parent Donor`
-    );
 
+    if (!isValidLabel(object, rui_location, provider_name)) {
+      throw new Error(
+        `Label is invalid for ${object.label}`
+      )
+    }
   }
-  //If Object has label then validate if it starts with Registered ...
-  if (!isValidLabel(object.label)) {
-    throw new Error(
-      `Label invalid for ${objectType}[${objectIndex}]. Please correct the label`
-    );
+  else { // Create one
+    console.log("creatir " + rui_location.placement.placement_date)
+    var provider_name = ''
+    for (const ancestor of ancestors) { // Grab the provider name
+      if (ancestor.provider_name) {
+        provider_name = ancestor.provider_name;
+        break;
+      }
+    }
+    return makeLabel(object, rui_location, provider_name)
   }
 }
 
-function isValidLabel(label) {
-  const tempLabel = label.split(" ");
-  return tempLabel[0] === "Registered";
+function isValidLabel(object, rui_location, provider_name) {
+  const creator = rui_location.creator
+  const dateArray = rui_location.placement.placement_date.split("-");
+  const month = parseInt(dateArray[1]);
+  const day = parseInt(dateArray[2]);
+  const year = parseInt(dateArray[0]);
+  // "Registered 10/19/2021, amir Bahmani, TMC-Stanford"
+  const valid_label = "Registered " + month + "/" + day + "/" + year + ", " + creator + ", " + provider_name;
+  console.log("obj sdcjsnh:::" + object.label + ":::")
+  console.log("obj sdcjsnh:::" + valid_label + ":::")
+  return valid_label == object.label;
+}
+
+function makeLabel(object, rui_location, provider_name) {
+  const creator = rui_location.creator;
+  const dateArray = rui_location.placement.placement_date.split("-");
+  const month = parseInt(dateArray[1]);
+  const day = parseInt(dateArray[2]);
+  const year = parseInt(dateArray[0]);
+  // "Registered 10/19/2021, amir Bahmani, TMC-Stanford"
+  object.label = "Registered " + month + "/" + day + "/" + year + ", " + creator + ", " + provider_name;
+  return;
 }
 
 function ensureDescription(objectIndex, object, objectType, ...ancestors) {
