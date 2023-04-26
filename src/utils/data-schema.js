@@ -3,7 +3,9 @@ import { SpatialEntity } from "./spatial-schema.js";
 
 export const Dataset = z.object({
   /** id of the Dataset item */
-  id: z.string().optional(),
+  '@id': z.string().optional(),
+  /** type of dataset */
+  '@type': z.string().optional(),
   /** label of the Dataset item */
   label: z.string().optional(),
   /** description of the Dataset item */
@@ -18,7 +20,9 @@ export const Dataset = z.object({
 
 export const Section = z.object({
   /** id of the Section item */
-  id: z.string().optional(),
+  '@id': z.string().optional(),
+  /** type of section */
+  '@type': z.string().optional(),
   /** label of the Section item */
   label: z.string().optional(),
   /** description of the Section item */
@@ -33,7 +37,9 @@ export const Section = z.object({
 
 export const Block = z.object({
   /** id of the Section item */
-  id: z.string().optional(),
+  '@id': z.string().optional(),
+  /** type of section */
+  '@type': z.string().optional(),
   /** RUI Location of Section item */
   rui_location: z.string().or(SpatialEntity),
   /** label of the Section item */
@@ -56,7 +62,9 @@ export const Block = z.object({
 
 export const Donor = z.object({
   /** id of the Donor */
-  id: z.string(),
+  '@id': z.string(),
+  /** type of donor */
+  '@type':z.string().optional(),
   /** label of the Donor */
   label: z.string(),
   /** descripton of the Donor */
@@ -74,8 +82,14 @@ export const Donor = z.object({
 });
 
 export const Provider = z.object({
+  /** id of the Donor */
+  '@id': z.string(),
+  /** type of donor */
+  '@type':z.string().optional(),
   /** Provider Name */
   provider_name: z.string(),
+  /**description */
+  description: z.string().optional(),
   /** Provider UUID */
   provider_uuid: z.string(),
   /** Consortium Name */

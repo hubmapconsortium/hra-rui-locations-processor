@@ -3,9 +3,9 @@ import { z } from "zod";
 
 export const SpatialPlacementCommon = z.object({
   /** JSON-LD context */
-  context: z.string().optional(),
+  '@context': z.string().optional(),
   /** Identifier */
-  id: z.string(),
+  '@id': z.string(),
   /** Type name */
   type: z.literal("SpatialPlacement"),
 

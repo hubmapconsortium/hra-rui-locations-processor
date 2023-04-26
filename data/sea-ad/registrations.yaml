@@ -1,58 +1,35 @@
 # yaml-language-server: $schema=../../registrations.schema.json
 
-- provider_name: SEA-AD
+- '@id': 'https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock'
+  provider_name: SEA-AD
   consortium_name: SEA-AD
   thumbnail: assets/blahblah
   provider_uuid: d97e6b70-5aca-4694-806b-5dc57e4f42c4
-  label: Middle Temporal Gyrus Male,
+  description: Entered 2/20/2023, Rebecca Hodge, SEA-AD
   donors:
-  - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
-    label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
-    description: "4 x 4 x 5 millimeter, 0.11 millimeter"
-    link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"
-    sex: Male
-    blocks: 
-    - id: https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock
+    - '@id': 'https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock'
       label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
-      description: 4 x 4 x 5 millimeter, 0.11 millimeter
-      section_count: 1
-      section_size: 0.11
-      section_unit: millimeter
-      rui_location: abc.json
-        # id: "Rebecca Hodge"
-        # type: SpatialEntity
-        # creator_first_name: Rebecca
-        # x_dimension: 4
-        # y_dimension: 5
-        # z_dimension: 5
-        # placement:
-        #   id: ididi
-        #   type: SpatialPlacement
-        #   placement_date: "2023-02-20"
-        #   x_scaling: 1
-        #   y_scaling: 1
-        #   z_scaling: 1
-        #   scaling_units: "ratio"
-        #   x_rotation: 0
-        #   y_rotation: 6
-        #   z_rotation: -10
-        #   rotation_order: "XYZ"
-        #   rotation_units: "degree"
-        #   x_translation: 133.347
-        #   y_translation: 57.93
-        #   z_translation: 64.154
-        #   translation_units: "millimeter"
-        #   target: "http://purl.org/ccf/latest/ccf.owl#VHMAllenBrain"
+      description: 'egfmgjkrn 4 x 4 x 5 millimeter, 0.11 millimeter'
+      link: 'https://portal.brain-map.org/explore/seattle-alzheimers-disease'
+      sex: Male
+      blocks:
+        - '@id': https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock
+          label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
+          # description: 4 x 4 x 5 millimeter, 0.11 millimeter
+          section_count: 1
+          section_size: 0.11
+          section_unit: millimeter
+          rui_location: abc.json
 
-      sections:
-      - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
-        label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
-        description: "4 x 4 x 5 millimeter, 0.11 millimeter"
-        # link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"
-      datasets:
-      - id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
-        label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
-        description: "4 x 4 x 5 millimeter, 0.11 millimeter"
-        # link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"  
-        technology: OTHER
-        thumbnail: assets/sea-ad/thumbnails/SEA-AD_logo_800x800.jpg
+          sections:
+            - #id: "https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock"
+              label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
+              # description: "4 x 4 x 5 millimeter, 0.11 millimeter"
+              # link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"
+          datasets:
+            - '@id': 'https://portal.brain-map.org/explore/seattle-alzheimers-disease#Human-MTG-10x_SEA-AD_Male_TissueBlock'
+              label: Registered 2/20/2023, Rebecca Hodge, SEA-AD
+              # description: "4 x 4 x 5 millimeter, 0.11 millimeter"
+              # link: "https://portal.brain-map.org/explore/seattle-alzheimers-disease"
+              technology: OTHER
+              thumbnail: assets/sea-ad/thumbnails/SEA-AD_logo_800x800.jpg

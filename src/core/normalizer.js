@@ -2,12 +2,14 @@ import { load } from "js-yaml";
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { Providers } from "../utils/data-schema.js";
-import { SpatialEntity } from "../utils/spatial-schema.js";
+import { SpatialEntity, temp } from "../utils/spatial-schema.js";
 
 export function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, "registrations");
   const data = loadFile(context.doPath, "registrations.yaml", Providers);
-  const normalized = normalizeRegistrations(data, ruiLocationsDir);
+  const normalized = normalizeRegistration(data, ruiLocationsDir);
+
+  const final = convertToJsonLd(normalized);
 
   // const normalizedPath = resolve(context.doPath, 'normalized.yaml');
   // writeFileSync(normalizedPath, dump(normalized));
@@ -16,12 +18,15 @@ export function normalizeRegistrations(context) {
     context.doPath,
     "rui_locations.jsonld"
   );
-  writeFileSync(ruiLocationsOutputPath, JSON.stringify(normalized, null, 2));
+  writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
 }
 
-export function normalizeRegistrations(data, ruiLocationsDir) {
+export function normalizeRegistration(data, ruiLocationsDir) {
   const warnings = new Set();
   for (const provider of data) {
+
+    ensureProviderDescription(provider.description);
+
     for (const donor of provider.donors) {
       //
 
@@ -36,15 +41,25 @@ export function normalizeRegistrations(data, ruiLocationsDir) {
         }
         const ruiLocation = block.rui_location;
 
-        // ensureLabel(blockId, block, ruiLocation, donor);
-        // ensureDescription(blockId, block, ruiLocation, donor);
+        ensureLabel(blockId, block, ruiLocation, donor);
+        ensureDescription(blockId, block, ruiLocation, donor);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           //
           ensureId(sectionId, section, block, donor);
+          ensureLabel(sectionId, section, ruiLocation, donor);
+          ensureDescription(sectionId, section, ruiLocation, donor);
 
-          for (const dataset of section.datasets ?? []) {
+          console.log("jngrjgntrjn")
+          for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
             //
+            console.log("1232312")
+            if (!dataset["@type"]) {
+              dataset["@type"] = "Dataset"
+            }
+            ensureId(datasetId, dataset, block, donor);
+            ensureLabel(datasetId, dataset, ruiLocation, donor);
+            ensureDescription(datasetId, dataset, ruiLocation, donor);
           }
         }
 
@@ -78,6 +93,80 @@ export function normalizeRegistrations(data, ruiLocationsDir) {
   //   }
   // }
   return data;
+}
+
+function loadFile(dir, file, schema) {
+  const path = resolve(dir, file);
+  const yaml = load(readFileSync(path));
+  return schema.parse(yaml);
+}
+
+function ensureProviderDescription(description){ //  First check. If yes, then validate. If not then generate. If invalid, throw error.
+  console.log(description)
+  const desc = description.split(" ")
+  if(desc[0] === "Entered"){
+    console.log("Okay")
+  }
+}
+
+function ensureId(objectIndex, object, objectType, ...ancestors) {
+  if (!object['@id']) {
+    for (const ancestor of ancestors) {
+      if (ancestor['@id']) {
+        object['@id'] = makeId(ancestor['@id'], objectType, objectIndex);
+        return;
+      }
+    }
+    throw new Error(
+      `Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`
+    );
+  }
+}
+
+function ensureLabel(objectIndex, object, objectType, ...ancestors) { //  First check. If yes, then validate. If not then generate. If invalid, throw error.
+  const tempLabel =  object.label.split(" ")
+  if(tempLabel[0] === "Registered"){
+    console.log("Yes");
+  }
+
+
+  if (!object.label) {
+    for (const ancestor of ancestors) {
+      if (ancestor.label) {
+        object.label = ancestor.label;
+        return;
+      }
+    }
+    throw new Error(
+      `Label missing for ${objectType}[${objectIndex}]. Add an label to this object or it's parent Donor`
+    );
+  }
+}
+
+function ensureDescription(objectIndex, object, objectType, ...ancestors) {  //  First check. If yes, then validate. If not then generate. If invalid, throw error.
+  if (!object.description) {
+    for (const ancestor of ancestors) {
+      if (ancestor.description) {
+        object.description = ancestor.description;
+        return;
+      }
+    }
+    throw new Error(
+      `Description missing for ${objectType}[${objectIndex}]. Add an Description to this object or it's parent Donor`
+    );
+  }
+}
+
+function makeId(baseIri, objectType, objectIndex) {
+  console.log(baseIri)
+  const separator = baseIri.indexOf("#") !== -1 ? "_" : "#";
+  return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
+}
+
+function* enumerate(arr) {
+  for (let i = 0; i < (arr ?? []).length; i++) {
+    yield [arr[i], i];
+  }
 }
 
 export function convertToJsonLd(normalized) {
@@ -125,46 +214,15 @@ export function convertToJsonLd(normalized) {
   const donors = data['@graph'];
 
   for (const provider of normalized) {
+    donors.push(provider);
     for (const donor of provider.donors) {
-      const newDonor = {
-
+      const finalDonor = {
+        ...provider,
+        ...donor,
       }
-      donors.push(newDonor);
+      // donors.push(finalDonor);
     }
   }
 
   return data;
-}
-
-function loadFile(dir, file, schema) {
-  const path = resolve(dir, file);
-  const yaml = load(readFileSync(path));
-  return schema.parse(yaml);
-}
-
-function ensureId(objectIndex, object, objectType, ...ancestors) {
-  if (!object.id) {
-    for (const ancestor of ancestors) {
-      if (ancestor.id) {
-        object.id = makeId(ancestor.id, objectType, objectIndex);
-        return;
-      }
-    }
-    throw new Error(
-      `Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`
-    );
-  }
-}
-
-function ensureLabel()
-
-function makeId(baseIri, objectType, objectIndex) {
-  const separator = baseIri.contains("#") ? "_" : "#";
-  return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
-}
-
-function* enumerate(arr) {
-  for (let i = 0; i < (arr ?? []).length; i++) {
-    yield [arr[i], i];
-  }
 }
