@@ -143,7 +143,7 @@ function ensureLabel(objectIndex, object, objectType, ...ancestors) {
     for (const ancestor of ancestors) {
       if (ancestor.provider_name) {
         const temp = ancestor.description.split(" ");
-        object.label = "Registered " + temp[1] + " " + temp[2] + " " + temp[3] + " " + temp[4]
+        object.label = `Registered ${temp.slice(1, 5).join(" ")}`
         console.log("sdfdfsd " + temp)
         return
       }
