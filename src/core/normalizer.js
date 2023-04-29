@@ -31,7 +31,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         ensureId(blockId, block, donor);
         ensureLabel(block, ruiLocation, donor, provider);
         ensureProviderDescription(provider, ruiLocation);
-        ensureLink(block)
+        ensureLink(block, donor, provider)
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           if (!section["@type"]) {
@@ -39,7 +39,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
           }
           ensureId(sectionId, section, block, donor);
           ensureLabel(section, ruiLocation, donor, provider);
-          ensureLink(section)
+          ensureLink(section, block, donor, provider)
 
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
             if (!dataset["@type"]) {
@@ -47,35 +47,13 @@ export function normalizeRegistration(data, ruiLocationsDir) {
             }
             ensureId(datasetId, dataset, block, donor);
             ensureLabel(dataset, ruiLocation, donor, provider);
-            ensureLink(dataset)
+            ensureLink(dataset, block, donor, provider)
           }
         }
       }
     }
   }
 
-  // for(const provider of providerIter(data)){
-  //   if(!(provider.description)){
-  //     for(const block of blockIter(data)){
-  //       provider.description = 'Entered '+ block.rui_location.creation_date + ", " +block.rui_location.creator +", "+provider.provider_name;
-  //     }
-  //   }
-  //   if (!(provider.default_dataset_technology)){
-  //     for(const dataset of datasetIter(data)){
-  //       provider.default_dataset_technology = dataset.technology;
-  //     }
-  //   }
-  //   if(!(provider.link)){
-  //     for(const dataset of datasetIter(data)){
-  //       provider.link = dataset.link;
-  //     }
-  //   }
-  //   if(!(provider.thumbnail)){
-  //     for(const dataset of datasetIter(data)){
-  //       provider.thumbnail = dataset.thumbnail;
-  //     }
-  //   }
-  // }
   return data;
 }
 
@@ -95,13 +73,19 @@ function ensureRuiLocation(block, ruiLocationsDir) {
   }
   return block.rui_location;
 }
-function ensureLink(object) {
+function ensureLink(object, ...ancestors) {
   console.log(object['@id'])
   if (!object.link) {
-    const prefix = "https://portal.hubmapconsortium.org/browse/dataset/"
-    const dataset_id = object['@id'].split("/");
-    return object.link = prefix + dataset_id[dataset_id.length - 1]
+    for (const ancestor of ancestors) {
+      if (ancestor.link) {
+        object.link = ancestor.link
+        return
+      }
+    }
   }
+  throw new Error(
+    " Link is missing. Please provide a link for the object or its parent Donor"
+  )
 }
 function ensureProviderDescription(provider, rui_location) {
   if (!provider.description) {
