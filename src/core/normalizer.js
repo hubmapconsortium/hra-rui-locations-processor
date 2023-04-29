@@ -24,39 +24,31 @@ export function normalizeRegistrations(context) {
 export function normalizeRegistration(data, ruiLocationsDir) {
   const warnings = new Set();
   for (const provider of data) {
-
-    ensureProviderDescription(provider.description);
-
     for (const donor of provider.donors) {
-      //
-
       for (const [block, blockId] of enumerate(donor.blocks)) {
-        ensureId(blockId, block, donor);
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
-        ensureLabel(blockId, block, ruiLocation, donor, provider);
-        ensureDescription(blockId, block, ruiLocation, donor);
+
+        ensureId(blockId, block, donor);
+        ensureLabel(block, ruiLocation, donor, provider);
+        ensureProviderDescription(provider, ruiLocation);
+        ensureLink(block)
 
         for (const [section, sectionId] of enumerate(block.sections)) {
-          //
+          if (!section["@type"]) {
+            section["@type"] = "Sample"
+          }
           ensureId(sectionId, section, block, donor);
-          ensureLabel(sectionId, section, ruiLocation, donor, provider);
-          ensureDescription(sectionId, section, ruiLocation, donor);
+          ensureLabel(section, ruiLocation, donor, provider);
+          ensureLink(section)
 
-          console.log("jngrjgntrjn")
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
-            //
-            console.log("1232312")
             if (!dataset["@type"]) {
               dataset["@type"] = "Dataset"
             }
             ensureId(datasetId, dataset, block, donor);
-            ensureLabel(datasetId, dataset, ruiLocation, donor, provider);
-            ensureDescription(datasetId, dataset, ruiLocation, donor);
+            ensureLabel(dataset, ruiLocation, donor, provider);
+            ensureLink(dataset)
           }
-        }
-
-        for (const dataset of block.datasets ?? []) {
-          //
         }
       }
     }
@@ -103,18 +95,20 @@ function ensureRuiLocation(block, ruiLocationsDir) {
   }
   return block.rui_location;
 }
-
-function ensureProviderDescription(description) {
-  if (description) {
-    const desc = description.split(" ")
-    if (desc[0] === "Entered") {
-      console.log("Okay")
-      return
-    }
+function ensureLink(object) {
+  console.log(object['@id'])
+  if (!object.link) {
+    const prefix = "https://portal.hubmapconsortium.org/browse/dataset/"
+    const dataset_id = object['@id'].split("/");
+    return object.link = prefix + dataset_id[dataset_id.length - 1]
   }
-  throw new Error(
-    `Description incorrect for provider.`
-  );
+}
+function ensureProviderDescription(provider, rui_location) {
+  if (!provider.description) {
+    console.log("Generated Desc")
+    const prefix = "Entered"
+    provider.description = makeLabel(prefix, rui_location, provider.provider_name)
+  }
 }
 
 function ensureId(objectIndex, object, objectType, ...ancestors) {
@@ -131,23 +125,8 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   }
 }
 
-function ensureLabel(objectIndex, object, rui_location, ...ancestors) {
-  if (object.label) { // If it exists then validate
-    console.log("ensuderejefbjsbf")
-    for (const ancestor of ancestors) {
-      if (ancestor.provider_name) {
-        provider_name = ancestor.provider_name;
-        break;
-      }
-    }
-
-    if (!isValidLabel(object, rui_location, provider_name)) {
-      throw new Error(
-        `Label is invalid for ${object.label}`
-      )
-    }
-  }
-  else { // Create one
+function ensureLabel(object, rui_location, ...ancestors) {
+  if (!object.label) { // Create one
     console.log("creatir " + rui_location.placement.placement_date)
     var provider_name = ''
     for (const ancestor of ancestors) { // Grab the provider name
@@ -156,50 +135,23 @@ function ensureLabel(objectIndex, object, rui_location, ...ancestors) {
         break;
       }
     }
-    return makeLabel(object, rui_location, provider_name)
+    const prefix = "Registered"
+    return object.label = makeLabel(prefix, rui_location, provider_name)
   }
 }
 
-function isValidLabel(object, rui_location, provider_name) {
-  const creator = rui_location.creator
-  const dateArray = rui_location.placement.placement_date.split("-");
-  const month = parseInt(dateArray[1]);
-  const day = parseInt(dateArray[2]);
-  const year = parseInt(dateArray[0]);
-  // "Registered 10/19/2021, amir Bahmani, TMC-Stanford"
-  const valid_label = "Registered " + month + "/" + day + "/" + year + ", " + creator + ", " + provider_name;
-  console.log("obj sdcjsnh:::" + object.label + ":::")
-  console.log("obj sdcjsnh:::" + valid_label + ":::")
-  return valid_label == object.label;
-}
 
-function makeLabel(object, rui_location, provider_name) {
+function makeLabel(prefix, rui_location, provider_name) {
   const creator = rui_location.creator;
-  const dateArray = rui_location.placement.placement_date.split("-");
-  const month = parseInt(dateArray[1]);
-  const day = parseInt(dateArray[2]);
-  const year = parseInt(dateArray[0]);
-  // "Registered 10/19/2021, amir Bahmani, TMC-Stanford"
-  object.label = "Registered " + month + "/" + day + "/" + year + ", " + creator + ", " + provider_name;
-  return;
+  const date = new Date(rui_location.placement.placement_date);
+  const month = date.getMonth();
+  const day = date.getDate();
+  const year = date.getFullYear();
+  return `${prefix} ${month}/${day}/${year}, ${creator}, ${provider_name}`;
 }
 
-function ensureDescription(objectIndex, object, objectType, ...ancestors) {
-  if (!object.description) {
-    for (const ancestor of ancestors) {
-      if (ancestor.description) {
-        object.description = ancestor.description;
-        return;
-      }
-    }
-    throw new Error(
-      `Description missing for ${objectType}[${objectIndex}]. Add an Description to this object or it's parent Donor`
-    );
-  }
-}
 
 function makeId(baseIri, objectType, objectIndex) {
-  // console.log(baseIri)
   const separator = baseIri.indexOf("#") !== -1 ? "_" : "#";
   return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
 }
