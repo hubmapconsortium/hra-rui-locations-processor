@@ -1,12 +1,12 @@
-import { load } from "js-yaml";
-import { readFileSync, writeFileSync } from "fs";
-import { resolve } from "path";
-import { Providers } from "../utils/data-schema.js";
-import { SpatialEntity, temp } from "../utils/spatial-schema.js";
+import { load } from 'js-yaml';
+import { readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
+import { Providers } from '../utils/data-schema.js';
+import { SpatialEntity, temp } from '../utils/spatial-schema.js';
 
 export function normalizeRegistrations(context) {
-  const ruiLocationsDir = resolve(context.doPath, "registrations");
-  const data = loadFile(context.doPath, "registrations.yaml", Providers);
+  const ruiLocationsDir = resolve(context.doPath, 'registrations');
+  const data = loadFile(context.doPath, 'registrations.yaml', Providers);
   const normalized = normalizeRegistration(data, ruiLocationsDir);
 
   const final = convertToJsonLd(normalized);
@@ -16,7 +16,7 @@ export function normalizeRegistrations(context) {
 
   const ruiLocationsOutputPath = resolve(
     context.doPath,
-    "rui_locations.jsonld"
+    'rui_locations.jsonld'
   );
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
 }
@@ -25,29 +25,35 @@ export function normalizeRegistration(data, ruiLocationsDir) {
   const warnings = new Set();
   for (const provider of data) {
     for (const donor of provider.donors) {
+      donor['@type'] = 'Donor';
+
       for (const [block, blockId] of enumerate(donor.blocks)) {
+        block['@type'] = 'Sample';
+        block['sample_type'] = 'Tissue Block';
+
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
 
         ensureId(blockId, block, donor);
         ensureLabel(block, ruiLocation, donor, provider);
         ensureProviderDescription(provider, ruiLocation);
-        ensureLink(block, donor, provider)
+        ensureLink(block, donor, provider);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
-          if (!section["@type"]) {
-            section["@type"] = "Sample"
-          }
+          section['@type'] = 'Sample';
+          section['sample_type'] = 'Tissue Section';
+
           ensureId(sectionId, section, block, donor);
           ensureLabel(section, ruiLocation, donor, provider);
-          ensureLink(section, block, donor, provider)
+          ensureSectionDescription(section, ruiLocation, donor, provider);
+          ensureLink(section, block, donor, provider);
 
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
-            if (!dataset["@type"]) {
-              dataset["@type"] = "Dataset"
-            }
+            dataset['@type'] = 'Dataset';
+
             ensureId(datasetId, dataset, block, donor);
             ensureLabel(dataset, ruiLocation, donor, provider);
-            ensureLink(dataset, block, donor, provider)
+            ensureDatasetDescription(dataset);
+            ensureLink(dataset, block, donor, provider);
           }
         }
       }
@@ -64,7 +70,7 @@ function loadFile(dir, file, schema) {
 }
 
 function ensureRuiLocation(block, ruiLocationsDir) {
-  if (typeof block.rui_location === "string") {
+  if (typeof block.rui_location === 'string') {
     block.rui_location = loadFile(
       ruiLocationsDir,
       block.rui_location,
@@ -73,25 +79,67 @@ function ensureRuiLocation(block, ruiLocationsDir) {
   }
   return block.rui_location;
 }
+
 function ensureLink(object, ...ancestors) {
-  console.log(object['@id'])
+  console.log(object['@id']);
   if (!object.link) {
     for (const ancestor of ancestors) {
       if (ancestor.link) {
-        object.link = ancestor.link
-        return
+        object.link = ancestor.link;
+        return;
       }
     }
   }
   throw new Error(
-    " Link is missing. Please provide a link for the object or its parent Donor"
-  )
+    ' Link is missing. Please provide a link for the object or its parent Donor'
+  );
 }
+
 function ensureProviderDescription(provider, rui_location) {
   if (!provider.description) {
-    console.log("Generated Desc")
-    const prefix = "Entered"
-    provider.description = makeLabel(prefix, rui_location, provider.provider_name)
+    console.log('Generated Desc');
+    const prefix = 'Entered';
+    provider.description = makeLabel(
+      prefix,
+      rui_location,
+      provider.provider_name
+    );
+  }
+}
+
+function ensureDatasetDescription(object) {
+  console.log('generated dataset ensuredesc');
+  if (!object.description) {
+    object.description = 'Data/Assay Types: ' + object.technology + ', ';
+    return;
+  }
+}
+
+function ensureSectionDescription(object, rui_location, ...ancestors) {
+  console.log('generated ensureSectionDescription');
+  if (!object.description) {
+    if (rui_location.x_dimension) {
+      // Generate from rui_location
+      console.log('generated from rui_location');
+      const x_dim = rui_location.x_dimension;
+      const y_dim = rui_location.y_dimension;
+      const z_dim = rui_location.z_dimension;
+      const units = rui_location.dimension_units;
+      //10 x 10 x 12 millimeter, 12 millimeter, ffpe_block
+      object.description = `${x_dim} x ${y_dim} x ${z_dim} ${units}, ${z_dim} ${units}, `;
+      return;
+    } else {
+      console.log('generated from ancestors');
+      for (const ancestor of ancestors) {
+        if (ancestor.description) {
+          object.description = ancestor.description;
+          return;
+        }
+      }
+      throw new Error(
+        'Description is missing. Please provide rui_locations or description to parent provider'
+      );
+    }
   }
 }
 
@@ -110,20 +158,21 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
 }
 
 function ensureLabel(object, rui_location, ...ancestors) {
-  if (!object.label) { // Create one
-    console.log("creatir " + rui_location.placement.placement_date)
-    var provider_name = ''
-    for (const ancestor of ancestors) { // Grab the provider name
+  if (!object.label) {
+    // Create one
+    console.log('creatir ' + rui_location.placement.placement_date);
+    var provider_name = '';
+    for (const ancestor of ancestors) {
+      // Grab the provider name
       if (ancestor.provider_name) {
         provider_name = ancestor.provider_name;
         break;
       }
     }
-    const prefix = "Registered"
-    return object.label = makeLabel(prefix, rui_location, provider_name)
+    const prefix = 'Registered';
+    return (object.label = makeLabel(prefix, rui_location, provider_name));
   }
 }
-
 
 function makeLabel(prefix, rui_location, provider_name) {
   const creator = rui_location.creator;
@@ -134,9 +183,8 @@ function makeLabel(prefix, rui_location, provider_name) {
   return `${prefix} ${month}/${day}/${year}, ${creator}, ${provider_name}`;
 }
 
-
 function makeId(baseIri, objectType, objectIndex) {
-  const separator = baseIri.indexOf("#") !== -1 ? "_" : "#";
+  const separator = baseIri.indexOf('#') !== -1 ? '_' : '#';
   return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
 }
 
@@ -148,56 +196,57 @@ function* enumerate(arr) {
 
 export function convertToJsonLd(normalized) {
   const data = {
-    "@context": {
-      "@base": "http://purl.org/ccf/latest/ccf-entity.owl#",
-      "@vocab": "http://purl.org/ccf/latest/ccf-entity.owl#",
-      ccf: "http://purl.org/ccf/latest/ccf.owl#",
-      rdfs: "http://www.w3.org/2000/01/rdf-schema#",
-      label: "rdfs:label",
-      description: "rdfs:comment",
+    '@context': {
+      '@base': 'http://purl.org/ccf/latest/ccf-entity.owl#',
+      '@vocab': 'http://purl.org/ccf/latest/ccf-entity.owl#',
+      ccf: 'http://purl.org/ccf/latest/ccf.owl#',
+      rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+      label: 'rdfs:label',
+      description: 'rdfs:comment',
       link: {
-        "@id": "rdfs:seeAlso",
-        "@type": "@id",
+        '@id': 'rdfs:seeAlso',
+        '@type': '@id',
       },
       samples: {
-        "@reverse": "has_donor",
+        '@reverse': 'has_donor',
       },
       sections: {
-        "@id": "has_tissue_section",
-        "@type": "@id",
+        '@id': 'has_tissue_section',
+        '@type': '@id',
       },
       datasets: {
-        "@id": "has_dataset",
-        "@type": "@id",
+        '@id': 'has_dataset',
+        '@type': '@id',
       },
       rui_location: {
-        "@id": "has_spatial_entity",
-        "@type": "@id",
+        '@id': 'has_spatial_entity',
+        '@type': '@id',
       },
       ontologyTerms: {
-        "@id": "has_ontology_term",
-        "@type": "@id",
+        '@id': 'has_ontology_term',
+        '@type': '@id',
       },
       cellTypeTerms: {
-        "@id": "has_cell_type_term",
-        "@type": "@id",
+        '@id': 'has_cell_type_term',
+        '@type': '@id',
       },
       thumbnail: {
-        "@id": "has_thumbnail",
+        '@id': 'has_thumbnail',
       },
     },
-    "@graph": [],
+    '@graph': [],
   };
   const donors = data['@graph'];
 
   for (const provider of normalized) {
-    donors.push(provider);
     for (const donor of provider.donors) {
       const finalDonor = {
-        ...provider,
+        'consortium_name': provider.consortium_name,
+        'provider_name': provider.provider_name,
+        'provider_uuid': provider.provider_uuid,
         ...donor,
-      }
-      // donors.push(finalDonor);
+      };
+      donors.push(finalDonor);
     }
   }
 
