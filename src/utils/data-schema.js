@@ -23,6 +23,8 @@ export const Section = z.object({
   '@id': z.string().optional(),
   /** type of section */
   '@type': z.string().optional(),
+  /** sample type of section */
+  'sample_type': z.literal("Tissue Section").optional(),
   /** label of the Section item */
   label: z.string().optional(),
   /** description of the Section item */
@@ -40,6 +42,8 @@ export const Block = z.object({
   '@id': z.string().optional(),
   /** type of section */
   '@type': z.string().optional(),
+  /** sample type of block */
+  'sample_type': z.literal("Tissue Block").optional(),
   /** RUI Location of Section item */
   rui_location: z.string().or(SpatialEntity),
   /** label of the Section item */
@@ -78,7 +82,7 @@ export const Donor = z.object({
   /** BMI of the Donor */
   bmi: z.number().optional(),
   /** An array of Block */
-  blocks: Block.array().min(1),
+  samples: Block.array().min(1),
 });
 
 export const Provider = z.object({

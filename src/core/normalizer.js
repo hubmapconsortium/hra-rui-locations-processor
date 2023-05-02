@@ -27,16 +27,19 @@ export function normalizeRegistration(data, ruiLocationsDir) {
     for (const donor of provider.donors) {
       donor['@type'] = 'Donor';
 
-      for (const [block, blockId] of enumerate(donor.blocks)) {
+      for (const [block, blockId] of enumerate(donor.samples)) {
         block['@type'] = 'Sample';
         block['sample_type'] = 'Tissue Block';
 
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
 
+        ensureDonorLabel(donor, block);
+        ensureDescription(donor, ruiLocation, provider);
+
         ensureId(blockId, block, donor);
         ensureLabel(block, ruiLocation, donor, provider);
-        ensureProviderDescription(provider, ruiLocation);
-        ensureLink(block, donor, provider);
+        ensureDescription(provider, ruiLocation, provider);
+        // ensureLink(block, donor, provider);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           section['@type'] = 'Sample';
@@ -46,6 +49,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSectionDescription(section, ruiLocation, donor, provider);
           ensureLink(section, block, donor, provider);
+          ensureSectionCount(block);
 
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
             dataset['@type'] = 'Dataset';
@@ -89,21 +93,52 @@ function ensureLink(object, ...ancestors) {
         return;
       }
     }
+    throw new Error(
+      ' Link is missing. Please provide a link for the object or its parent Donor'
+    );
   }
-  throw new Error(
-    ' Link is missing. Please provide a link for the object or its parent Donor'
-  );
 }
 
-function ensureProviderDescription(provider, rui_location) {
-  if (!provider.description) {
+function ensureDescription(object, rui_location, provider) {
+  if (!object.description) {
     console.log('Generated Desc');
     const prefix = 'Entered';
-    provider.description = makeLabel(
+    object.description = makeLabel(
       prefix,
       rui_location,
       provider.provider_name
     );
+  }
+}
+
+function ensureSectionCount(block) {
+  if (!block.section_count ) {
+    block.section_count = block.sections.length;
+    console.log("efmvnvj: "+block.section_count)
+    return;
+  }
+  console.log("ef: "+block.section_count)
+  block.section_count = 0;
+  return;
+}
+
+function ensureDonorLabel(donor, block) {
+  if (!donor.label) {
+    var newLabel = '';
+    if (donor.sex) {
+      newLabel += donor.sex;
+    }
+    if (donor.age) {
+      newLabel += ', Age ' + donor.age;
+    }
+    if (donor.bmi) {
+      newLabel += ', BMI ' + donor.bmi;
+    }
+    if (newLabel === '') {
+      newLabel = block.label;
+    }
+    console.log(" Label " + newLabel);
+    return donor.label = newLabel;
   }
 }
 
@@ -127,6 +162,7 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
       const units = rui_location.dimension_units;
       //10 x 10 x 12 millimeter, 12 millimeter, ffpe_block
       object.description = `${x_dim} x ${y_dim} x ${z_dim} ${units}, ${z_dim} ${units}, `;
+      object.section_size = z_dim
       return;
     } else {
       console.log('generated from ancestors');
@@ -158,6 +194,7 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
 }
 
 function ensureLabel(object, rui_location, ...ancestors) {
+  console.log("NONONONO " + rui_location)
   if (!object.label) {
     // Create one
     console.log('creatir ' + rui_location.placement.placement_date);
