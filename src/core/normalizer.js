@@ -4,15 +4,15 @@ import { resolve } from 'path';
 import { Providers } from '../utils/data-schema.js';
 import { SpatialEntity, temp } from '../utils/spatial-schema.js';
 
+/** This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
+ *  @param { string }  context  - The directory path of registration.yaml file.
+ */
 export function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
   const data = loadFile(context.doPath, 'registrations.yaml', Providers);
   const normalized = normalizeRegistration(data, ruiLocationsDir);
 
   const final = convertToJsonLd(normalized);
-
-  // const normalizedPath = resolve(context.doPath, 'normalized.yaml');
-  // writeFileSync(normalizedPath, dump(normalized));
 
   const ruiLocationsOutputPath = resolve(
     context.doPath,
@@ -21,9 +21,16 @@ export function normalizeRegistrations(context) {
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
 }
 
+/** This function ensures the registration.yaml file has id, label, description, and link at Provider, Donor, Section, Block and Dataset levels. 
+ * If not, it creates one.
+ * @param { string } data - 
+ */
 export function normalizeRegistration(data, ruiLocationsDir) {
   const warnings = new Set();
   for (const provider of data) {
+    if(!provider.defaults.thumbnail){
+      provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
+    }
     for (const donor of provider.donors) {
       donor['@type'] = 'Donor';
 
@@ -35,29 +42,30 @@ export function normalizeRegistration(data, ruiLocationsDir) {
 
         ensureDonorLabel(donor, block);
         ensureDescription(donor, ruiLocation, provider);
+        ensureLink(donor, provider, provider.defaults);
 
-        ensureId(blockId, block, donor);
+        ensureId(blockId, block, '', donor, provider, provider.defaults);
         ensureLabel(block, ruiLocation, donor, provider);
+        ensureLink(block, donor, provider, provider.defaults);
         ensureDescription(provider, ruiLocation, provider);
-        // ensureLink(block, donor, provider);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           section['@type'] = 'Sample';
           section['sample_type'] = 'Tissue Section';
 
-          ensureId(sectionId, section, block, donor);
+          ensureId(sectionId, section, block, donor, provider.defaults);
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSectionDescription(section, ruiLocation, donor, provider);
-          ensureLink(section, block, donor, provider);
+          ensureLink(section, block, donor, provider, provider.defaults);
           ensureSectionCount(block);
 
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
             dataset['@type'] = 'Dataset';
 
-            ensureId(datasetId, dataset, block, donor);
+            ensureId(datasetId, dataset, block, donor, provider.defaults);
             ensureLabel(dataset, ruiLocation, donor, provider);
             ensureDatasetDescription(dataset);
-            ensureLink(dataset, block, donor, provider);
+            ensureLink(dataset, block, donor, provider, provider.defaults);
           }
         }
       }
@@ -67,12 +75,21 @@ export function normalizeRegistration(data, ruiLocationsDir) {
   return data;
 }
 
+/** This function loads the file, and valdiates it with schema.
+ * @param { string } dir - The directory of file
+ * @param { string } file - The name of file
+ * @param { string } schema - The Zod schema with which the file has to be validated.
+ */
 function loadFile(dir, file, schema) {
   const path = resolve(dir, file);
   const yaml = load(readFileSync(path));
   return schema.parse(yaml);
 }
 
+/** This function validates the rui_location file if it is passed as a file name in JSON format in the registration.yaml file.
+ * @param { string } block - This is the block object which contains rui_locations
+ * @param { string } ruiLocationsDir - The directory where rui_location JSON file exists.
+ */
 function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === 'string') {
     block.rui_location = loadFile(
@@ -84,8 +101,11 @@ function ensureRuiLocation(block, ruiLocationsDir) {
   return block.rui_location;
 }
 
+/** This function ensures the link is mentioned. If not, it generates it from ancestors(It searches upwards in the registration.yaml file or till the provider level)
+ * @param {Object} object - The object where link has to checked
+ * @param {[Object]} ancestors  - The hierarchial structures to the top from where the link can be fetched.
+ */
 function ensureLink(object, ...ancestors) {
-  console.log(object['@id']);
   if (!object.link) {
     for (const ancestor of ancestors) {
       if (ancestor.link) {
@@ -99,9 +119,9 @@ function ensureLink(object, ...ancestors) {
   }
 }
 
+/** This function ensures the description is mentioned. If not it creates one from rui_locations, and providers. */
 function ensureDescription(object, rui_location, provider) {
   if (!object.description) {
-    console.log('Generated Desc');
     const prefix = 'Entered';
     object.description = makeLabel(
       prefix,
@@ -112,12 +132,10 @@ function ensureDescription(object, rui_location, provider) {
 }
 
 function ensureSectionCount(block) {
-  if (!block.section_count ) {
+  if (!block.section_count) {
     block.section_count = block.sections.length;
-    console.log("efmvnvj: "+block.section_count)
     return;
   }
-  console.log("ef: "+block.section_count)
   block.section_count = 0;
   return;
 }
@@ -137,13 +155,11 @@ function ensureDonorLabel(donor, block) {
     if (newLabel === '') {
       newLabel = block.label;
     }
-    console.log(" Label " + newLabel);
     return donor.label = newLabel;
   }
 }
 
 function ensureDatasetDescription(object) {
-  console.log('generated dataset ensuredesc');
   if (!object.description) {
     object.description = 'Data/Assay Types: ' + object.technology + ', ';
     return;
@@ -151,21 +167,17 @@ function ensureDatasetDescription(object) {
 }
 
 function ensureSectionDescription(object, rui_location, ...ancestors) {
-  console.log('generated ensureSectionDescription');
   if (!object.description) {
     if (rui_location.x_dimension) {
       // Generate from rui_location
-      console.log('generated from rui_location');
       const x_dim = rui_location.x_dimension;
       const y_dim = rui_location.y_dimension;
       const z_dim = rui_location.z_dimension;
       const units = rui_location.dimension_units;
-      //10 x 10 x 12 millimeter, 12 millimeter, ffpe_block
       object.description = `${x_dim} x ${y_dim} x ${z_dim} ${units}, ${z_dim} ${units}, `;
       object.section_size = z_dim
       return;
     } else {
-      console.log('generated from ancestors');
       for (const ancestor of ancestors) {
         if (ancestor.description) {
           object.description = ancestor.description;
@@ -180,10 +192,14 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
 }
 
 function ensureId(objectIndex, object, objectType, ...ancestors) {
-  if (!object['@id']) {
+  if (object.id && !object['@id']) {
+    object['@id'] = object['id'];
+    delete object['id'];
+  }
+  if (!object.id) {
     for (const ancestor of ancestors) {
-      if (ancestor['@id']) {
-        object['@id'] = makeId(ancestor['@id'], objectType, objectIndex);
+      if (ancestor.id) {
+        object.id = makeId(ancestor.id, objectType, objectIndex);
         return;
       }
     }
@@ -194,10 +210,8 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
 }
 
 function ensureLabel(object, rui_location, ...ancestors) {
-  console.log("NONONONO " + rui_location)
   if (!object.label) {
     // Create one
-    console.log('creatir ' + rui_location.placement.placement_date);
     var provider_name = '';
     for (const ancestor of ancestors) {
       // Grab the provider name

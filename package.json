@@ -8,6 +8,7 @@
   },
   "type": "module",
   "scripts": {
+    "hra-registration-processor": "node src/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,7 @@
     "chalk": "^5.2.0",
     "commander": "^10.0.1",
     "js-yaml": "^4.1.0",
+    "shelljs": "^0.8.5",
     "zod": "^3.21.4",
     "zod-to-json-schema": "^3.20.4"
   },

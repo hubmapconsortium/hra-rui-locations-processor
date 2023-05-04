@@ -66,30 +66,39 @@ export const Block = z.object({
 
 export const Donor = z.object({
   /** id of the Donor */
-  '@id': z.string(),
+  id: z.string().optional(),
   /** type of donor */
-  '@type':z.string().optional(),
+  '@type': z.string().optional(),
   /** label of the Donor */
-  label: z.string().optional(), //made it optional to test if it gets from root.
+  label: z.string().optional(), 
   /** descripton of the Donor */
   description: z.string().optional(),
   /** link of the Donor */
-  link: z.string(),
+  link: z.string().optional(),
   /** Age of the Donor */
   age: z.number().optional(),
   /** Sex of the Donor */
-  sex: z.enum(['Male', 'Female']).optional(),
+  sex: z.enum(['Male', 'Female']),
   /** BMI of the Donor */
   bmi: z.number().optional(),
   /** An array of Block */
   samples: Block.array().min(1),
 });
 
+export const Default = z.object({
+  /** default id */
+  id: z.string(),
+  /** default link */
+  link: z.string(),
+  /** default thumbnail */
+  thumbnail: z.string().optional()
+})
+
 export const Provider = z.object({
   /** id of the Donor */
-  '@id': z.string(),
+  id: z.string().optional(),
   /** type of donor */
-  '@type':z.string().optional(),
+  '@type': z.string().optional(),
   /** Provider Name */
   provider_name: z.string(),
   /**description */
@@ -99,11 +108,15 @@ export const Provider = z.object({
   /** Consortium Name */
   consortium_name: z.string(),
   /** Defaults: thumbnail technology */
-  thumbnail: z.string(),
+  thumbnail: z.string().optional(),
+  /** Link of the dataset. This link will be referred if there are no links mentioned in data. */
+  link : z.string().optional(),
   /** Default Thumbnail */
   default_dataset_technology: z.string().optional(),
   /** An array of Donor */
   donors: Donor.array().min(1),
+  /** Default id, link, and thumbnail if the Provider doesn't have it */
+  defaults: Default.optional(),
 });
 
 export const Providers = Provider.array();

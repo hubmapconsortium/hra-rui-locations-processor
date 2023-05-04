@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CCF-EUI with custom data</title>
+  <base href="https://cdn.jsdelivr.net/gh/hubmapconsortium/ccf-ui@gh-pages/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <script src="wc.js" async></script>
+</head>
+<body>
+  <ccf-eui use-remote-api="false" hubmap-data-url="" login-disabled="true" logo-tooltip=""></ccf-eui>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const eui = document.querySelector('ccf-eui');
+      // Get current URL, but remove any *.html ending, so we get base path
+      const basePath = location.href.replace(/\/[^\/]+\.html/,'/');
+      eui.homeUrl = location.href;
+      eui.dataSources = [
+        `${basePath}rui_locations.jsonld`
+
+        // Uncomment below to add HuBMAP data
+        // 'https://ccf-api.hubmapconsortium.org/v1/hubmap/rui_locations.jsonld'
+      ];
+    });
+  </script>
+</body>
+</html>

@@ -80,7 +80,7 @@ export const temp = z.object({
 
 
 
-  
+
 });
 
 export const SpatialPlacement = SpatialPlacementCommon.extend({

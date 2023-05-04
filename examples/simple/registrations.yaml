@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../registrations.schema.json
+
+- consortium_name: HuBMAP
+  provider_name: TMC-CalTech
+  provider_uuid: 308f5ffc-ed43-11e8-b56a-0e8017bdda58
+  defaults:
+    id: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
+    thumbnail: assets/icons/ico-unknown.svg
+    link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
+  donors:
+    - sex: Male
+      id: 'https://foo-entity/1'
+      link: https://example.com/registration-data-1
+      samples:
+      - rui_location: registration-data-1.json

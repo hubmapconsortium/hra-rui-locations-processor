@@ -1,0 +1,43 @@
+{
+  "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+  "@id": "http://purl.org/ccf/1.5/70d72c42-034c-4fb4-be13-7795ed42e733",
+  "@type": "SpatialEntity",
+  "creator": "Rebecca Hodge",
+  "creator_first_name": "Rebecca",
+  "creator_last_name": "Hodge",
+  "creation_date": "2023-05-02",
+  "ccf_annotations": [
+    "http://purl.obolibrary.org/obo/UBERON_0002015",
+    "http://purl.obolibrary.org/obo/UBERON_0008716",
+    "http://purl.obolibrary.org/obo/UBERON_0000362",
+    "http://purl.obolibrary.org/obo/UBERON_0001228",
+    "http://purl.obolibrary.org/obo/UBERON_0004200",
+    "http://purl.obolibrary.org/obo/UBERON_0001225",
+    "http://purl.obolibrary.org/obo/UBERON_0001284",
+    "http://purl.obolibrary.org/obo/UBERON_0002189"
+  ],
+  "x_dimension": 24,
+  "y_dimension": 23,
+  "z_dimension": 10,
+  "dimension_units": "millimeter",
+  "placement": {
+    "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+    "@id": "http://purl.org/ccf/1.5/70d72c42-034c-4fb4-be13-7795ed42e733_placement",
+    "@type": "SpatialPlacement",
+    "target": "http://purl.org/ccf/latest/ccf.owl#VHFLeftKidneyV1.1",
+    "placement_date": "2023-05-02",
+    "x_scaling": 1,
+    "y_scaling": 1,
+    "z_scaling": 1,
+    "scaling_units": "ratio",
+    "x_rotation": 0,
+    "y_rotation": 0,
+    "z_rotation": 0,
+    "rotation_order": "XYZ",
+    "rotation_units": "degree",
+    "x_translation": 25.331,
+    "y_translation": 90.579,
+    "z_translation": 38.79,
+    "translation_units": "millimeter"
+  }
+}

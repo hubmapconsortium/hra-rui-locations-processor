@@ -6,7 +6,16 @@
       "items": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
+          "@type": {
+            "type": "string"
+          },
           "provider_name": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "provider_uuid": {
@@ -18,7 +27,7 @@
           "thumbnail": {
             "type": "string"
           },
-          "label": {
+          "link": {
             "type": "string"
           },
           "default_dataset_technology": {
@@ -30,6 +39,9 @@
               "type": "object",
               "properties": {
                 "id": {
+                  "type": "string"
+                },
+                "@type": {
                   "type": "string"
                 },
                 "label": {
@@ -54,13 +66,20 @@
                 "bmi": {
                   "type": "number"
                 },
-                "blocks": {
+                "samples": {
                   "type": "array",
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
+                      "@id": {
                         "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "sample_type": {
+                        "type": "string",
+                        "const": "Tissue Block"
                       },
                       "rui_location": {
                         "anyOf": [
@@ -70,12 +89,15 @@
                           {
                             "type": "object",
                             "properties": {
-                              "id": {
+                              "@id": {
                                 "type": "string"
                               },
-                              "type": {
+                              "@type": {
                                 "type": "string",
                                 "const": "SpatialEntity"
+                              },
+                              "@context": {
+                                "type": "string"
                               },
                               "label": {
                                 "type": "string"
@@ -119,13 +141,13 @@
                               "placement": {
                                 "type": "object",
                                 "properties": {
-                                  "context": {
+                                  "@context": {
                                     "type": "string"
                                   },
-                                  "id": {
+                                  "@id": {
                                     "type": "string"
                                   },
-                                  "type": {
+                                  "@type": {
                                     "type": "string",
                                     "const": "SpatialPlacement"
                                   },
@@ -182,52 +204,56 @@
                                       {
                                         "type": "object",
                                         "properties": {
-                                          "id": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/id"
+                                          "@id": {
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@id"
                                           },
-                                          "type": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/type"
+                                          "@type": {
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@type"
+                                          },
+                                          "@context": {
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@context"
                                           },
                                           "label": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/label"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/label"
                                           },
                                           "comment": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/comment"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/comment"
                                           },
                                           "creator": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/creator"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator"
                                           },
                                           "creator_first_name": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/creator_first_name"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_first_name"
                                           },
                                           "creator_last_name": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/creator_last_name"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_last_name"
                                           },
                                           "creator_orcid": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/creator_orcid"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_orcid"
                                           },
                                           "creation_date": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/creation_date"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creation_date"
                                           },
                                           "ccf_annotations": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/ccf_annotations"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/ccf_annotations"
                                           },
                                           "x_dimension": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/x_dimension"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/x_dimension"
                                           },
                                           "y_dimension": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/y_dimension"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/y_dimension"
                                           },
                                           "z_dimension": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/z_dimension"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/z_dimension"
                                           },
                                           "dimension_units": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/dimension_units"
+                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/dimension_units"
                                           }
                                         },
                                         "required": [
-                                          "id",
-                                          "type"
+                                          "@id",
+                                          "@type",
+                                          "@context"
                                         ],
                                         "additionalProperties": false
                                       }
@@ -239,14 +265,14 @@
                                         "type": "string"
                                       },
                                       {
-                                        "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/rui_location/anyOf/1/properties/placement/properties/source/anyOf/1"
+                                        "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/placement/properties/source/anyOf/1"
                                       }
                                     ]
                                   }
                                 },
                                 "required": [
-                                  "id",
-                                  "type",
+                                  "@id",
+                                  "@type",
                                   "placement_date",
                                   "x_scaling",
                                   "y_scaling",
@@ -266,8 +292,9 @@
                               }
                             },
                             "required": [
-                              "id",
-                              "type",
+                              "@id",
+                              "@type",
+                              "@context",
                               "placement"
                             ],
                             "additionalProperties": false
@@ -297,8 +324,15 @@
                         "items": {
                           "type": "object",
                           "properties": {
-                            "id": {
+                            "@id": {
                               "type": "string"
+                            },
+                            "@type": {
+                              "type": "string"
+                            },
+                            "sample_type": {
+                              "type": "string",
+                              "const": "Tissue Section"
                             },
                             "label": {
                               "type": "string"
@@ -317,7 +351,10 @@
                               "items": {
                                 "type": "object",
                                 "properties": {
-                                  "id": {
+                                  "@id": {
+                                    "type": "string"
+                                  },
+                                  "@type": {
                                     "type": "string"
                                   },
                                   "label": {
@@ -346,7 +383,7 @@
                       "datasets": {
                         "type": "array",
                         "items": {
-                          "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/blocks/items/properties/sections/items/properties/datasets/items"
+                          "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/sections/items/properties/datasets/items"
                         }
                       }
                     },
@@ -359,19 +396,37 @@
                 }
               },
               "required": [
-                "id",
-                "label",
-                "link",
-                "blocks"
+                "sex",
+                "samples"
               ],
               "additionalProperties": false
             },
             "minItems": 1
+          },
+          "defaults": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "link": {
+                "type": "string"
+              },
+              "thumbnail": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "link"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
           "provider_name",
-          "thumbnail",
+          "provider_uuid",
+          "consortium_name",
           "donors"
         ],
         "additionalProperties": false
