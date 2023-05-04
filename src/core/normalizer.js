@@ -28,8 +28,9 @@ export function normalizeRegistrations(context) {
 export function normalizeRegistration(data, ruiLocationsDir) {
   const warnings = new Set();
   for (const provider of data) {
-    if(!provider.defaults.thumbnail){
-      provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
+    if(provider.defaults)
+      if(!provider.defaults.thumbnail){
+        provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
     }
     for (const donor of provider.donors) {
       donor['@type'] = 'Donor';
@@ -42,30 +43,30 @@ export function normalizeRegistration(data, ruiLocationsDir) {
 
         ensureDonorLabel(donor, block);
         ensureDescription(donor, ruiLocation, provider);
-        ensureLink(donor, provider, provider.defaults);
+        ensureLink(donor, provider, provider.defaults ? provider.defaults : '');
 
-        ensureId(blockId, block, '', donor, provider, provider.defaults);
+        ensureId(blockId, block, '', donor, provider, provider.defaults ? provider.defaults : '');
         ensureLabel(block, ruiLocation, donor, provider);
-        ensureLink(block, donor, provider, provider.defaults);
+        ensureLink(block, donor, provider, provider.defaults ? provider.defaults : '');
         ensureDescription(provider, ruiLocation, provider);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           section['@type'] = 'Sample';
           section['sample_type'] = 'Tissue Section';
 
-          ensureId(sectionId, section, block, donor, provider.defaults);
+          ensureId(sectionId, section, block, donor, provider, provider.defaults ? provider.defaults : '');
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSectionDescription(section, ruiLocation, donor, provider);
-          ensureLink(section, block, donor, provider, provider.defaults);
+          ensureLink(section, block, donor, provider, provider.defaults ? provider.defaults : '');
           ensureSectionCount(block);
 
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
             dataset['@type'] = 'Dataset';
 
-            ensureId(datasetId, dataset, block, donor, provider.defaults);
+            ensureId(datasetId, dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
             ensureLabel(dataset, ruiLocation, donor, provider);
             ensureDatasetDescription(dataset);
-            ensureLink(dataset, block, donor, provider, provider.defaults);
+            ensureLink(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
           }
         }
       }
@@ -132,12 +133,11 @@ function ensureDescription(object, rui_location, provider) {
 }
 
 function ensureSectionCount(block) {
-  if (!block.section_count) {
-    block.section_count = block.sections.length;
-    return;
+  if (!block.section_count && block.sections) {
+    return block.section_count = block.sections.length;
   }
-  block.section_count = 0;
-  return;
+    return;
+  
 }
 
 function ensureDonorLabel(donor, block) {
