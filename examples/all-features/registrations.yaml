@@ -46,8 +46,9 @@
 - consortium_name: HuBMAP
   provider_name: TMC-Stanford
   provider_uuid: def5fd76-ed43-11e8-b56a-0e8017bdda58
-  id: https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0
-  link: https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0
+  defaults:
+    id: https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0
+    link: https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0
   donors:
     - sex: Female
       bmi: 10

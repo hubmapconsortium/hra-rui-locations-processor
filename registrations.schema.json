@@ -6,9 +6,6 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "@type": {
             "type": "string"
           },
@@ -22,12 +19,6 @@
             "type": "string"
           },
           "consortium_name": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "link": {
             "type": "string"
           },
           "default_dataset_technology": {

@@ -1,8 +1,9 @@
-import { load } from 'js-yaml';
 import { readFileSync, writeFileSync } from 'fs';
+import { load } from 'js-yaml';
 import { resolve } from 'path';
+import sh from 'shelljs';
 import { Providers } from '../utils/data-schema.js';
-import { SpatialEntity, temp } from '../utils/spatial-schema.js';
+import { SpatialEntity } from '../utils/spatial-schema.js';
 
 /** This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
  *  @param { string }  context  - The directory path of registration.yaml file.
@@ -19,6 +20,7 @@ export function normalizeRegistrations(context) {
     'rui_locations.jsonld'
   );
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
+  sh.cp('ccf-eui-template.html', resolve(context.doPath, 'index.html'))
 }
 
 /** This function ensures the registration.yaml file has id, label, description, and link at Provider, Donor, Section, Block and Dataset levels. 

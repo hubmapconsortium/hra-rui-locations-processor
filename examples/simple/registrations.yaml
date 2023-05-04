@@ -13,3 +13,10 @@
       link: https://example.com/registration-data-1
       samples:
       - rui_location: registration-data-1.json
+        sections:
+          - label: Registered 9/7/2021, daniel cotter, TMC-Stanford
+            link:  https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
+            datasets:
+              - technology: CODEX
+                link: https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
+                thumbnail: assets/icons/ico-spatial-codex.svg

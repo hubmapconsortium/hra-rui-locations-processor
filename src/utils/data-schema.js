@@ -95,8 +95,6 @@ export const Default = z.object({
 })
 
 export const Provider = z.object({
-  /** id of the Donor */
-  id: z.string().optional(),
   /** type of donor */
   '@type': z.string().optional(),
   /** Provider Name */
@@ -107,10 +105,6 @@ export const Provider = z.object({
   provider_uuid: z.string(),
   /** Consortium Name */
   consortium_name: z.string(),
-  /** Defaults: thumbnail technology */
-  thumbnail: z.string().optional(),
-  /** Link of the dataset. This link will be referred if there are no links mentioned in data. */
-  link : z.string().optional(),
   /** Default Thumbnail */
   default_dataset_technology: z.string().optional(),
   /** An array of Donor */
