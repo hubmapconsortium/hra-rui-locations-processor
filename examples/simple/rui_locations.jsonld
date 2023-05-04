@@ -90,11 +90,30 @@
               "target": "http://purl.org/ccf/latest/ccf.owl#VHFLeftKidneyV1.1"
             }
           },
+          "sections": [
+            {
+              "label": "Registered 9/7/2021, daniel cotter, TMC-Stanford",
+              "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "datasets": [
+                {
+                  "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+                  "technology": "CODEX",
+                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                }
+              ],
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "id": "https://foo-entity/1#[object Object]1",
+              "description": "24 x 23 x 10 millimeter, 10 millimeter, ",
+              "section_size": 10
+            }
+          ],
           "@type": "Sample",
           "sample_type": "Tissue Block",
           "id": "https://foo-entity/1#1",
           "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
-          "link": "https://example.com/registration-data-1"
+          "link": "https://example.com/registration-data-1",
+          "section_count": 1
         }
       ],
       "@type": "Donor",
