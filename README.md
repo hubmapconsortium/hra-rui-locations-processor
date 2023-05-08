@@ -4,6 +4,11 @@ The HRA - RUI Locations Processor is a basic tool for processing the RUI Locatio
 
 ## Steps to install the software
 
+### Prerequisite
+
+- Microsoft Visual Studio Code ( VS Code) - https://code.visualstudio.com/download
+- Adding the YAML Extension - In the VS Code, on the vertical ribbon (Activity Bar) to the left click on Extension icon (![](C:\Users\hsjoshi\Desktop\extensions_icon.png)) and search for ```yaml``` and chose the one developed by Red Hat (![](C:\Users\hsjoshi\Desktop\YAML_RedHat.png)) and install. 
+
 ### 1. Clone the repo
 
 ```bash
@@ -18,7 +23,7 @@ $ git checkout develop
 $ npm ci
 ```
 
-### 3. Interacting with the software
+### 3. Interacting with the software 
 
 The software can be interacted with a terminal. There are two options the software provides:
 
@@ -26,7 +31,7 @@ The software can be interacted with a terminal. There are two options the softwa
 
 - ```json-schema```: With this option, a new json schema will be exported which can be used to validate the ```registrations.yaml``` file.
 
-  #### Commands to interact with the softwarea
+  #### Commands to interact with the software
 
 ​		Open a terminal and refer the commands below. (Ensure you are in ```src``` folder to execute the ```cli.js``` commands. )
 
