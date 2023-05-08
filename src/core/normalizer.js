@@ -25,15 +25,15 @@ export function normalizeRegistrations(context) {
 
 /** This function ensures the registration.yaml file has id, label, description, and link at Provider, Donor, Section, Block and Dataset levels. 
  * If not, it creates one.
- * @param { string } data - 
+ * @param { string } data - The data which has to be normalized, here, the contents of registrations.yaml file which has the provider data.
+ * @param { string } ruiLocationsDir - The directory where rui_locations can be found, if file name is mentioned in registration.yaml file.
  */
 export function normalizeRegistration(data, ruiLocationsDir) {
-  const warnings = new Set();
   for (const provider of data) {
-    if(provider.defaults)
-      if(!provider.defaults.thumbnail){
+    if (provider.defaults)
+      if (!provider.defaults.thumbnail) {
         provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
-    }
+      }
     for (const donor of provider.donors) {
       donor['@type'] = 'Donor';
 
@@ -138,14 +138,21 @@ function ensureDescription(object, rui_location, provider) {
   }
 }
 
+/** This function ensures the section count is mentioned. If not, it will count the sections and add the length in appropriate block
+ * @param { object } block - The block object where sections and section count is present.
+ */
 function ensureSectionCount(block) {
   if (!block.section_count && block.sections) {
     return block.section_count = block.sections.length;
   }
-    return;
-  
+  return;
+
 }
 
+/** This function generates label if not present. 
+ * @param { object } donor - The donor object where label has to be generated which contains Age, Sex, and BMI.
+ * @param { object } block - If the donor object does not have Age, Sex, and BMI then the block label will be used.
+*/
 function ensureDonorLabel(donor, block) {
   if (!donor.label) {
     var newLabel = '';
@@ -165,6 +172,9 @@ function ensureDonorLabel(donor, block) {
   }
 }
 
+/** This function ensures the dataset description is mentioned. 
+ * @param { object } object - The dataset object where the description will be generated if absent.
+ */
 function ensureDatasetDescription(object) {
   if (!object.description) {
     object.description = 'Data/Assay Types: ' + object.technology + ', ';
@@ -172,6 +182,11 @@ function ensureDatasetDescription(object) {
   }
 }
 
+/** This function ensures the section description is present. If not, it will be generated.
+ * @param { object } object - The section object where the section will be generated if absent.
+ * @param { object } rui_location - The rui_location object from where the dimensions will be fetched if section is absent.
+ * @param { [object] } ancestors - The array of ancestors to fetch the description if the rui_location is absent.
+ */
 function ensureSectionDescription(object, rui_location, ...ancestors) {
   if (!object.description) {
     if (rui_location.x_dimension) {
@@ -197,6 +212,12 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
   }
 }
 
+/** This function will ensure id is presnet. If not, it will be fetched from ancestors.
+ * @param { number } objectIndex - The index # of the object which has to be appended at the last of generated Id.
+ * @param { object } object - The object for which the id has to generated if absent.
+ * @param { objectType } objectType - The type of object
+ * @param { [object] } ancestors - If the id is absent, then the id will be fetched from ancestors, and then it will be created for the object.
+ */
 function ensureId(objectIndex, object, objectType, ...ancestors) {
   if (object.id && !object['@id']) {
     object['@id'] = object['id'];
@@ -215,6 +236,11 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   }
 }
 
+/** This function is used to generate label if it is absent.
+ * @param { object } object - The object for which the label has to be ensured.
+ * @param { object } rui_location - The rui_location object from where the creator name, and date will be fetched to generate label if absent.
+ * @param { [object] } ancestors - If the label is absent, then the provider name will be fetched from ancestors. 
+ */
 function ensureLabel(object, rui_location, ...ancestors) {
   if (!object.label) {
     // Create one
@@ -231,6 +257,11 @@ function ensureLabel(object, rui_location, ...ancestors) {
   }
 }
 
+/** This function  is used to make label for the object passed 
+ * @param { string } prefix - It can be either Entered or Registered. Only for the provider level, the description starts with Entered. For rest, it starts with Registered.
+ * @param { object } rui_location - The rui_location object from where the creator, and date will be fetched.
+ * @param { string } provider_name - The name of provider.
+*/
 function makeLabel(prefix, rui_location, provider_name) {
   const creator = rui_location.creator;
   const date = new Date(rui_location.placement.placement_date);
@@ -240,17 +271,28 @@ function makeLabel(prefix, rui_location, provider_name) {
   return `${prefix} ${month}/${day}/${year}, ${creator}, ${provider_name}`;
 }
 
+/** This function makes id
+ * @param { string } baseIri - It is the base URL. It can be from donor or dataset level.
+ * @param { string } objectType  - The type of object
+ * @param { number } objectIndex - The index number of the object. This number will be appended at the last.
+ */
 function makeId(baseIri, objectType, objectIndex) {
   const separator = baseIri.indexOf('#') !== -1 ? '_' : '#';
   return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
 }
 
+/** Enumerator function. It iterates throught the array and yields the index number and element from the array. 
+ * @param { Array } arr - An array of elements.
+*/
 function* enumerate(arr) {
   for (let i = 0; i < (arr ?? []).length; i++) {
     yield [arr[i], i];
   }
 }
 
+/** This function is used to convert the above generated schema to JsonLd format. 
+ * @param { object } data - The data, which was ensured above, and which needs to be converted to JsonLd format.
+*/
 export function convertToJsonLd(normalized) {
   const data = {
     '@context': {
