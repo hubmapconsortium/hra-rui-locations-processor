@@ -35,8 +35,12 @@ $ cd src
 $ ./cli.js <options> <path/to/directory>
 
 # Example:
-$ ./cli.js normalize ./data/sea-ad/      # This command will normalize the registrations.yaml file. It will 										   search for the file in './data/sea-ad/' folder.
-$ ./cli.js json-schema ./temp/file.json  # This command will generate a new json-schema which will be used 											   to validate against the registrations.yaml file. The new json-											   schema will be created in the temp folder, the file name will be 										   file.json
+$ ./cli.js normalize ./data/sea-ad/      # This command will normalize the registrations.yaml file. It will
+                     										   search for the file in './data/sea-ad/' folder.
+$ ./cli.js json-schema ./temp/file.json  # This command will generate a new json-schema which will be used
+                   											   to validate against the registrations.yaml file. The new json-
+                  											   schema will be created in the temp folder, the file name will be
+                     										   file.json
 
 ```
 
