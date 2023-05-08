@@ -122,7 +122,11 @@ function ensureLink(object, ...ancestors) {
   }
 }
 
-/** This function ensures the description is mentioned. If not it creates one from rui_locations, and providers. */
+/** This function ensures the description is mentioned. If not it creates one from rui_locations, and providers. 
+ * @param { object } object - the object where description has to be checked
+ * @param { object } rui_location  - THe rui_location object from where the creator name and date can be fetched if discription is missing
+ * @param { object } provider - The provider object to fetch the provider name if description is missing.  
+*/
 function ensureDescription(object, rui_location, provider) {
   if (!object.description) {
     const prefix = 'Entered';
