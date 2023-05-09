@@ -7,7 +7,9 @@ The HRA - RUI Locations Processor is a basic tool for processing the RUI Locatio
 ### Prerequisite
 
 - Microsoft Visual Studio Code ( VS Code) - https://code.visualstudio.com/download
-- Adding the YAML Extension - In the VS Code, on the vertical ribbon (Activity Bar) to the left click on Extension icon (![](C:\Users\hsjoshi\Desktop\extensions_icon.png)) and search for ```yaml``` and chose the one developed by Red Hat (![](C:\Users\hsjoshi\Desktop\YAML_RedHat.png)) and install. 
+- Adding the YAML Extension - In the VS Code, on the vertical ribbon (Activity Bar) to the left click on Extension icon (![extensions_icon](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9c2a58f6-d292-40cf-baf4-dae371c0f015)) and search for ```yaml``` and chose the one developed by Red Hat (![YAML_RedHat](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9e88d2c7-b412-4f4f-9eff-6139b05d3fdf)) and install. 
+
+
 
 ### 1. Clone the repo
 
