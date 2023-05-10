@@ -11,5 +11,4 @@ export function newRegistrations(context) {
     );
     sh.cp(resolve(context.processorHome, 'src/ccf-eui-template.html'), resolve(context.doPath, 'index.html'));
   }
-  console.log(context);
 }
