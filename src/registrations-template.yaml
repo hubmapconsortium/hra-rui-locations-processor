@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/hubmapconsortium/hra-rui-locations-processor/main/registrations.schema.json
+
+- consortium_name: <Consortium Name>
+  provider_name: <Provider Name>
+  provider_uuid: <uuid>
+  defaults:
+    id: http://example.com/required/id
+    thumbnail: assets/icons/ico-unknown.svg
+    link: http://example.com/user/link
+  donors:
+    - sex: Male
+      samples:
+      - rui_location: <name-of-rui-location in registrations folder>.json

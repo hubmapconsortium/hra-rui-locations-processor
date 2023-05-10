@@ -21,7 +21,7 @@ export function normalizeRegistrations(context) {
     'rui_locations.jsonld'
   );
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
-  sh.cp('ccf-eui-template.html', resolve(context.doPath, 'index.html'));
+  sh.cp(resolve(context.processorHome, 'src/ccf-eui-template.html'), resolve(context.doPath, 'index.html'));
 }
 
 /**
