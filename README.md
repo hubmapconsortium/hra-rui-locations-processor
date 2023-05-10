@@ -2,6 +2,14 @@
 
 The HRA - RUI Locations Processor is a basic tool for processing the RUI Locations to minimize the human efforts and reducing errors thereby maintaining the consistency across the application.
 
+## Quick Start
+
+Once installing Node.js v16+ with NPM, you can run
+
+```npx github:hubmapconsortium/hra-rui-locations-processor help```
+
+to run the code without checking out the code manually with github.
+
 ## Steps to install the software
 
 ### Prerequisite
