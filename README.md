@@ -10,15 +10,16 @@ The HRA - RUI Locations Processor is a basic tool for processing the RUI Locatio
 
 - [ ] Adding the YAML Extension - In the VS Code, on the vertical ribbon (Activity Bar) to the left click on Extension icon (![extensions_icon](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9c2a58f6-d292-40cf-baf4-dae371c0f015)) and search for ```yaml``` and chose the one developed by Red Hat (![YAML_RedHat](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9e88d2c7-b412-4f4f-9eff-6139b05d3fdf)) and install. 
 
+- [ ] Node.js v16+
+
 ### 1. Clone the repo
 
 ```bash
 $ git clone https://github.com/hubmapconsortium/hra-rui-locations-processor.git
 $ cd hra-rui-locations-processor
-$ git checkout develop
 ```
 
-### 2. Installing the software
+### 2. Setting up the software
 
 ```bash
 $ npm ci
@@ -37,13 +38,12 @@ The software can be interacted with a terminal. There are two options the softwa
 ​		Open a terminal and refer the commands below. (Ensure you are in ```src``` folder to execute the ```cli.js``` commands. )
 
 ```bash
-$ cd src
-$ ./cli.js <option> <path/to/directory>
+$ npm run hra-registration-processor <option> <path/to/directory>
 
 # Example:
-$ ./cli.js normalize ./data/sea-ad/      # This command will normalize the registrations.yaml file. It will search for the file in '.data/sea-ad/' folder.
-$ ./cli.js json-schema ./temp/file.json  # This command will generate a new json-schema which will be used to validate against the registrations.yaml file. The new json-schema will be created in the temp folder, the file name will be file.json
-$ ./cli.js --help 	# This command will show the help menu which displays the options and descriptions.
+$ npm run hra-registration-processor normalize ./data/sea-ad/      # This command will normalize the registrations.yaml file. It will search for the file in '.data/sea-ad/' folder.
+$ npm run hra-registration-processor json-schema ./temp/file.json  # This command will generate a new json-schema which will be used to validate against the registrations.yaml file. The new json-schema will be created in the temp folder, the file name will be file.json
+$ npm run hra-registration-processor help 	# This command will show the help menu which displays the options and descriptions.
 ```
 
 If everything goes well, after executing the commands, you will not see any error(s). 
@@ -71,6 +71,3 @@ Once the schema file is set, and loaded properly into the yaml file ( Setting th
 - If any required key is missing, it will be denoted by a small red marker for the section. Hover over it and it will tell which property is missing. 
 
 - The value for ```rui_locations``` can be either a JSON filename containing the RUI locations or an object containing the RUI locations in YAML format defined in same file.
-
-  
-
