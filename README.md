@@ -7,9 +7,8 @@ The HRA - RUI Locations Processor is a basic tool for processing the RUI Locatio
 ### Prerequisite
 
 - [ ] Microsoft Visual Studio Code ( VS Code) - https://code.visualstudio.com/download
-
-- [ ] Adding the YAML Extension - In the VS Code, on the vertical ribbon (Activity Bar) to the left click on Extension icon (![extensions_icon](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9c2a58f6-d292-40cf-baf4-dae371c0f015)) and search for ```yaml``` and chose the one developed by Red Hat (![YAML_RedHat](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9e88d2c7-b412-4f4f-9eff-6139b05d3fdf)) and install. 
-
+- [ ] Adding the YAML Extension - In the VS Code, on the vertical ribbon (Activity Bar) to the left click on Extension icon (![extensions_icon](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9c2a58f6-d292-40cf-baf4-dae371c0f015)) and search for ```yaml``` and chose the one developed by Red Hat and install. 
+    ![YAML_RedHat](https://github.com/hubmapconsortium/hra-rui-locations-processor/assets/88348124/9e88d2c7-b412-4f4f-9eff-6139b05d3fdf)
 - [ ] Node.js v16+
 
 ### 1. Clone the repo
@@ -18,6 +17,8 @@ The HRA - RUI Locations Processor is a basic tool for processing the RUI Locatio
 $ git clone https://github.com/hubmapconsortium/hra-rui-locations-processor.git
 $ cd hra-rui-locations-processor
 ```
+
+Or check out the same with Visual Studio Code or GitHub Desktop
 
 ### 2. Setting up the software
 
@@ -31,11 +32,9 @@ The software can be interacted with a terminal. There are two options the softwa
 
 - ```normalize```: With this option, the  ```registrations.yaml``` file will be scanned, the missing metadata will be generated and added, and ```rui_locations.jsonld``` file will be generated.
 
-- ```json-schema```: With this option, a new json schema will be exported which can be used to validate the ```registrations.yaml``` file.
+### Commands to interact with the software
 
-  #### Commands to interact with the software
-
-​		Open a terminal and refer the commands below. (Ensure you are in ```src``` folder to execute the ```cli.js``` commands. )
+​Open a terminal and refer the commands below. (Ensure you are in ```src``` folder to execute the ```cli.js``` commands. )
 
 ```bash
 $ npm run hra-registration-processor <option> <path/to/directory>

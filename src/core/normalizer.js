@@ -5,8 +5,9 @@ import sh from 'shelljs';
 import { Providers } from '../utils/data-schema.js';
 import { SpatialEntity } from '../utils/spatial-schema.js';
 
-/** This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
- *  @param { string }  context  - The directory path of registration.yaml file.
+/**
+ * This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
+ *  @param { string } context - The directory path of registration.yaml file.
  */
 export function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
@@ -20,10 +21,11 @@ export function normalizeRegistrations(context) {
     'rui_locations.jsonld'
   );
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
-  sh.cp('ccf-eui-template.html', resolve(context.doPath, 'index.html'))
+  sh.cp('ccf-eui-template.html', resolve(context.doPath, 'index.html'));
 }
 
-/** This function ensures the registration.yaml file has id, label, description, and link at Provider, Donor, Section, Block and Dataset levels. 
+/**
+ * This function ensures the registration.yaml file has id, label, description, and link at Provider, Donor, Section, Block and Dataset levels.
  * If not, it creates one.
  * @param { string } data - The data which has to be normalized, here, the contents of registrations.yaml file which has the provider data.
  * @param { string } ruiLocationsDir - The directory where rui_locations can be found, if file name is mentioned in registration.yaml file.
@@ -47,28 +49,66 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         ensureDescription(donor, ruiLocation, provider);
         ensureLink(donor, provider, provider.defaults ? provider.defaults : '');
 
-        ensureId(blockId, block, '', donor, provider, provider.defaults ? provider.defaults : '');
+        ensureId(
+          blockId,
+          block,
+          '',
+          donor,
+          provider,
+          provider.defaults ? provider.defaults : ''
+        );
         ensureLabel(block, ruiLocation, donor, provider);
-        ensureLink(block, donor, provider, provider.defaults ? provider.defaults : '');
+        ensureLink(
+          block,
+          donor,
+          provider,
+          provider.defaults ? provider.defaults : ''
+        );
         ensureDescription(provider, ruiLocation, provider);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           section['@type'] = 'Sample';
           section['sample_type'] = 'Tissue Section';
 
-          ensureId(sectionId, section, block, donor, provider, provider.defaults ? provider.defaults : '');
+          ensureId(
+            sectionId,
+            section,
+            block,
+            donor,
+            provider,
+            provider.defaults ? provider.defaults : ''
+          );
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSectionDescription(section, ruiLocation, donor, provider);
-          ensureLink(section, block, donor, provider, provider.defaults ? provider.defaults : '');
+          ensureLink(
+            section,
+            block,
+            donor,
+            provider,
+            provider.defaults ? provider.defaults : ''
+          );
           ensureSectionCount(block);
 
           for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
             dataset['@type'] = 'Dataset';
 
-            ensureId(datasetId, dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
+            ensureId(
+              datasetId,
+              dataset,
+              block,
+              donor,
+              provider,
+              provider.defaults ? provider.defaults : ''
+            );
             ensureLabel(dataset, ruiLocation, donor, provider);
             ensureDatasetDescription(dataset);
-            ensureLink(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
+            ensureLink(
+              dataset,
+              block,
+              donor,
+              provider,
+              provider.defaults ? provider.defaults : ''
+            );
           }
         }
       }
@@ -78,7 +118,8 @@ export function normalizeRegistration(data, ruiLocationsDir) {
   return data;
 }
 
-/** This function loads the file, and valdiates it with schema.
+/**
+ * This function loads the file, and valdiates it with schema.
  * @param { string } dir - The directory of file
  * @param { string } file - The name of file
  * @param { string } schema - The Zod schema with which the file has to be validated.
@@ -89,7 +130,8 @@ function loadFile(dir, file, schema) {
   return schema.parse(yaml);
 }
 
-/** This function validates the rui_location file if it is passed as a file name in JSON format in the registration.yaml file.
+/**
+ * This function validates the rui_location file if it is passed as a file name in JSON format in the registration.yaml file.
  * @param { string } block - This is the block object which contains rui_locations
  * @param { string } ruiLocationsDir - The directory where rui_location JSON file exists.
  */
@@ -104,7 +146,8 @@ function ensureRuiLocation(block, ruiLocationsDir) {
   return block.rui_location;
 }
 
-/** This function ensures the link is mentioned. If not, it generates it from ancestors(It searches upwards in the registration.yaml file or till the provider level)
+/**
+ * This function ensures the link is mentioned. If not, it generates it from ancestors(It searches upwards in the registration.yaml file or till the provider level)
  * @param {Object} object - The object where link has to checked
  * @param {[Object]} ancestors  - The hierarchial structures to the top from where the link can be fetched.
  */
@@ -122,11 +165,12 @@ function ensureLink(object, ...ancestors) {
   }
 }
 
-/** This function ensures the description is mentioned. If not it creates one from rui_locations, and providers. 
+/**
+ * This function ensures the description is mentioned. If not it creates one from rui_locations, and providers.
  * @param { object } object - the object where description has to be checked
  * @param { object } rui_location  - THe rui_location object from where the creator name and date can be fetched if discription is missing
- * @param { object } provider - The provider object to fetch the provider name if description is missing.  
-*/
+ * @param { object } provider - The provider object to fetch the provider name if description is missing.
+ */
 function ensureDescription(object, rui_location, provider) {
   if (!object.description) {
     const prefix = 'Entered';
@@ -138,21 +182,22 @@ function ensureDescription(object, rui_location, provider) {
   }
 }
 
-/** This function ensures the section count is mentioned. If not, it will count the sections and add the length in appropriate block
+/**
+ * This function ensures the section count is mentioned. If not, it will count the sections and add the length in appropriate block
  * @param { object } block - The block object where sections and section count is present.
  */
 function ensureSectionCount(block) {
   if (!block.section_count && block.sections) {
-    return block.section_count = block.sections.length;
+    return (block.section_count = block.sections.length);
   }
   return;
-
 }
 
-/** This function generates label if not present. 
+/**
+ * This function generates label if not present.
  * @param { object } donor - The donor object where label has to be generated which contains Age, Sex, and BMI.
  * @param { object } block - If the donor object does not have Age, Sex, and BMI then the block label will be used.
-*/
+ */
 function ensureDonorLabel(donor, block) {
   if (!donor.label) {
     var newLabel = '';
@@ -168,11 +213,12 @@ function ensureDonorLabel(donor, block) {
     if (newLabel === '') {
       newLabel = block.label;
     }
-    return donor.label = newLabel;
+    return (donor.label = newLabel);
   }
 }
 
-/** This function ensures the dataset description is mentioned. 
+/**
+ * This function ensures the dataset description is mentioned.
  * @param { object } object - The dataset object where the description will be generated if absent.
  */
 function ensureDatasetDescription(object) {
@@ -182,7 +228,8 @@ function ensureDatasetDescription(object) {
   }
 }
 
-/** This function ensures the section description is present. If not, it will be generated.
+/**
+ * This function ensures the section description is present. If not, it will be generated.
  * @param { object } object - The section object where the section will be generated if absent.
  * @param { object } rui_location - The rui_location object from where the dimensions will be fetched if section is absent.
  * @param { [object] } ancestors - The array of ancestors to fetch the description if the rui_location is absent.
@@ -196,7 +243,7 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
       const z_dim = rui_location.z_dimension;
       const units = rui_location.dimension_units;
       object.description = `${x_dim} x ${y_dim} x ${z_dim} ${units}, ${z_dim} ${units}, `;
-      object.section_size = z_dim
+      object.section_size = z_dim;
       return;
     } else {
       for (const ancestor of ancestors) {
@@ -212,7 +259,8 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
   }
 }
 
-/** This function will ensure id is presnet. If not, it will be fetched from ancestors.
+/**
+ * This function will ensure id is presnet. If not, it will be fetched from ancestors.
  * @param { number } objectIndex - The index # of the object which has to be appended at the last of generated Id.
  * @param { object } object - The object for which the id has to generated if absent.
  * @param { objectType } objectType - The type of object
@@ -236,10 +284,11 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   }
 }
 
-/** This function is used to generate label if it is absent.
+/**
+ * This function is used to generate label if it is absent.
  * @param { object } object - The object for which the label has to be ensured.
  * @param { object } rui_location - The rui_location object from where the creator name, and date will be fetched to generate label if absent.
- * @param { [object] } ancestors - If the label is absent, then the provider name will be fetched from ancestors. 
+ * @param { [object] } ancestors - If the label is absent, then the provider name will be fetched from ancestors.
  */
 function ensureLabel(object, rui_location, ...ancestors) {
   if (!object.label) {
@@ -257,11 +306,12 @@ function ensureLabel(object, rui_location, ...ancestors) {
   }
 }
 
-/** This function  is used to make label for the object passed 
+/**
+ * This function  is used to make label for the object passed
  * @param { string } prefix - It can be either Entered or Registered. Only for the provider level, the description starts with Entered. For rest, it starts with Registered.
  * @param { object } rui_location - The rui_location object from where the creator, and date will be fetched.
  * @param { string } provider_name - The name of provider.
-*/
+ */
 function makeLabel(prefix, rui_location, provider_name) {
   const creator = rui_location.creator;
   const date = new Date(rui_location.placement.placement_date);
@@ -271,7 +321,8 @@ function makeLabel(prefix, rui_location, provider_name) {
   return `${prefix} ${month}/${day}/${year}, ${creator}, ${provider_name}`;
 }
 
-/** This function makes id
+/**
+ * This function makes id
  * @param { string } baseIri - It is the base URL. It can be from donor or dataset level.
  * @param { string } objectType  - The type of object
  * @param { number } objectIndex - The index number of the object. This number will be appended at the last.
@@ -281,18 +332,20 @@ function makeId(baseIri, objectType, objectIndex) {
   return `${baseIri}${separator}${objectType}${objectIndex + 1}`;
 }
 
-/** Enumerator function. It iterates throught the array and yields the index number and element from the array. 
+/**
+ * Enumerator function. It iterates throught the array and yields the index number and element from the array.
  * @param { Array } arr - An array of elements.
-*/
+ */
 function* enumerate(arr) {
   for (let i = 0; i < (arr ?? []).length; i++) {
     yield [arr[i], i];
   }
 }
 
-/** This function is used to convert the above generated schema to JsonLd format. 
+/**
+ * This function is used to convert the above generated schema to JsonLd format.
  * @param { object } data - The data, which was ensured above, and which needs to be converted to JsonLd format.
-*/
+ */
 export function convertToJsonLd(normalized) {
   const data = {
     '@context': {
@@ -340,9 +393,9 @@ export function convertToJsonLd(normalized) {
   for (const provider of normalized) {
     for (const donor of provider.donors) {
       const finalDonor = {
-        'consortium_name': provider.consortium_name,
-        'provider_name': provider.provider_name,
-        'provider_uuid': provider.provider_uuid,
+        consortium_name: provider.consortium_name,
+        provider_name: provider.provider_name,
+        provider_uuid: provider.provider_uuid,
         ...donor,
       };
       donors.push(finalDonor);

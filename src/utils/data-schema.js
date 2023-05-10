@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { SpatialEntity } from "./spatial-schema.js";
+import { z } from 'zod';
+import { SpatialEntity } from './spatial-schema.js';
 
 export const Dataset = z.object({
   /** id of the Dataset item */
@@ -24,7 +24,7 @@ export const Section = z.object({
   /** type of section */
   '@type': z.string().optional(),
   /** sample type of section */
-  'sample_type': z.literal("Tissue Section").optional(),
+  sample_type: z.literal('Tissue Section').optional(),
   /** label of the Section item */
   label: z.string().optional(),
   /** description of the Section item */
@@ -43,7 +43,7 @@ export const Block = z.object({
   /** type of section */
   '@type': z.string().optional(),
   /** sample type of block */
-  'sample_type': z.literal("Tissue Block").optional(),
+  sample_type: z.literal('Tissue Block').optional(),
   /** RUI Location of Section item */
   rui_location: z.string().or(SpatialEntity),
   /** label of the Section item */
@@ -70,7 +70,7 @@ export const Donor = z.object({
   /** type of donor */
   '@type': z.string().optional(),
   /** label of the Donor */
-  label: z.string().optional(), 
+  label: z.string().optional(),
   /** descripton of the Donor */
   description: z.string().optional(),
   /** link of the Donor */
@@ -91,8 +91,8 @@ export const Default = z.object({
   /** default link */
   link: z.string(),
   /** default thumbnail */
-  thumbnail: z.string().optional()
-})
+  thumbnail: z.string().optional(),
+});
 
 export const Provider = z.object({
   /** type of donor */

@@ -9,6 +9,7 @@
   "type": "module",
   "scripts": {
     "hra-registration-processor": "node src/cli.js",
+    "build-json-schema": "node src/cli.js json-schema ./registrations.schema.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

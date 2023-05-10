@@ -1,5 +1,4 @@
-import { z } from "zod";
-
+import { z } from 'zod';
 
 export const SpatialPlacementCommon = z.object({
   /** JSON-LD context */
@@ -7,7 +6,7 @@ export const SpatialPlacementCommon = z.object({
   /** Identifier */
   '@id': z.string(),
   /** Type name */
-  '@type': z.literal("SpatialPlacement"),
+  '@type': z.literal('SpatialPlacement'),
 
   /** Date placement was made */
   placement_date: z.string(),
@@ -43,13 +42,11 @@ export const SpatialPlacementCommon = z.object({
   translation_units: z.string(),
 });
 
-
-
 export const temp = z.object({
   /** Identifier */
   '@id': z.string(),
   /** Type name */
-  '@type': z.literal("SpatialEntity"),
+  '@type': z.literal('SpatialEntity'),
   /**Context label */
   '@context': z.string(),
   /** Entity label */
@@ -77,22 +74,15 @@ export const temp = z.object({
   z_dimension: z.number().optional(),
   /** Units dimensions are in */
   dimension_units: z.string().optional(),
-
-
-
-
 });
 
 export const SpatialPlacement = SpatialPlacementCommon.extend({
   /** Source entity */
   source: z.string().or(temp).optional(),
   /** Target entity */
-  target: z.string().or(temp)
+  target: z.string().or(temp),
 });
 
 export const SpatialEntity = temp.extend({
-  placement: SpatialPlacement
-})
-
-
-
+  placement: SpatialPlacement,
+});
