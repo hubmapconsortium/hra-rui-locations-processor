@@ -1,0 +1,38 @@
+{
+  "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+  "@id": "http://purl.org/ccf/1.5/0c0a1979-77be-40f2-b950-3725707e40c9",
+  "@type": "SpatialEntity",
+  "creator": "Nathan Tucker",
+  "creator_first_name": "Nathan",
+  "creator_last_name": "Tucker",
+  "creation_date": "2023-04-20",
+  "ccf_annotations": [
+    "http://purl.obolibrary.org/obo/UBERON_0002078"
+  ],
+  "slice_thickness": 100,
+  "slice_count": 30,
+  "x_dimension": 5,
+  "y_dimension": 5,
+  "z_dimension": 4,
+  "dimension_units": "millimeter",
+  "placement": {
+    "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+    "@id": "http://purl.org/ccf/1.5/0c0a1979-77be-40f2-b950-3725707e40c9_placement",
+    "@type": "SpatialPlacement",
+    "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart",
+    "placement_date": "2023-04-20",
+    "x_scaling": 1,
+    "y_scaling": 1,
+    "z_scaling": 1,
+    "scaling_units": "ratio",
+    "x_rotation": -28,
+    "y_rotation": 34,
+    "z_rotation": 0,
+    "rotation_order": "XYZ",
+    "rotation_units": "degree",
+    "x_translation": 6.351,
+    "y_translation": 58.218,
+    "z_translation": 46.608,
+    "translation_units": "millimeter"
+  }
+}

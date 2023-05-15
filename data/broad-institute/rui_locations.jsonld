@@ -1,0 +1,99 @@
+{
+  "@context": {
+    "@base": "http://purl.org/ccf/latest/ccf-entity.owl#",
+    "@vocab": "http://purl.org/ccf/latest/ccf-entity.owl#",
+    "ccf": "http://purl.org/ccf/latest/ccf.owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "label": "rdfs:label",
+    "description": "rdfs:comment",
+    "link": {
+      "@id": "rdfs:seeAlso",
+      "@type": "@id"
+    },
+    "samples": {
+      "@reverse": "has_donor"
+    },
+    "sections": {
+      "@id": "has_tissue_section",
+      "@type": "@id"
+    },
+    "datasets": {
+      "@id": "has_dataset",
+      "@type": "@id"
+    },
+    "rui_location": {
+      "@id": "has_spatial_entity",
+      "@type": "@id"
+    },
+    "ontologyTerms": {
+      "@id": "has_ontology_term",
+      "@type": "@id"
+    },
+    "cellTypeTerms": {
+      "@id": "has_cell_type_term",
+      "@type": "@id"
+    },
+    "thumbnail": {
+      "@id": "has_thumbnail"
+    }
+  },
+  "@graph": [
+    {
+      "consortium_name": "Broad Institute",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 52,
+      "sex": "Female",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/allen-brain/P1221#Donor/P1221_LV#TissueBlock",
+          "rui_location": {
+            "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23",
+            "@type": "SpatialEntity",
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 6,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 46,
+              "y_rotation": 133,
+              "z_rotation": -11,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 122.542,
+              "y_translation": 61.492,
+              "z_translation": 28.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "id": "http://purl.org/ccf/1.5/broad-institute#1",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401"
+        }
+      ],
+      "@type": "Donor",
+      "label": "Female, Age 52",
+      "description": "Entered 3/19/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401"
+    }
+  ]
+}
