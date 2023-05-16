@@ -3,7 +3,7 @@ import { SpatialEntity } from './spatial-schema.js';
 
 export const Dataset = z.object({
   /** id of the Dataset item */
-  '@id': z.string().optional(),
+  id: z.string().optional(),
   /** type of dataset */
   '@type': z.string().optional(),
   /** label of the Dataset item */
@@ -20,7 +20,7 @@ export const Dataset = z.object({
 
 export const Section = z.object({
   /** id of the Section item */
-  '@id': z.string().optional(),
+  id: z.string().optional(),
   /** type of section */
   '@type': z.string().optional(),
   /** sample type of section */
@@ -39,7 +39,7 @@ export const Section = z.object({
 
 export const Block = z.object({
   /** id of the Section item */
-  '@id': z.string().optional(),
+  id: z.string().optional(),
   /** type of section */
   '@type': z.string().optional(),
   /** sample type of block */

@@ -4,12 +4,12 @@
   provider_name: TMC-CalTech
   provider_uuid: 308f5ffc-ed43-11e8-b56a-0e8017bdda58
   defaults:
-    id: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
+    id: http://dx.doi.org/10.1681/ASN.2016091027
     thumbnail: assets/icons/ico-unknown.svg
     link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
   donors:
     - sex: Male
-      id: 'https://foo-entity/1'
+      # id: 'https://foo-entity/1'
       link: https://example.com/registration-data-1
       samples:
       - rui_location: registration-data-1.json

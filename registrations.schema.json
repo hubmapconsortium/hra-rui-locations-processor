@@ -62,7 +62,7 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "@id": {
+                      "id": {
                         "type": "string"
                       },
                       "@type": {
@@ -315,7 +315,7 @@
                         "items": {
                           "type": "object",
                           "properties": {
-                            "@id": {
+                            "id": {
                               "type": "string"
                             },
                             "@type": {
@@ -342,7 +342,7 @@
                               "items": {
                                 "type": "object",
                                 "properties": {
-                                  "@id": {
+                                  "id": {
                                     "type": "string"
                                   },
                                   "@type": {
