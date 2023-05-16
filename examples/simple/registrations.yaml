@@ -9,7 +9,6 @@
     link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
   donors:
     - sex: Male
-      # id: 'https://foo-entity/1'
       link: https://example.com/registration-data-1
       samples:
       - rui_location: registration-data-1.json
