@@ -36,7 +36,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
       if (!provider.defaults.thumbnail) {
         provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
       }
-    for (const donor of provider.donors) {
+    for (const [donor, donorId] of enumerate(provider.donors)) {
       donor['@type'] = 'Donor';
 
       for (const [block, blockId] of enumerate(donor.samples)) {
@@ -44,7 +44,14 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         block['sample_type'] = 'Tissue Block';
 
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
-
+        //objectIndex, object, objectType, ...ancestors
+        ensureId(
+          donorId, 
+          donor, 
+          'Donor', 
+          provider, 
+          provider.defaults ? provider.defaults : ''
+        );
         ensureDonorLabel(donor, block);
         ensureDescription(donor, ruiLocation, provider);
         ensureLink(donor, provider, provider.defaults ? provider.defaults : '');
@@ -52,7 +59,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         ensureId(
           blockId,
           block,
-          '',
+          'TissueBlock',
           donor,
           provider,
           provider.defaults ? provider.defaults : ''
@@ -73,6 +80,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
           ensureId(
             sectionId,
             section,
+            'TissueSection',
             block,
             donor,
             provider,
@@ -95,6 +103,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
             ensureId(
               datasetId,
               dataset,
+              'Dataset',
               block,
               donor,
               provider,
