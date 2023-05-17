@@ -44,7 +44,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         block['sample_type'] = 'Tissue Block';
 
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
-        //objectIndex, object, objectType, ...ancestors
+        
         ensureId(
           donorId, 
           donor, 
@@ -269,27 +269,27 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
 }
 
 /**
- * This function will ensure id is presnet. If not, it will be fetched from ancestors.
+ * This function will ensure id is present. If not, it will be fetched from ancestors. And also convert id to JSONld format(@id)
  * @param { number } objectIndex - The index # of the object which has to be appended at the last of generated Id.
  * @param { object } object - The object for which the id has to generated if absent.
  * @param { objectType } objectType - The type of object
  * @param { [object] } ancestors - If the id is absent, then the id will be fetched from ancestors, and then it will be created for the object.
  */
 function ensureId(objectIndex, object, objectType, ...ancestors) {
-  if (object.id && !object['@id']) {
-    object['@id'] = object['id'];
-    delete object['id'];
-  }
   if (!object.id) {
     for (const ancestor of ancestors) {
-      if (ancestor.id) {
-        object.id = makeId(ancestor.id, objectType, objectIndex);
+      if (ancestor.id || ancestor['@id']) {
+        object['@id'] = makeId(ancestor.id ? ancestor.id : ancestor['@id'], objectType, objectIndex);
         return;
       }
     }
     throw new Error(
       `Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`
     );
+  }
+  if (object.id && !object['@id']) {
+    object['@id'] = object.id;
+    delete object.id;
   }
 }
 
