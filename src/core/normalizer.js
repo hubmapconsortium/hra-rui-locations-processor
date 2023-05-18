@@ -21,7 +21,10 @@ export function normalizeRegistrations(context) {
     'rui_locations.jsonld'
   );
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
-  sh.cp(resolve(context.processorHome, 'src/ccf-eui-template.html'), resolve(context.doPath, 'index.html'));
+  sh.cp(
+    resolve(context.processorHome, 'src/ccf-eui-template.html'),
+    resolve(context.doPath, 'index.html')
+  );
 }
 
 /**
@@ -44,12 +47,12 @@ export function normalizeRegistration(data, ruiLocationsDir) {
         block['sample_type'] = 'Tissue Block';
 
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
-        
+
         ensureId(
-          donorId, 
-          donor, 
-          'Donor', 
-          provider, 
+          donorId,
+          donor,
+          'Donor',
+          provider,
           provider.defaults ? provider.defaults : ''
         );
         ensureDonorLabel(donor, block);
@@ -209,7 +212,7 @@ function ensureSectionCount(block) {
  */
 function ensureDonorLabel(donor, block) {
   if (!donor.label) {
-    var newLabel = '';
+    let newLabel = '';
     if (donor.sex) {
       newLabel += donor.sex;
     }
@@ -279,7 +282,11 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   if (!object.id) {
     for (const ancestor of ancestors) {
       if (ancestor.id || ancestor['@id']) {
-        object['@id'] = makeId(ancestor.id ? ancestor.id : ancestor['@id'], objectType, objectIndex);
+        object['@id'] = makeId(
+          ancestor.id ? ancestor.id : ancestor['@id'],
+          objectType,
+          objectIndex
+        );
         return;
       }
     }
@@ -302,7 +309,7 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
 function ensureLabel(object, rui_location, ...ancestors) {
   if (!object.label) {
     // Create one
-    var provider_name = '';
+    let provider_name = '';
     for (const ancestor of ancestors) {
       // Grab the provider name
       if (ancestor.provider_name) {

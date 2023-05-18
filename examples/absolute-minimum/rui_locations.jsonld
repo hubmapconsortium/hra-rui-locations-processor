@@ -90,12 +90,13 @@
           },
           "@type": "Sample",
           "sample_type": "Tissue Block",
-          "id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#1",
+          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1",
           "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
           "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346"
         }
       ],
       "@type": "Donor",
+      "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1",
       "label": "Male",
       "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech",
       "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346"

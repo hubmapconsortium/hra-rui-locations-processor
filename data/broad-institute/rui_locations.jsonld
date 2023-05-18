@@ -46,7 +46,6 @@
       "sex": "Female",
       "samples": [
         {
-          "@id": "http://purl.org/ccf/1.5/allen-brain/P1221#Donor/P1221_LV#TissueBlock",
           "rui_location": {
             "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23",
             "@type": "SpatialEntity",
@@ -85,12 +84,13 @@
           },
           "@type": "Sample",
           "sample_type": "Tissue Block",
-          "id": "http://purl.org/ccf/1.5/broad-institute#1",
+          "@id": "http://purl.org/ccf/1.5/allen-brain/P1221#Donor/P1221_LV#TissueBlock",
           "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
           "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401"
         }
       ],
       "@type": "Donor",
+      "@id": "http://purl.org/ccf/1.5/allen-brain/P1221#Donor",
       "label": "Female, Age 52",
       "description": "Entered 3/19/2023, Nathan Tucker, Broad Institute",
       "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401"
