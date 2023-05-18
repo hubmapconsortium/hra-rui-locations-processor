@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { normalizeRegistrations } from './core/normalizer.js';
+import { deployDir } from './core/deploy-dir.js';
 import { saveJsonSchema } from './core/json-schema.js';
 import { newRegistrations } from './core/new-registrations.js';
+import { normalizeRegistrations } from './core/normalizer.js';
 import { getProcessorHome } from './utils/source-info.js';
 
 const program = new Command();
@@ -14,7 +15,11 @@ program
   .argument('<digital-object-path>')
   .option('--overwrite', 'Overwrite the directory if it exists')
   .action((str, options) => {
-    newRegistrations({ ...options, doPath: str, processorHome: getProcessorHome() });
+    newRegistrations({
+      ...options,
+      doPath: str,
+      processorHome: getProcessorHome(),
+    });
   });
 
 program
@@ -25,6 +30,27 @@ program
   .argument('<digital-object-path>', 'Path to the digital object')
   .action((str) => {
     normalizeRegistrations({ doPath: str, processorHome: getProcessorHome() });
+  });
+
+program
+  .command('deploy-dir')
+  .description(
+    'Normalizes a directory of registrations and creates a distribution for publishing.'
+  )
+  .argument(
+    '<digital-objects-folder>',
+    'Path to a folder containning multiple digital objects'
+  )
+  .argument(
+    '<deploy-dir>',
+    'Path to a folder containning multiple digital objects'
+  )
+  .action((str, str2) => {
+    deployDir({
+      dirPath: str,
+      deploymentHome: str2,
+      processorHome: getProcessorHome(),
+    });
   });
 
 program
