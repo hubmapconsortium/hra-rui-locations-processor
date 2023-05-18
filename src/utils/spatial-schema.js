@@ -43,12 +43,12 @@ export const SpatialPlacementCommon = z.object({
 });
 
 export const temp = z.object({
+  /**Context label */
+  '@context': z.string(),
   /** Identifier */
   '@id': z.string(),
   /** Type name */
   '@type': z.literal('SpatialEntity'),
-  /**Context label */
-  '@context': z.string(),
   /** Entity label */
   label: z.string().optional(),
   /** Entity Comment */

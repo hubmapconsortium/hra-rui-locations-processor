@@ -39,16 +39,29 @@
   },
   "@graph": [
     {
+      "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1",
+      "@type": "Donor",
+      "label": "Male",
+      "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+      "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
       "consortium_name": "HuBMAP",
       "provider_name": "TMC-CalTech",
       "provider_uuid": "308f5ffc-ed43-11e8-b56a-0e8017bdda58",
       "sex": "Male",
       "samples": [
         {
+          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+          "description": "24 x 23 x 10 millimeter, 10 millimeter",
+          "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
+          "section_count": 0,
+          "section_size": 10,
           "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "@id": "http://purl.org/ccf/1.5/70d72c42-034c-4fb4-be13-7795ed42e733",
             "@type": "SpatialEntity",
-            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "creator": "Rebecca Hodge",
             "creator_first_name": "Rebecca",
             "creator_last_name": "Hodge",
@@ -87,19 +100,9 @@
               "translation_units": "millimeter",
               "target": "http://purl.org/ccf/latest/ccf.owl#VHFLeftKidneyV1.1"
             }
-          },
-          "@type": "Sample",
-          "sample_type": "Tissue Block",
-          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1",
-          "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
-          "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346"
+          }
         }
-      ],
-      "@type": "Donor",
-      "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1",
-      "label": "Male",
-      "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech",
-      "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346"
+      ]
     }
   ]
 }

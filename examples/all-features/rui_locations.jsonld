@@ -39,16 +39,29 @@
   },
   "@graph": [
     {
+      "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1",
+      "@type": "Donor",
+      "label": "Male",
+      "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+      "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
       "consortium_name": "HuBMAP",
       "provider_name": "TMC-CalTech",
       "provider_uuid": "308f5ffc-ed43-11e8-b56a-0e8017bdda58",
       "sex": "Male",
       "samples": [
         {
+          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+          "description": "24 x 23 x 10 millimeter, 10 millimeter",
+          "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
+          "section_count": 2,
+          "section_size": 10,
           "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "@id": "http://purl.org/ccf/1.5/70d72c42-034c-4fb4-be13-7795ed42e733",
             "@type": "SpatialEntity",
-            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "creator": "Rebecca Hodge",
             "creator_first_name": "Rebecca",
             "creator_last_name": "Hodge",
@@ -90,56 +103,78 @@
           },
           "sections": [
             {
+              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection1",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
               "label": "Registered 9/7/2021, daniel cotter, TMC-Stanford",
+              "description": "24 x 23 x 10 millimeter, 10 millimeter",
               "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "section_size": 10,
               "datasets": [
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection1_Dataset1",
+                  "@type": "Dataset",
+                  "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+                  "description": "Data/Assay Types: CODEX, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "CODEX",
                   "thumbnail": "assets/icons/ico-spatial-codex.svg"
                 },
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection1_Dataset2",
+                  "@type": "Dataset",
+                  "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+                  "description": "Data/Assay Types: 10x, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "10x",
                   "thumbnail": "assets/icons/ico-bulk-10x.svg"
                 }
-              ],
-              "@type": "Sample",
-              "sample_type": "Tissue Section",
-              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection1",
-              "description": "24 x 23 x 10 millimeter, 10 millimeter, ",
-              "section_size": 10
+              ]
             },
             {
+              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection2",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
               "label": "Registered 9/7/2021, Test cotter, TMC-Stanford",
+              "description": "24 x 23 x 10 millimeter, 10 millimeter",
               "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "section_size": 10,
               "datasets": [
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection2_Dataset1",
+                  "@type": "Dataset",
+                  "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+                  "description": "Data/Assay Types: CODEX, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "CODEX",
                   "thumbnail": "assets/icons/ico-spatial-codex.svg"
                 },
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection2_Dataset2",
+                  "@type": "Dataset",
+                  "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+                  "description": "Data/Assay Types: 10x, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "10x",
                   "thumbnail": "assets/icons/ico-bulk-10x.svg"
                 }
-              ],
-              "@type": "Sample",
-              "sample_type": "Tissue Section",
-              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection2",
-              "description": "24 x 23 x 10 millimeter, 10 millimeter, ",
-              "section_size": 10
+              ]
             }
-          ],
-          "@type": "Sample",
-          "sample_type": "Tissue Block",
-          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1",
-          "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
-          "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
-          "section_count": 2
+          ]
         },
         {
+          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/2/2023, Test Last , TMC-CalTech",
+          "description": "10 x 10 x 10 millimeter, 10 millimeter",
+          "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
+          "section_count": 2,
+          "section_size": 10,
           "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "@id": "http://purl.org/ccf/1.5/81c77717-b454-49f0-a1fe-55bcac5b3a83",
             "@type": "SpatialEntity",
-            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "creator": "Test Last ",
             "creator_first_name": "Test",
             "creator_last_name": "Last ",
@@ -172,59 +207,73 @@
           },
           "sections": [
             {
+              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection1",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
               "label": "Registered 9/14/2021, Dan cotter, TMC-Stanford",
+              "description": "10 x 10 x 10 millimeter, 10 millimeter",
               "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "section_size": 10,
               "datasets": [
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection1_Dataset1",
+                  "@type": "Dataset",
+                  "label": "Registered 4/2/2023, Test Last , TMC-CalTech",
+                  "description": "Data/Assay Types: OTHER, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "OTHER",
                   "thumbnail": "assets/icons/ico-spatial-codex.svg"
                 },
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection1_Dataset2",
+                  "@type": "Dataset",
+                  "label": "Registered 4/2/2023, Test Last , TMC-CalTech",
+                  "description": "Data/Assay Types: 20x, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "20x",
                   "thumbnail": "assets/icons/ico-bulk-10x.svg"
                 }
-              ],
-              "@type": "Sample",
-              "sample_type": "Tissue Section",
-              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection1",
-              "description": "10 x 10 x 10 millimeter, 10 millimeter, ",
-              "section_size": 10
+              ]
             },
             {
+              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection2",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
               "label": "Registered 9/7/2021, Test cotter, TMC-Stanford",
+              "description": "10 x 10 x 10 millimeter, 10 millimeter",
               "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "section_size": 10,
               "datasets": [
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection2_Dataset1",
+                  "@type": "Dataset",
+                  "label": "Registered 4/2/2023, Test Last , TMC-CalTech",
+                  "description": "Data/Assay Types: OTHER, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "OTHER",
                   "thumbnail": "assets/icons/ico-spatial-codex.svg"
                 },
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection2_Dataset2",
+                  "@type": "Dataset",
+                  "label": "Registered 4/2/2023, Test Last , TMC-CalTech",
+                  "description": "Data/Assay Types: 30x, ",
+                  "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "30x",
                   "thumbnail": "assets/icons/ico-bulk-10x.svg"
                 }
-              ],
-              "@type": "Sample",
-              "sample_type": "Tissue Section",
-              "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection2",
-              "description": "10 x 10 x 10 millimeter, 10 millimeter, ",
-              "section_size": 10
+              ]
             }
-          ],
-          "@type": "Sample",
-          "sample_type": "Tissue Block",
-          "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2",
-          "label": "Registered 4/2/2023, Test Last , TMC-CalTech",
-          "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
-          "section_count": 2
+          ]
         }
-      ],
-      "@type": "Donor",
-      "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1",
-      "label": "Male",
-      "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech",
-      "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346"
+      ]
     },
     {
+      "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1",
+      "@type": "Donor",
+      "label": "Female, BMI 10",
+      "description": "Entered 4/2/2023, as vb, TMC-Stanford",
+      "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
       "consortium_name": "HuBMAP",
       "provider_name": "TMC-Stanford",
       "provider_uuid": "def5fd76-ed43-11e8-b56a-0e8017bdda58",
@@ -232,10 +281,18 @@
       "bmi": 10,
       "samples": [
         {
+          "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1_TissueBlock1",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/2/2023, as vb, TMC-Stanford",
+          "description": "10 x 10 x 10 millimeter, 10 millimeter",
+          "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
+          "section_count": 1,
+          "section_size": 10,
           "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "@id": "http://purl.org/ccf/1.5/fbe4edd9-3f02-4948-987d-49d4ad11128c",
             "@type": "SpatialEntity",
-            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "creator": "as vb",
             "creator_first_name": "as",
             "creator_last_name": "vb",
@@ -268,36 +325,35 @@
           },
           "sections": [
             {
+              "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1_TissueBlock1_TissueSection1",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
               "label": "Registered 9/20/2021, Dan cotter, TMC-Stanford",
+              "description": "10 x 10 x 10 millimeter, 10 millimeter",
               "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "section_size": 10,
               "datasets": [
                 {
+                  "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1_TissueBlock1_TissueSection1_Dataset1",
+                  "@type": "Dataset",
+                  "label": "Registered 4/2/2023, as vb, TMC-Stanford",
+                  "description": "Data/Assay Types: 50X, ",
+                  "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
                   "technology": "50X",
                   "thumbnail": "assets/icons/ico-spatial-codex.svg"
                 }
-              ],
-              "@type": "Sample",
-              "sample_type": "Tissue Section",
-              "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1_TissueBlock1_TissueSection1",
-              "description": "10 x 10 x 10 millimeter, 10 millimeter, ",
-              "section_size": 10
+              ]
             }
-          ],
-          "@type": "Sample",
-          "sample_type": "Tissue Block",
-          "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1_TissueBlock1",
-          "label": "Registered 4/2/2023, as vb, TMC-Stanford",
-          "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
-          "section_count": 1
+          ]
         }
-      ],
-      "@type": "Donor",
-      "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor1",
-      "label": "Female, BMI 10",
-      "description": "Entered 4/2/2023, as vb, TMC-Stanford",
-      "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0"
+      ]
     },
     {
+      "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor2",
+      "@type": "Donor",
+      "label": "Female, Age 20, BMI 50",
+      "description": "Entered 4/2/2023, rt dc, TMC-Stanford",
+      "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
       "consortium_name": "HuBMAP",
       "provider_name": "TMC-Stanford",
       "provider_uuid": "def5fd76-ed43-11e8-b56a-0e8017bdda58",
@@ -306,10 +362,18 @@
       "bmi": 50,
       "samples": [
         {
+          "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor2_TissueBlock1",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/2/2023, rt dc, TMC-Stanford",
+          "description": "10 x 10 x 10 millimeter, 10 millimeter",
+          "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
+          "section_count": 0,
+          "section_size": 10,
           "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "@id": "http://purl.org/ccf/1.5/c4a6cf63-824b-42b4-8e1f-e5f81c0d4096",
             "@type": "SpatialEntity",
-            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "creator": "rt dc",
             "creator_first_name": "rt",
             "creator_last_name": "dc",
@@ -339,19 +403,9 @@
               "translation_units": "millimeter",
               "target": "http://purl.org/ccf/latest/ccf.owl#VHMLung"
             }
-          },
-          "@type": "Sample",
-          "sample_type": "Tissue Block",
-          "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor2_TissueBlock1",
-          "label": "Registered 4/2/2023, rt dc, TMC-Stanford",
-          "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0"
+          }
         }
-      ],
-      "@type": "Donor",
-      "@id": "https://entity.api.hubmapconsortium.org/entities/f84ff583687f3407636d8ce843b48ff0#Donor2",
-      "label": "Female, Age 20, BMI 50",
-      "description": "Entered 4/2/2023, rt dc, TMC-Stanford",
-      "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0"
+      ]
     }
   ]
 }

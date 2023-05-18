@@ -39,17 +39,29 @@
   },
   "@graph": [
     {
+      "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1",
+      "@type": "Donor",
+      "label": "Male",
+      "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+      "link": "https://example.com/registration-data-1",
       "consortium_name": "HuBMAP",
       "provider_name": "TMC-CalTech",
       "provider_uuid": "308f5ffc-ed43-11e8-b56a-0e8017bdda58",
-      "link": "https://example.com/registration-data-1",
       "sex": "Male",
       "samples": [
         {
+          "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1_TissueBlock1",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+          "description": "24 x 23 x 10 millimeter, 10 millimeter",
+          "link": "https://example.com/registration-data-1",
+          "section_count": 1,
+          "section_size": 10,
           "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "@id": "http://purl.org/ccf/1.5/70d72c42-034c-4fb4-be13-7795ed42e733",
             "@type": "SpatialEntity",
-            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
             "creator": "Rebecca Hodge",
             "creator_first_name": "Rebecca",
             "creator_last_name": "Hodge",
@@ -91,34 +103,28 @@
           },
           "sections": [
             {
+              "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1_TissueBlock1_TissueSection1",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
               "label": "Registered 9/7/2021, daniel cotter, TMC-Stanford",
+              "description": "24 x 23 x 10 millimeter, 10 millimeter",
               "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
+              "section_size": 10,
               "datasets": [
                 {
+                  "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1_TissueBlock1_TissueSection1_Dataset1",
+                  "@type": "Dataset",
+                  "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
+                  "description": "Data/Assay Types: CODEX, ",
                   "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
                   "technology": "CODEX",
                   "thumbnail": "assets/icons/ico-spatial-codex.svg"
                 }
-              ],
-              "@type": "Sample",
-              "sample_type": "Tissue Section",
-              "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1_TissueBlock1_TissueSection1",
-              "description": "24 x 23 x 10 millimeter, 10 millimeter, ",
-              "section_size": 10
+              ]
             }
-          ],
-          "@type": "Sample",
-          "sample_type": "Tissue Block",
-          "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1_TissueBlock1",
-          "label": "Registered 4/1/2023, Rebecca Hodge, TMC-CalTech",
-          "link": "https://example.com/registration-data-1",
-          "section_count": 1
+          ]
         }
-      ],
-      "@type": "Donor",
-      "@id": "http://dx.doi.org/10.1681/ASN.2016091027#Donor1",
-      "label": "Male",
-      "description": "Entered 4/1/2023, Rebecca Hodge, TMC-CalTech"
+      ]
     }
   ]
 }

@@ -5,6 +5,19 @@ import sh from 'shelljs';
 import { Providers } from '../utils/data-schema.js';
 import { SpatialEntity } from '../utils/spatial-schema.js';
 
+/** The default order that properties should show in objects */
+const DEFAULT_PROPERTY_ORDER = [
+  '@id',
+  '@type',
+  'sample_type',
+  'label',
+  'description',
+  'link',
+  'section_count',
+  'section_size',
+  'rui_location',
+];
+
 /**
  * This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
  *  @param { string } context - The directory path of registration.yaml file.
@@ -35,10 +48,11 @@ export function normalizeRegistrations(context) {
  */
 export function normalizeRegistration(data, ruiLocationsDir) {
   for (const provider of data) {
-    if (provider.defaults)
+    if (provider.defaults) {
       if (!provider.defaults.thumbnail) {
         provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
       }
+    }
     for (const [donor, donorId] of enumerate(provider.donors)) {
       donor['@type'] = 'Donor';
 
@@ -74,7 +88,17 @@ export function normalizeRegistration(data, ruiLocationsDir) {
           provider,
           provider.defaults ? provider.defaults : ''
         );
-        ensureDescription(provider, ruiLocation, provider);
+        ensureSampleDescription(block, ruiLocation, provider);
+        ensureSectionCount(block);
+        ensureDatasets(
+          block.datasets,
+          `TissueBlock${blockId + 1}`,
+          provider,
+          donor,
+          block,
+          ruiLocation
+        );
+        ensurePropertyOrder(block, donor.samples);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
           section['@type'] = 'Sample';
@@ -90,7 +114,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
             provider.defaults ? provider.defaults : ''
           );
           ensureLabel(section, ruiLocation, donor, provider);
-          ensureSectionDescription(section, ruiLocation, donor, provider);
+          ensureSampleDescription(section, ruiLocation, donor, provider);
           ensureLink(
             section,
             block,
@@ -98,31 +122,17 @@ export function normalizeRegistration(data, ruiLocationsDir) {
             provider,
             provider.defaults ? provider.defaults : ''
           );
-          ensureSectionCount(block);
-
-          for (const [dataset, datasetId] of enumerate(block.datasets ?? [])) {
-            dataset['@type'] = 'Dataset';
-
-            ensureId(
-              datasetId,
-              dataset,
-              'Dataset',
-              block,
-              donor,
-              provider,
-              provider.defaults ? provider.defaults : ''
-            );
-            ensureLabel(dataset, ruiLocation, donor, provider);
-            ensureDatasetDescription(dataset);
-            ensureLink(
-              dataset,
-              block,
-              donor,
-              provider,
-              provider.defaults ? provider.defaults : ''
-            );
-          }
+          ensureDatasets(
+            section.datasets,
+            `TissueSection${sectionId + 1}`,
+            provider,
+            donor,
+            block,
+            ruiLocation
+          );
+          ensurePropertyOrder(section, block.sections);
         }
+        ensurePropertyOrder(donor, provider.donors);
       }
     }
   }
@@ -140,6 +150,65 @@ function loadFile(dir, file, schema) {
   const path = resolve(dir, file);
   const yaml = load(readFileSync(path));
   return schema.parse(yaml);
+}
+
+/**
+ * This function ensures that the object in the container has the right property order.
+ * @param { object } obj
+ * @param { object[] } container
+ * @param { string[] } propOrder
+ */
+function ensurePropertyOrder(
+  obj,
+  container,
+  propOrder = DEFAULT_PROPERTY_ORDER
+) {
+  const newObj = {};
+  for (const prop of propOrder) {
+    newObj[prop] = obj[prop];
+  }
+  Object.assign(newObj, obj);
+  container[container.indexOf(obj)] = newObj;
+}
+
+/**
+ * This function ensures all datasets have proper info for both block and section datasets.
+ * @param { object[] } container
+ * @param { object } provider
+ * @param { object } donor
+ * @param { object } block
+ * @param { object } ruiLocation
+ */
+function ensureDatasets(
+  container,
+  idPrefix,
+  provider,
+  donor,
+  block,
+  ruiLocation
+) {
+  for (const [dataset, datasetId] of enumerate(container ?? [])) {
+    dataset['@type'] = 'Dataset';
+    ensureId(
+      datasetId,
+      dataset,
+      `${idPrefix}_Dataset`,
+      block,
+      donor,
+      provider,
+      provider.defaults ? provider.defaults : ''
+    );
+    ensureLabel(dataset, ruiLocation, donor, provider);
+    ensureDatasetDescription(dataset);
+    ensureLink(
+      dataset,
+      block,
+      donor,
+      provider,
+      provider.defaults ? provider.defaults : ''
+    );
+    ensurePropertyOrder(dataset, container);
+  }
 }
 
 /**
@@ -199,10 +268,9 @@ function ensureDescription(object, rui_location, provider) {
  * @param { object } block - The block object where sections and section count is present.
  */
 function ensureSectionCount(block) {
-  if (!block.section_count && block.sections) {
-    return (block.section_count = block.sections.length);
+  if (!block.section_count) {
+    block.section_count = block.sections?.length ?? 0;
   }
-  return;
 }
 
 /**
@@ -246,7 +314,7 @@ function ensureDatasetDescription(object) {
  * @param { object } rui_location - The rui_location object from where the dimensions will be fetched if section is absent.
  * @param { [object] } ancestors - The array of ancestors to fetch the description if the rui_location is absent.
  */
-function ensureSectionDescription(object, rui_location, ...ancestors) {
+function ensureSampleDescription(object, rui_location, ...ancestors) {
   if (!object.description) {
     if (rui_location.x_dimension) {
       // Generate from rui_location
@@ -254,7 +322,7 @@ function ensureSectionDescription(object, rui_location, ...ancestors) {
       const y_dim = rui_location.y_dimension;
       const z_dim = rui_location.z_dimension;
       const units = rui_location.dimension_units;
-      object.description = `${x_dim} x ${y_dim} x ${z_dim} ${units}, ${z_dim} ${units}, `;
+      object.description = `${x_dim} x ${y_dim} x ${z_dim} ${units}, ${z_dim} ${units}`;
       object.section_size = z_dim;
       return;
     } else {
@@ -407,15 +475,16 @@ export function convertToJsonLd(normalized) {
   const donors = data['@graph'];
 
   for (const provider of normalized) {
-    for (const donor of provider.donors) {
-      const finalDonor = {
-        consortium_name: provider.consortium_name,
-        provider_name: provider.provider_name,
-        provider_uuid: provider.provider_uuid,
-        ...donor,
-      };
-      donors.push(finalDonor);
-    }
+    const providerDonors = provider.donors.map((donor) => ({
+      consortium_name: provider.consortium_name,
+      provider_name: provider.provider_name,
+      provider_uuid: provider.provider_uuid,
+      ...donor,
+    }));
+    providerDonors.forEach((donor) =>
+      ensurePropertyOrder(donor, providerDonors)
+    );
+    providerDonors.forEach((donor) => donors.push(donor));
   }
 
   return data;
