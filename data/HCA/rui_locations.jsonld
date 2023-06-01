@@ -1,0 +1,1849 @@
+{
+  "@context": {
+    "@base": "http://purl.org/ccf/latest/ccf-entity.owl#",
+    "@vocab": "http://purl.org/ccf/latest/ccf-entity.owl#",
+    "ccf": "http://purl.org/ccf/latest/ccf.owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "label": "rdfs:label",
+    "description": "rdfs:comment",
+    "link": {
+      "@id": "rdfs:seeAlso",
+      "@type": "@id"
+    },
+    "samples": {
+      "@reverse": "has_donor"
+    },
+    "sections": {
+      "@id": "has_tissue_section",
+      "@type": "@id"
+    },
+    "datasets": {
+      "@id": "has_dataset",
+      "@type": "@id"
+    },
+    "rui_location": {
+      "@id": "has_spatial_entity",
+      "@type": "@id"
+    },
+    "ontologyTerms": {
+      "@id": "has_ontology_term",
+      "@type": "@id"
+    },
+    "cellTypeTerms": {
+      "@id": "has_cell_type_term",
+      "@type": "@id"
+    },
+    "thumbnail": {
+      "@id": "has_thumbnail"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor",
+      "@type": "Donor",
+      "label": "Female, Age 52",
+      "description": "Entered 3/19/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 52,
+      "sex": "Female",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/LV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 6 millimeter, 6 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 6,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 6,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 46,
+              "y_rotation": 133,
+              "z_rotation": -11,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 122.542,
+              "y_translation": 61.492,
+              "z_translation": 28.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/LV#TissueBlock/LV_1221#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 6 millimeter, 6 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 6,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/LV#TissueBlock/LV_1221#TissueSection/LV_1221_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-25",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002078"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-25",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -69,
+              "y_rotation": -76,
+              "z_rotation": -4,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 3.542,
+              "y_translation": 55.492,
+              "z_translation": 62.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RA#TissueBlock/RA_1221#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RA#TissueBlock/RA_1221#TissueSection/RA_1221_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/aefbf9c4-7f7f-494d-bdad-708aa232d02b",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002080"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/aefbf9c4-7f7f-494d-bdad-708aa232d02b_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -4,
+              "y_rotation": 3,
+              "z_rotation": 0,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 68.542,
+              "y_translation": 49.992,
+              "z_translation": 99.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RV#TissueBlock/RV_1221#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RV#TissueBlock/RV_1221#TissueSection/RV_1221_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1221#Donor/RV#TissueBlock/RV_1221#TissueSection/RV_1221_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor",
+      "@type": "Donor",
+      "label": "Female, Age 51",
+      "description": "Entered 3/19/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 51,
+      "sex": "Female",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/LA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/817b4f43-5cb7-47c7-8e5d-db6e2d52fa68",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002079"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/817b4f43-5cb7-47c7-8e5d-db6e2d52fa68_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -92,
+              "y_rotation": -10,
+              "z_rotation": -28,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 35.542,
+              "y_translation": 94.992,
+              "z_translation": 22.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/LA#TissueBlock/LA_1600#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/LA#TissueBlock/LA_1600#TissueSection/LA_1600_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/LA#TissueBlock/LA_1600#TissueSection/LA_1600_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/RA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-25",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002078"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-25",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -69,
+              "y_rotation": -76,
+              "z_rotation": -4,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 3.542,
+              "y_translation": 55.492,
+              "z_translation": 62.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/RA#TissueBlock/RA_1600#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/RA#TissueBlock/RA_1600#TissueSection/RA_1600_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1600#Donor/RA#TissueBlock/RA_1600#TissueSection/RA_1600_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor",
+      "@type": "Donor",
+      "label": "Male, Age 54",
+      "description": "Entered 4/31/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 54,
+      "sex": "Male",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/3db43e49-5b7f-4806-a772-07a1ccfd49a8",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-06-01",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002079"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/3db43e49-5b7f-4806-a772-07a1ccfd49a8_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-06-01",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -126,
+              "y_rotation": -14,
+              "z_rotation": -10,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 51.351,
+              "y_translation": 89.718,
+              "z_translation": 27.108,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LA#TissueBlock/LA_1666#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LA#TissueBlock/LA_1666#TissueSection/LA_1666_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LA#TissueBlock/LA_1666#TissueSection/LA_1666_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 7 millimeter, 7 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 7,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/2d7b421b-cd7a-4b31-8f36-157067599c24",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 7,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/2d7b421b-cd7a-4b31-8f36-157067599c24_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 44,
+              "y_rotation": 128,
+              "z_rotation": 62,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 110.351,
+              "y_translation": 49.218,
+              "z_translation": 46.108,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LV#TissueBlock/LV_1666#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 7 millimeter, 7 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 7,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LV#TissueBlock/LV_1666#TissueSection/LV_1666_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/LVT#issueBlock/LV_1666#TissueSection/LV_1666_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 5 millimeter, 5 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 5,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/c127016f-4de6-41ce-a314-56ad21390e0b",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002080"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 5,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/c127016f-4de6-41ce-a314-56ad21390e0b_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -32,
+              "y_rotation": -9,
+              "z_rotation": -9,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 57.351,
+              "y_translation": 60.218,
+              "z_translation": 85.608,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/RV#TissueBlock/RV_1666#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 5 millimeter, 5 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 5,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/RV#TissueBlock/RV_1666#TissueSection/RV_1666_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1666#Donor/RVT#issueBlock/RV_1666#TissueSection/RV_1666_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor",
+      "@type": "Donor",
+      "label": "Male, Age 39",
+      "description": "Entered 4/31/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 39,
+      "sex": "Male",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/3db43e49-5b7f-4806-a772-07a1ccfd49a8",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-06-01",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002079"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/3db43e49-5b7f-4806-a772-07a1ccfd49a8_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-06-01",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -126,
+              "y_rotation": -14,
+              "z_rotation": -10,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 51.351,
+              "y_translation": 89.718,
+              "z_translation": 27.108,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LA#TissueBlock/LA_1681#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LA#TissueBlock/LA_1681#TissueSection/LA_1681_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LA#TissueBlock/LA_1681#TissueSection/LA_1681_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 7 millimeter, 7 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 7,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/2d7b421b-cd7a-4b31-8f36-157067599c24",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 7,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/2d7b421b-cd7a-4b31-8f36-157067599c24_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 44,
+              "y_rotation": 128,
+              "z_rotation": 62,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 110.351,
+              "y_translation": 49.218,
+              "z_translation": 46.108,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LV#TissueBlock/LV_1681#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 7 millimeter, 7 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 7,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LV#TissueBlock/LV_1681#TissueSection/LV_1681_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/LVT#issueBlock/LV_1681#TissueSection/LV_1681_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/RA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/0c0a1979-77be-40f2-b950-3725707e40c9",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002078"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/0c0a1979-77be-40f2-b950-3725707e40c9_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -28,
+              "y_rotation": 34,
+              "z_rotation": 0,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 6.351,
+              "y_translation": 58.218,
+              "z_translation": 46.608,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/RA#TissueBlock/RA_1681#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/RA#TissueBlock/RA_1681#TissueSection/RA_1681_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1681#Donor/RAT#issueBlock/RA_1681#TissueSection/RA_1681_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor",
+      "@type": "Donor",
+      "label": "Male, Age 59",
+      "description": "Entered 4/31/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 59,
+      "sex": "Male",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/LA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/3db43e49-5b7f-4806-a772-07a1ccfd49a8",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-06-01",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002079"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/3db43e49-5b7f-4806-a772-07a1ccfd49a8_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-06-01",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -126,
+              "y_rotation": -14,
+              "z_rotation": -10,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 51.351,
+              "y_translation": 89.718,
+              "z_translation": 27.108,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/LA#TissueBlock/LA_1702#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/LA#TissueBlock/LA_1702#TissueSection/LA_1702_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/LA#TissueBlock/LA_1702#TissueSection/LA_1702_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 4/31/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 7 millimeter, 7 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 7,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/2d7b421b-cd7a-4b31-8f36-157067599c24",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 7,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/2d7b421b-cd7a-4b31-8f36-157067599c24_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 44,
+              "y_rotation": 128,
+              "z_rotation": 62,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 110.351,
+              "y_translation": 49.218,
+              "z_translation": 46.108,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock/RV_1702#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 7 millimeter, 7 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 7,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock/RV_1702#TissueSection/RV_1702_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock/RV_1702#TissueSection/RV_1702_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/0c0a1979-77be-40f2-b950-3725707e40c9",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002078"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/0c0a1979-77be-40f2-b950-3725707e40c9_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -28,
+              "y_rotation": 34,
+              "z_rotation": 0,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 6.351,
+              "y_translation": 58.218,
+              "z_translation": 46.608,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RA#TissueBlock/RA_1702#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RA#TissueBlock/RA_1702#TissueSection/RA_1702_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RA#TissueBlock/RA_1702#TissueSection/RA_1702_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 5 millimeter, 5 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 5,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/c127016f-4de6-41ce-a314-56ad21390e0b",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002080"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 5,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/c127016f-4de6-41ce-a314-56ad21390e0b_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -32,
+              "y_rotation": -9,
+              "z_rotation": -9,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 57.351,
+              "y_translation": 60.218,
+              "z_translation": 85.608,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHMHeart"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock/RV_1702#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 5 millimeter, 5 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 5,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock/RV_1702#TissueSection/RV_1702_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1702#Donor/RV#TissueBlock/RV_1702#TissueSection/RV_1702_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor",
+      "@type": "Donor",
+      "label": "Female, Age 60",
+      "description": "Entered 3/19/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 60,
+      "sex": "Female",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/LA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/817b4f43-5cb7-47c7-8e5d-db6e2d52fa68",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002079"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/817b4f43-5cb7-47c7-8e5d-db6e2d52fa68_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -92,
+              "y_rotation": -10,
+              "z_rotation": -28,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 35.542,
+              "y_translation": 94.992,
+              "z_translation": 22.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/LA#TissueBlock/LA_1708#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/LA#TissueBlock/LA_1708#TissueSection/LA_1708_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/LA#TissueBlock/LA_1708#TissueSection/LA_1708_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 6 millimeter, 6 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 6,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 6,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 46,
+              "y_rotation": 133,
+              "z_rotation": -11,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 122.542,
+              "y_translation": 61.492,
+              "z_translation": 28.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock/RV_1708#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 6 millimeter, 6 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 6,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock/RV_1708#TissueSection/RV_1708_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock/RV_1708#TissueSection/RV_1708_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-25",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002078"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-25",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -69,
+              "y_rotation": -76,
+              "z_rotation": -4,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 3.542,
+              "y_translation": 55.492,
+              "z_translation": 62.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RA#TissueBlock/RA_1708#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RA#TissueBlock/RA_1708#TissueSection/RA_1708_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RA#TissueBlock/RA_1708#TissueSection/RA_1708_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/aefbf9c4-7f7f-494d-bdad-708aa232d02b",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002080"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/aefbf9c4-7f7f-494d-bdad-708aa232d02b_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -4,
+              "y_rotation": 3,
+              "z_rotation": 0,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 68.542,
+              "y_translation": 49.992,
+              "z_translation": 99.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock/RV_1708#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock/RV_1708#TissueSection/RV_1708_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1708#Donor/RV#TissueBlock/RV_1708#TissueSection/RV_1708_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor",
+      "@type": "Donor",
+      "label": "Female, Age 60",
+      "description": "Entered 3/19/2023, Nathan Tucker, Broad Institute",
+      "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+      "consortium_name": "HCA",
+      "provider_name": "Broad Institute",
+      "provider_uuid": "458fc690-a858-4518-bffa-6a41f2f20af0",
+      "age": 60,
+      "sex": "Female",
+      "samples": [
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/LA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/817b4f43-5cb7-47c7-8e5d-db6e2d52fa68",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002079"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/817b4f43-5cb7-47c7-8e5d-db6e2d52fa68_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -92,
+              "y_rotation": -10,
+              "z_rotation": -28,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 35.542,
+              "y_translation": 94.992,
+              "z_translation": 22.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/LA#TissueBlock/LA_1723#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/LA#TissueBlock/LA_1723#TissueSection/LA_1723_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/LA#TissueBlock/LA_1723#TissueSection/LA_1723_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 6 millimeter, 6 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 6,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002084"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 6,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/60d98bd4-122b-485f-b55e-444065091e23_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": 46,
+              "y_rotation": 133,
+              "z_rotation": -11,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 122.542,
+              "y_translation": 61.492,
+              "z_translation": 28.749,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock/RV_1723#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 6 millimeter, 6 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 6,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock/RV_1723#TissueSection/RV_1723_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock/RV_1723#TissueSection/RV_1723_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RA#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-25",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002078"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/e306f975-0649-40fe-96f8-43ac7a3a9a1d_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-25",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -69,
+              "y_rotation": -76,
+              "z_rotation": -4,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 3.542,
+              "y_translation": 55.492,
+              "z_translation": 62.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RA#TissueBlock/RA_1723#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RA#TissueBlock/RA_1723#TissueSection/RA_1723_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RA#TissueBlock/RA_1723#TissueSection/RA_1723_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/24/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock",
+          "@type": "Sample",
+          "sample_type": "Tissue Block",
+          "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+          "description": "5 x 5 x 4 millimeter, 4 millimeter",
+          "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+          "section_count": 1,
+          "section_size": 4,
+          "rui_location": {
+            "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+            "@id": "http://purl.org/ccf/1.5/aefbf9c4-7f7f-494d-bdad-708aa232d02b",
+            "@type": "SpatialEntity",
+            "creator": "Nathan Tucker",
+            "creator_first_name": "Nathan",
+            "creator_last_name": "Tucker",
+            "creation_date": "2023-04-20",
+            "ccf_annotations": [
+              "http://purl.obolibrary.org/obo/UBERON_0002080"
+            ],
+            "x_dimension": 5,
+            "y_dimension": 5,
+            "z_dimension": 4,
+            "dimension_units": "millimeter",
+            "placement": {
+              "@context": "https://hubmapconsortium.github.io/ccf-ontology/ccf-context.jsonld",
+              "@id": "http://purl.org/ccf/1.5/aefbf9c4-7f7f-494d-bdad-708aa232d02b_placement",
+              "@type": "SpatialPlacement",
+              "placement_date": "2023-04-20",
+              "x_scaling": 1,
+              "y_scaling": 1,
+              "z_scaling": 1,
+              "scaling_units": "ratio",
+              "x_rotation": -4,
+              "y_rotation": 3,
+              "z_rotation": 0,
+              "rotation_order": "XYZ",
+              "rotation_units": "degree",
+              "x_translation": 68.542,
+              "y_translation": 49.992,
+              "z_translation": 99.249,
+              "translation_units": "millimeter",
+              "target": "http://purl.org/ccf/latest/ccf.owl#VHFHeartV1.1"
+            }
+          },
+          "sections": [
+            {
+              "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock/RV_1723#TissueSection",
+              "@type": "Sample",
+              "sample_type": "Tissue Section",
+              "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+              "description": "5 x 5 x 4 millimeter, 4 millimeter",
+              "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+              "section_size": 4,
+              "datasets": [
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock/RV_1723#TissueSection/RV_1723_1#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                },
+                {
+                  "@id": "http://purl.org/ccf/1.5/broad-institute/P1723#Donor/RV#TissueBlock/RV_1723#TissueSection/RV_1723_2#Dataset",
+                  "@type": "Dataset",
+                  "label": "Registered 3/19/2023, Nathan Tucker, Broad Institute",
+                  "description": "Data/Assay Types: other, ",
+                  "link": "https://doi.org/10.1161/CIRCULATIONAHA.119.045401",
+                  "technology": "other"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
