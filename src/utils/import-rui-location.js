@@ -4,14 +4,10 @@ export const Filter = z.object({
   ids: z.array(z.string())
 })
 
-export const MultiImport = z.object({
+export const ImportMultiLocation = z.object({
   imports: z.array(z.string()),
   filter: Filter.optional()
 })
-
-export const ImportMultiLocation = z.array(MultiImport)
-
-
 
 // Importing from CSV
 

@@ -46,7 +46,7 @@ export const Block = z.object({
   /** sample type of block */
   sample_type: z.literal('Tissue Block').optional(),
   /** RUI Location of Section item */
-  rui_location: z.string().or(SpatialEntity).or(ImportMultiLocation),
+  rui_location: z.string().or(SpatialEntity),
   /** label of the Section item */
   label: z.string().optional(),
   /** description of the Section item */
@@ -119,6 +119,6 @@ export const Provider = z.object({
 
 export const Providers = z.union([
   Provider,
-  ImportFromCSV
+  ImportFromCSV,
+  ImportMultiLocation,
 ]).array();
-
