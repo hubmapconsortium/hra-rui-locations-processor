@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { SpatialEntity } from './spatial-schema.js';
+import { ImportMultiLocation, ImportFromCSV } from './import-rui-location.js'
 
 export const Dataset = z.object({
   /** id of the Dataset item */
@@ -45,7 +46,7 @@ export const Block = z.object({
   /** sample type of block */
   sample_type: z.literal('Tissue Block').optional(),
   /** RUI Location of Section item */
-  rui_location: z.string().or(SpatialEntity),
+  rui_location: z.string().or(SpatialEntity).or(ImportMultiLocation),
   /** label of the Section item */
   label: z.string().optional(),
   /** description of the Section item */
@@ -113,4 +114,11 @@ export const Provider = z.object({
   defaults: Default.optional(),
 });
 
-export const Providers = Provider.array();
+// export const Providers = Provider.array();
+
+
+export const Providers = z.union([
+  Provider,
+  ImportFromCSV
+]).array();
+
