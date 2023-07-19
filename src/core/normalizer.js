@@ -4,6 +4,8 @@ import { resolve } from 'path';
 import sh from 'shelljs';
 import { Providers } from '../utils/data-schema.js';
 import { SpatialEntity } from '../utils/spatial-schema.js';
+import { importCsv } from './csv-normalizer.js';
+
 
 /** The default order that properties should show in objects */
 const DEFAULT_PROPERTY_ORDER = [
@@ -22,10 +24,10 @@ const DEFAULT_PROPERTY_ORDER = [
  * This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
  *  @param { string } context - The directory path of registration.yaml file.
  */
-export function normalizeRegistrations(context) {
+export async function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
   const data = loadFile(context.doPath, 'registrations.yaml', Providers);
-  const normalized = normalizeRegistration(data, ruiLocationsDir);
+  const normalized = await normalizeRegistration(data, ruiLocationsDir);
 
   const final = convertToJsonLd(normalized);
 
@@ -46,7 +48,16 @@ export function normalizeRegistrations(context) {
  * @param { string } data - The data which has to be normalized, here, the contents of registrations.yaml file which has the provider data.
  * @param { string } ruiLocationsDir - The directory where rui_locations can be found, if file name is mentioned in registration.yaml file.
  */
-export function normalizeRegistration(data, ruiLocationsDir) {
+export async function normalizeRegistration(data, ruiLocationsDir) {
+
+  for (const csv of data) {
+    if (csv.import_from_csv) {
+      console.log(csv.import_from_csv)
+      const allFields = await importCsv(csv.import_from_csv, csv.fields, csv.baseIri)
+      console.log(allFields)
+    }
+  }
+
   for (const provider of data) {
     if (provider.defaults) {
       if (!provider.defaults.thumbnail) {
@@ -475,16 +486,17 @@ export function convertToJsonLd(normalized) {
   const donors = data['@graph'];
 
   for (const provider of normalized) {
-    const providerDonors = provider.donors.map((donor) => ({
-      consortium_name: provider.consortium_name,
-      provider_name: provider.provider_name,
-      provider_uuid: provider.provider_uuid,
-      ...donor,
-    }));
-    providerDonors.forEach((donor) =>
-      ensurePropertyOrder(donor, providerDonors)
-    );
-    providerDonors.forEach((donor) => donors.push(donor));
+    if (provider.donor){  
+        const providerDonors = provider.donors.map((donor) => ({
+        consortium_name: provider.consortium_name,
+        provider_name: provider.provider_name,
+        provider_uuid: provider.provider_uuid,
+        ...donor,
+      }));
+      providerDonors.forEach((donor) =>
+        ensurePropertyOrder(donor, providerDonors)
+      );
+      providerDonors.forEach((donor) => donors.push(donor));}
   }
 
   return data;
