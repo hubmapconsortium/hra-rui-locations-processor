@@ -4,14 +4,24 @@ import Papa from 'papaparse';
 import { getHbmToUuidLookup } from './hubmap-uuid-lookup.js';
 
 const dataSourcesCache = {};
+// Some rui_locations.jsonld may need to be remapped. You can specify old => new url mappings here.
+const ALIASES = {
+  'https://dw-dot.github.io/hra-cell-type-populations-rui-json-lds/AllenWangLungMap_rui_locations.jsonld': 'https://cns-iu.github.io/hra-cell-type-populations-rui-json-lds/AllenWangLungMap_rui_locations.jsonld'
+}
+
 /**
  * Grab and normalize registration data from the given url
  * 
  * @param {string} url link to a rui_locations.jsonld to download from 
  * @returns rui_locations.jsonld data (list of donor objects)
  */
-async function getDataSource(url) {
+async function getDataSource(url, HUBMAP_TOKEN) {
+  url = ALIASES[url] || url;
 
+  // Add token for HuBMAP's registrations if available
+  if (url === 'https://ccf-api.hubmapconsortium.org/v1/hubmap/rui_locations.jsonld' && HUBMAP_TOKEN) {
+    url += `?token=${HUBMAP_TOKEN}`;
+  }
   if (!dataSourcesCache[url] && url) {
     const graph = await fetch(url).then(r => r.json());
 
@@ -77,18 +87,25 @@ export async function importCsv(CSV_URL, FIELDS, BASE_IRI) {
   const OUTPUT = './rui_locations.jsonld'
   const HUBMAP_TOKEN = process.env.HUBMAP_TOKEN;
 
+  // A HuBMAP Token is required as some datasets are unpublished
+  if (!HUBMAP_TOKEN) {
+    console.log('Please run `export HUBMAP_TOKEN=xxxYourTokenyyy` and try again.')
+    process.exit();
+  }
+
   //Fetch values of Columns from given fields
   const FIELD = []
   for (const f in FIELDS) {
     FIELD.push(FIELDS[f])
   }
-  console.log(FIELD)
+  // console.log(FIELD)
 
   const allDatasets = await fetch(CSV_URL, { redirect: 'follow' })
     .then((r) => r.text())
     .then((r) =>
       Papa.parse(r, { header: true, fields: FIELD }).data.filter(
-        (row) => row.dataset_id
+        // (row) => row.dataset_id.ALIASES,
+        (row) => row.excluded_from_atlas_construction !== 'TRUE'
       )
     ).catch((error) => {
       console.error('Error:', error);
@@ -100,16 +117,15 @@ export async function importCsv(CSV_URL, FIELDS, BASE_IRI) {
   ], HUBMAP_TOKEN);
 
   const datasets = {};
-
   const results = [];
   const donors = {};
   const blocks = {};
 
   for (const dataset of allDatasets) {
     // Grab registrations where this dataset occurs in
-    const data = await getDataSource(dataset.ccf_api_endpoint);
+    const data = await getDataSource(dataset.ccf_api_endpoint, HUBMAP_TOKEN);
 
-    console.log(data)
+    // console.log(data)
 
     let id;
     let result;
@@ -120,8 +136,8 @@ export async function importCsv(CSV_URL, FIELDS, BASE_IRI) {
       result = findInData(data, { sampleId: dataset.sample_id });
     } else if (dataset.source === 'HuBMAP') {
       id = dataset.dataset_id;
-      // const datasetId = hbmLookup[id];
-      result = findInData(data, { id });
+      const datasetId = hbmLookup[id];
+      result = findInData(data, { datasetId });
       if (!result) {
         const sampleId = hbmLookup[dataset.HuBMAP_tissue_block_id];
         result = findInData(data, { sampleId });
@@ -213,6 +229,5 @@ export async function importCsv(CSV_URL, FIELDS, BASE_IRI) {
   };
   writeFileSync(OUTPUT, JSON.stringify(jsonld, null, 2));
 
-  const datasetIds = allDatasets.map(row => row.dataset_id);
-  return datasetIds;
+  return results;
 }

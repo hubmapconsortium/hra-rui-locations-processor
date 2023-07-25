@@ -28,8 +28,26 @@ export async function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
   const data = loadFile(context.doPath, 'registrations.yaml', Providers);
   const normalized = await normalizeRegistration(data, ruiLocationsDir);
+  //CSV Normalization
+  let csv_normalized = ''
+  for (const csv of data) {
+    if (csv.import_from_csv) {
+      console.log(csv.import_from_csv)
+      csv_normalized = await importCsv(csv.import_from_csv, csv.fields, csv.baseIri);
+    }
+  }
 
-  const final = convertToJsonLd(normalized);
+  // //Importing from web or local files using filters
+  // let import_list_normalized = ''
+  // for (const import_list of data) {
+  //   if (import_list.imports) {
+  //     console.log(import_list.imports)
+  //     import_list_normalized = await importFromList(import_list.imports, import_list.filter.ids);
+  //   }
+  // }
+
+
+  const final = convertToJsonLd(normalized, csv_normalized);
 
   const ruiLocationsOutputPath = resolve(
     context.doPath,
@@ -49,14 +67,6 @@ export async function normalizeRegistrations(context) {
  * @param { string } ruiLocationsDir - The directory where rui_locations can be found, if file name is mentioned in registration.yaml file.
  */
 export async function normalizeRegistration(data, ruiLocationsDir) {
-
-  for (const csv of data) {
-    if (csv.import_from_csv) {
-      console.log(csv.import_from_csv)
-      const allFields = await importCsv(csv.import_from_csv, csv.fields, csv.baseIri)
-      console.log(allFields)
-    }
-  }
 
   for (const provider of data) {
     if (provider.defaults) {
@@ -441,7 +451,7 @@ function* enumerate(arr) {
  * This function is used to convert the above generated schema to JsonLd format.
  * @param { object } data - The data, which was ensured above, and which needs to be converted to JsonLd format.
  */
-export function convertToJsonLd(normalized) {
+export function convertToJsonLd(normalized, csv_normalized) {
   const data = {
     '@context': {
       '@base': 'http://purl.org/ccf/latest/ccf-entity.owl#',
@@ -484,10 +494,11 @@ export function convertToJsonLd(normalized) {
     '@graph': [],
   };
   const donors = data['@graph'];
+  // console.log(normalized)
 
   for (const provider of normalized) {
-    if (provider.donor){  
-        const providerDonors = provider.donors.map((donor) => ({
+    if (provider.donor) {
+      const providerDonors = provider.donors.map((donor) => ({
         consortium_name: provider.consortium_name,
         provider_name: provider.provider_name,
         provider_uuid: provider.provider_uuid,
@@ -496,8 +507,11 @@ export function convertToJsonLd(normalized) {
       providerDonors.forEach((donor) =>
         ensurePropertyOrder(donor, providerDonors)
       );
-      providerDonors.forEach((donor) => donors.push(donor));}
+      providerDonors.forEach((donor) => donors.push(donor));
+    }
   }
+
+  donors.push(csv_normalized);
 
   return data;
 }
