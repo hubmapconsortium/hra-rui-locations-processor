@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
+//Importing from List and applying filters
+
 export const Filter = z.object({
-  ids: z.array(z.string())
+  donorIds: z.array(z.string()).optional(),
+  sampleIds: z.array(z.string()).optional(),
+  ruiLocationIds: z.array(z.string()).optional()
 })
 
 export const ImportMultiLocation = z.object({
