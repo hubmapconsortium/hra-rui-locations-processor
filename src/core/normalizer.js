@@ -5,6 +5,7 @@ import sh from 'shelljs';
 import { Providers } from '../utils/data-schema.js';
 import { SpatialEntity } from '../utils/spatial-schema.js';
 import { importCsv } from './csv-normalizer.js';
+import { importFromList } from './import-list-normalizer.js';
 
 
 /** The default order that properties should show in objects */
@@ -37,17 +38,17 @@ export async function normalizeRegistrations(context) {
     }
   }
 
-  // //Importing from web or local files using filters
-  // let import_list_normalized = ''
-  // for (const import_list of data) {
-  //   if (import_list.imports) {
-  //     console.log(import_list.imports)
-  //     import_list_normalized = await importFromList(import_list.imports, import_list.filter.ids);
-  //   }
-  // }
+  //Importing from list (web or local) files using filters
+  let import_list_normalized = ''
+  for (const import_list of data) {
+    if (import_list.imports) {
+      console.log(import_list.imports)
+      import_list_normalized = await importFromList(import_list.imports, import_list.filter);
+    }
+  }
 
 
-  const final = convertToJsonLd(normalized, csv_normalized);
+  const final = convertToJsonLd(normalized, csv_normalized, import_list_normalized);
 
   const ruiLocationsOutputPath = resolve(
     context.doPath,
@@ -451,7 +452,7 @@ function* enumerate(arr) {
  * This function is used to convert the above generated schema to JsonLd format.
  * @param { object } data - The data, which was ensured above, and which needs to be converted to JsonLd format.
  */
-export function convertToJsonLd(normalized, csv_normalized) {
+export function convertToJsonLd(normalized, csv_normalized, import_list_normalized) {
   const data = {
     '@context': {
       '@base': 'http://purl.org/ccf/latest/ccf-entity.owl#',
@@ -512,6 +513,7 @@ export function convertToJsonLd(normalized, csv_normalized) {
   }
 
   donors.push(csv_normalized);
+  donors.push(import_list_normalized);
 
   return data;
 }

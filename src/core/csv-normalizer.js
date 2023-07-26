@@ -15,7 +15,7 @@ const ALIASES = {
  * @param {string} url link to a rui_locations.jsonld to download from 
  * @returns rui_locations.jsonld data (list of donor objects)
  */
-async function getDataSource(url, HUBMAP_TOKEN) {
+export async function getDataSource(url, HUBMAP_TOKEN) {
   url = ALIASES[url] || url;
 
   // Add token for HuBMAP's registrations if available
