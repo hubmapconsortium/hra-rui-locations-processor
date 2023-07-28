@@ -98,7 +98,6 @@ export async function importCsv(CSV_URL, FIELDS, BASE_IRI) {
   for (const f in FIELDS) {
     FIELD.push(FIELDS[f])
   }
-  // console.log(FIELD)
 
   const allDatasets = await fetch(CSV_URL, { redirect: 'follow' })
     .then((r) => r.text())
@@ -124,8 +123,6 @@ export async function importCsv(CSV_URL, FIELDS, BASE_IRI) {
   for (const dataset of allDatasets) {
     // Grab registrations where this dataset occurs in
     const data = await getDataSource(dataset.ccf_api_endpoint, HUBMAP_TOKEN);
-
-    // console.log(data)
 
     let id;
     let result;

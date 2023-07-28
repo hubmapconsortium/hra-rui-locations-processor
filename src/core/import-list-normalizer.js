@@ -16,12 +16,11 @@ export async function importFromList(rui_locations, filters) {
     }
     results = results.concat(filterDonors(data['@graph'], filters));
   }
-  console.log(results)
   return results;
 }
 
 function filterDonors(donors, filters) {
-  const { donorIds = [], sampleIds = [], ruiLocationIds = [] } = filters;
+  const { donorIds = [], sampleIds = [], ruiLocationIds = [] } = filters || {};
   const hasFilters = donorIds.length > 0 || sampleIds.length > 0 || ruiLocationIds.length > 0;
   if (!hasFilters) {
     return donors;

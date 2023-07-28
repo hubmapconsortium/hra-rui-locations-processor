@@ -7,7 +7,7 @@
  * @param {string} prefix prefix for the UUID (often to convert to an HRA-compatible IRI)
  * @returns a lookup table from hubmap_id to (optionally prefixed) UUIDs.
  */
-export function getHbmToUuidLookup(hubmap_ids, token, prefix = 'https://entity.api.hubmapconsortium.org/entities/') {
+export async function getHbmToUuidLookup(hubmap_ids, token, prefix = 'https://entity.api.hubmapconsortium.org/entities/') {
   return fetch('https://search.api.hubmapconsortium.org/v3/portal/search', {
     method: 'POST',
     headers: token
