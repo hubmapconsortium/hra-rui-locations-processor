@@ -527,13 +527,13 @@ export function convertToJsonLd(normalized, csv_normalized, import_list_normaliz
   }
 
   if (csv_normalized !== '') {
-    for(const data of csv_normalized){
+    for (const data of csv_normalized) {
       donors.push(data);
     }
   }
 
   if (import_list_normalized !== '') {
-    for( const data of import_list_normalized){
+    for (const data of import_list_normalized) {
       donors.push(data);
     }
   }
