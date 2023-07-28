@@ -2,6 +2,11 @@ import { readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { resolve } from 'path';
 
+/**
+ * Imports data from a list of RUI locations, fetches them, and filter it.
+ * @param { string[] } rui_locations - An array containing RUI locations (URLs or file paths) from which data will be fetched and imported.
+ * @param { string[] } filters - An array containing filtering criteria to apply to the imported rui_location data.
+ */
 export async function importFromList(rui_locations, filters) {
   let results = [];
 
@@ -19,6 +24,11 @@ export async function importFromList(rui_locations, filters) {
   return results;
 }
 
+/**
+ * Filters the donors' information based on the provided filter criteria.
+ * @param { string[] } donors - An array of donor objects representing the donor's information.
+ * @param { string[] } filters - An array containing filtering criteria for donor information.
+ */
 function filterDonors(donors, filters) {
   const { donorIds = [], sampleIds = [], ruiLocationIds = [] } = filters || {};
   const hasFilters = donorIds.length > 0 || sampleIds.length > 0 || ruiLocationIds.length > 0;
@@ -38,6 +48,13 @@ function filterDonors(donors, filters) {
   return results;
 }
 
+/**
+ * Partitions an array of items into two arrays based on a filtering and mapping function.
+ * The filtering function is used to determine whether an item should be included in the 'matching' array or the 'rest' array.
+ * @param { string[] } items - An array of items to be partitioned.
+ * @param { string[] } filter - An array containing filtering criteria for donor information.
+ * @param { string[] } map - A map that takes the original item and the filtered array as inputs and returns the mapped item.
+ */
 function partition(items, filter, map) {
   const matching = [];
   const rest = [];
@@ -54,14 +71,27 @@ function partition(items, filter, map) {
   return [matching, rest];
 }
 
+/**
+ * Factory function that creates a donor filtering function based on a provided array of donor IDs.
+ * @param { string[] } ids - An array of donor IDs to be used as filter criteria.
+ */
 function donorFilterFactory(ids) {
   return (donor) => ids.includes(donor['@id']) ? [true] : [];
 }
 
+/**
+ * Mapping function that maps a donor object to itself.
+ * @param { string[] } donor - A donor object representing the donor's information.
+ */
 function donorMap(donor) {
   return donor;
 }
 
+/**
+ * Factory function that creates a filtering function to filter donors based on sample IDs or RUI location IDs.
+ * @param {string[]} sampleIds - An array of sample IDs to be used as filter criteria.
+ * @param {string[]} ruiLocationIds - An array of RUI location IDs to be used as filter criteria.
+ */
 function sampleOrRuiLocationFilterFactory(sampleIds, ruiLocationIds) {
   return (donor) => donor.samples.filter(sample => {
     return sampleIds.includes(sample['@id'])
@@ -69,6 +99,11 @@ function sampleOrRuiLocationFilterFactory(sampleIds, ruiLocationIds) {
   });
 }
 
+/**
+ * Mapping function that maps a donor object with a new set of samples.
+ * @param {Object} donor - A donor object representing the donor's information.
+ * @param {Object[]} samples - An array of sample objects representing the new set of samples to be associated with the donor.
+ */
 function sampleMap(donor, samples) {
   return { ...donor, samples };
 }

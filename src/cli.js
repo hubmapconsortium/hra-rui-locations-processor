@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import { deployDir } from './core/deploy-dir.js';
 import { saveJsonSchema } from './core/json-schema.js';
 import { newRegistrations } from './core/new-registrations.js';
-import { normalizeRegistrations } from './core/normalizer.js';
+import { normalizeRegistrations } from './core/main.js';
 import { getProcessorHome } from './utils/source-info.js';
 
 const program = new Command();

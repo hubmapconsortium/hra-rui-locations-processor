@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import sh from 'shelljs';
-import { normalizeRegistrations } from './normalizer.js';
+import { normalizeRegistrations } from './main.js';
 
 export function deployDir(context) {
   const { dirPath, deploymentHome, processorHome } = context;
