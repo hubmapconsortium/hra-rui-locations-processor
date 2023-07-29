@@ -39,11 +39,11 @@ program
   )
   .argument(
     '<digital-objects-folder>',
-    'Path to a folder containning multiple digital objects'
+    'Path to a folder containing multiple digital objects'
   )
   .argument(
     '<deploy-dir>',
-    'Path to a folder containning multiple digital objects'
+    'Path to a folder containing multiple digital objects'
   )
   .action((str, str2) => {
     deployDir({
