@@ -23,6 +23,10 @@ const FILTER_SPEC = {
               test: matches,
               inner: [
                 {
+                  property: 'samples',
+                  test: matches
+                },
+                {
                   property: 'datasets',
                   test: matches
                 }

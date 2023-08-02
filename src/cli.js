@@ -28,8 +28,9 @@ program
     "Normalizes a registrations digital object from it's raw form. Minimally, it converts the source DO type + integrates the metadata into a single HRA v1.x JSON-LD file."
   )
   .argument('<digital-object-path>', 'Path to the digital object')
-  .action((str) => {
-    normalizeRegistrations({ doPath: str, processorHome: getProcessorHome() });
+  .option('--base-iri <string>', 'Base IRI for Digital Objects')
+  .action((str, str1) => {
+    normalizeRegistrations({ doPath: str, processorHome: getProcessorHome(), str1 });
   });
 
 program
