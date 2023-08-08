@@ -3,8 +3,8 @@
 import { Command } from 'commander';
 import { deployDir } from './core/deploy-dir.js';
 import { saveJsonSchema } from './core/json-schema.js';
-import { newRegistrations } from './core/new-registrations.js';
 import { normalizeRegistrations } from './core/main.js';
+import { newRegistrations } from './core/new-registrations.js';
 import { getProcessorHome } from './utils/source-info.js';
 
 const program = new Command();
@@ -35,17 +35,9 @@ program
 
 program
   .command('deploy-dir')
-  .description(
-    'Normalizes a directory of registrations and creates a distribution for publishing.'
-  )
-  .argument(
-    '<digital-objects-folder>',
-    'Path to a folder containing multiple digital objects'
-  )
-  .argument(
-    '<deploy-dir>',
-    'Path to a folder containing multiple digital objects'
-  )
+  .description('Normalizes a directory of registrations and creates a distribution for publishing.')
+  .argument('<digital-objects-folder>', 'Path to a folder containing multiple digital objects')
+  .argument('<deploy-dir>', 'Path to a folder containing multiple digital objects')
   .action((str, str2) => {
     deployDir({
       dirPath: str,
@@ -56,9 +48,7 @@ program
 
 program
   .command('json-schema')
-  .description(
-    'Exports the JSON Schema used to validate registrations.yaml files'
-  )
+  .description('Exports the JSON Schema used to validate registrations.yaml files')
   .argument('<output path>', 'Path for storing the json schema')
   .action((str) => {
     saveJsonSchema(str);

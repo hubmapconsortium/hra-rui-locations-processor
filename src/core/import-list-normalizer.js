@@ -16,7 +16,7 @@ const FILTER_SPEC = {
           inner: [
             {
               property: 'datasets',
-              test: matches
+              test: matches,
             },
             {
               property: 'sections',
@@ -24,19 +24,19 @@ const FILTER_SPEC = {
               inner: [
                 {
                   property: 'samples',
-                  test: matches
+                  test: matches,
                 },
                 {
                   property: 'datasets',
-                  test: matches
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  test: matches,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 /**
@@ -49,11 +49,10 @@ export async function importFromList(rui_locations, filters) {
   let results = [];
 
   for (const dataset of rui_locations) {
-    let data = ''
+    let data = '';
     if (dataset.startsWith('http://') || dataset.startsWith('https://')) {
-      data = await fetch(dataset).then(r => r.json());
-    }
-    else {
+      data = await fetch(dataset).then((r) => r.json());
+    } else {
       const path = resolve(dataset, 'rui_locations.jsonld');
       data = load(readFileSync(path));
     }
@@ -77,9 +76,7 @@ function filter(item, ids, spec, level = 0) {
   let hasMatches = false;
   for (const innerSpec of spec.inner ?? []) {
     const { property } = innerSpec;
-    const innerItems = item[property]
-      ?.map(i => filter(i, ids, innerSpec, level + 1))
-      ?.filter(i => i !== undefined);
+    const innerItems = item[property]?.map((i) => filter(i, ids, innerSpec, level + 1))?.filter((i) => i !== undefined);
 
     copy[property] = innerItems;
     if (innerItems !== undefined && innerItems.length > 0) {
