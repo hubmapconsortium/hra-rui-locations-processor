@@ -20,6 +20,7 @@ export const FieldMappingSchema = z.object({
   datasetId: z.string(),
   sampleId: z.string(),
   ruiLocationId: z.string(),
+  donorId: z.string(),
 }).partial();
 
 export const DefaultsSchema = z.object({

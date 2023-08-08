@@ -1,39 +1,40 @@
 # yaml-language-server: $schema=../../src/temp.json
 
-- consortium_name: HuBMAP
-  provider_name: TMC-CalTech
-  provider_uuid: 308f5ffc-ed43-11e8-b56a-0e8017bdda58
-  defaults:
-    id: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
-    thumbnail: assets/icons/ico-unknown.svg
-    link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
-  donors:
-    - sex: Male
-      samples:
-      - rui_location: registration-data-1.json
+# - consortium_name: HuBMAP
+#   provider_name: TMC-CalTech
+#   provider_uuid: 308f5ffc-ed43-11e8-b56a-0e8017bdda58
+#   defaults:
+#     id: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
+#     thumbnail: assets/icons/ico-unknown.svg
+#     link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
+#   donors:
+#     - sex: Male
+#       samples:
+#       - rui_location: registration-data-1.json
 
 - import_from_csv: https://docs.google.com/spreadsheets/d/1cwxztPg9sLq0ASjJ5bntivUk6dSKHsVyR1bE6bXvMkY/export?format=csv&gid=1529271254
   fields:
     uniqueId: dataset_id
     endpoint: ccf_api_endpoint
     paperId: paper_id
-    datasetId: dataset_id  # priority 
-    sampleId: sample_id  # priority
-    ruiLocationId: rui_location_id  # priority
+    datasetId: dataset_id  
+    sampleId: sample_id  
+    ruiLocationId: CxG_dataset_id_donor_id_organ  
+    donorId: HuBMAP_donor_id
   defaults: 
     baseIri: 'https://cns-iu.github.io/hra-cell-type-populations-supporting-information/registrations/rui_locations.jsonld'
 
-- imports: 
-    - https://ccf-api.hubmapconsortium.org/v1/hubmap/rui_locations.jsonld
-    - https://ccf-api.hubmapconsortium.org/v1/gtex/rui_locations.jsonld
-    - ../examples/all-features/
-  filter: #optional
-    ids: 
-      - https://entity.api.hubmapconsortium.org/entities/01d8b1a59c0326441167d8375c4437ec # (Donor id) This is present in import 1 (Donor 1) (GRAB ALL DATA)
-      - https://entity.api.hubmapconsortium.org/entities/017eccf19e93969ce5cd8f30f78bab67 # (Sample id) This is present in import 1 (Donor 2) (ONLY GRAB 1 SAMPLE)
-      - http://purl.org/ccf/1.5/b7ad0f82-7460-4fc5-8c91-cc46666ee4f2 # (Rui Location id) This is present in import 1  (Donor 3) (ONLY GRAB ONE SAMPLE)
-      - http://purl.org/ccf/1.5/64ebd98a-c6d1-4317-8596-dd73551da0cf # (Rui Location id) This is present in import 1  (Donor 3) (ONLY GRAB ONE SAMPLE)
-      - https://entity.api.hubmapconsortium.org/entities/cacbcb64aa8d9e3160a4ff6600df081a  # (Dataset id) This is present in import 1 (Donor 4 ) (only GRAB 1 DATASET, 1 SAMPLE, DONOR)
+# - imports: 
+#     - https://ccf-api.hubmapconsortium.org/v1/hubmap/rui_locations.jsonld
+#     - https://ccf-api.hubmapconsortium.org/v1/gtex/rui_locations.jsonld
+#     - ../examples/all-features/
+#   filter: #optional
+#     ids: 
+#       - https://entity.api.hubmapconsortium.org/entities/01d8b1a59c0326441167d8375c4437ec # (Donor id) This is present in import 1 (Donor 1) (GRAB ALL DATA)
+#       - https://entity.api.hubmapconsortium.org/entities/017eccf19e93969ce5cd8f30f78bab67 # (Sample id) This is present in import 1 (Donor 2) (ONLY GRAB 1 SAMPLE)
+#       - http://purl.org/ccf/1.5/b7ad0f82-7460-4fc5-8c91-cc46666ee4f2 # (Rui Location id) This is present in import 1  (Donor 3) (ONLY GRAB ONE SAMPLE)
+#       - http://purl.org/ccf/1.5/64ebd98a-c6d1-4317-8596-dd73551da0cf # (Rui Location id) This is present in import 1  (Donor 3) (ONLY GRAB ONE SAMPLE)
+#       - https://entity.api.hubmapconsortium.org/entities/cacbcb64aa8d9e3160a4ff6600df081a  # (Dataset id) This is present in import 1 (Donor 4 ) (only GRAB 1 DATASET, 1 SAMPLE, DONOR)
 
 
 
