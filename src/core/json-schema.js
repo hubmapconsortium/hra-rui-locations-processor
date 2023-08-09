@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
-import { Providers } from '../utils/data-schema.js';
 import { zodToJsonSchema } from 'zod-to-json-schema';
+import { Providers } from '../utils/data-schema.js';
 
 /**
  * This function converts the Providers Zod Schema and creates a JSON schema file.

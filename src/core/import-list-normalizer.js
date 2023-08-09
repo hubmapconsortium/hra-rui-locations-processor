@@ -1,6 +1,8 @@
-import { readFileSync } from 'fs';
-import { load } from 'js-yaml';
+import { existsSync, readFileSync } from 'fs';
 import { resolve } from 'path';
+import { Providers } from '../utils/data-schema.js';
+import { convertToJsonLd } from './main.js';
+import { loadFile, normalizeRegistration } from './normalizer.js';
 
 const FILTER_SPEC = {
   property: '',
@@ -16,7 +18,7 @@ const FILTER_SPEC = {
           inner: [
             {
               property: 'datasets',
-              test: matches
+              test: matches,
             },
             {
               property: 'sections',
@@ -24,19 +26,19 @@ const FILTER_SPEC = {
               inner: [
                 {
                   property: 'samples',
-                  test: matches
+                  test: matches,
                 },
                 {
                   property: 'datasets',
-                  test: matches
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  test: matches,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 /**
@@ -49,13 +51,19 @@ export async function importFromList(rui_locations, filters) {
   let results = [];
 
   for (const dataset of rui_locations) {
-    let data = ''
+    let data = '';
+
     if (dataset.startsWith('http://') || dataset.startsWith('https://')) {
-      data = await fetch(dataset).then(r => r.json());
-    }
-    else {
-      const path = resolve(dataset, 'rui_locations.jsonld');
-      data = load(readFileSync(path));
+      data = await fetch(dataset).then((r) => r.json());
+    } else if (dataset.endsWith('rui_locations.jsonld') && existsSync(dataset)) {
+      data = JSON.parse(readFileSync(dataset).toString());
+    } else if (existsSync(resolve(dataset, 'registrations.yaml'))) {
+      const ruiLocationsDir = resolve(dataset, 'registrations');
+      data = loadFile(dataset, 'registrations.yaml', Providers);
+      data = await normalizeRegistration(data, ruiLocationsDir);
+      data = convertToJsonLd(data, '', '');
+    } else {
+      console.log('Unable to import', dataset);
     }
 
     const filtered = filter(data, ids, FILTER_SPEC);
@@ -77,9 +85,7 @@ function filter(item, ids, spec, level = 0) {
   let hasMatches = false;
   for (const innerSpec of spec.inner ?? []) {
     const { property } = innerSpec;
-    const innerItems = item[property]
-      ?.map(i => filter(i, ids, innerSpec, level + 1))
-      ?.filter(i => i !== undefined);
+    const innerItems = item[property]?.map((i) => filter(i, ids, innerSpec, level + 1))?.filter((i) => i !== undefined);
 
     copy[property] = innerItems;
     if (innerItems !== undefined && innerItems.length > 0) {

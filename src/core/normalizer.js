@@ -24,7 +24,6 @@ const DEFAULT_PROPERTY_ORDER = [
  * @param { string } ruiLocationsDir - The directory where rui_locations can be found, if file name is mentioned in registration.yaml file.
  */
 export async function normalizeRegistration(data, ruiLocationsDir) {
-
   for (const provider of data) {
     if (provider.defaults) {
       if (!provider.defaults.thumbnail) {
@@ -40,42 +39,17 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
 
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
 
-        ensureId(
-          donorId,
-          donor,
-          'Donor',
-          provider,
-          provider.defaults ? provider.defaults : ''
-        );
+        ensureId(donorId, donor, 'Donor', provider, provider.defaults ? provider.defaults : '');
         ensureDonorLabel(donor, block);
         ensureDescription(donor, ruiLocation, provider);
         ensureLink(donor, provider, provider.defaults ? provider.defaults : '');
 
-        ensureId(
-          blockId,
-          block,
-          'TissueBlock',
-          donor,
-          provider,
-          provider.defaults ? provider.defaults : ''
-        );
+        ensureId(blockId, block, 'TissueBlock', donor, provider, provider.defaults ? provider.defaults : '');
         ensureLabel(block, ruiLocation, donor, provider);
-        ensureLink(
-          block,
-          donor,
-          provider,
-          provider.defaults ? provider.defaults : ''
-        );
+        ensureLink(block, donor, provider, provider.defaults ? provider.defaults : '');
         ensureSampleDescription(block, ruiLocation, provider);
         ensureSectionCount(block);
-        ensureDatasets(
-          block.datasets,
-          `TissueBlock${blockId + 1}`,
-          provider,
-          donor,
-          block,
-          ruiLocation
-        );
+        ensureDatasets(block.datasets, `TissueBlock${blockId + 1}`, provider, donor, block, ruiLocation);
         ensurePropertyOrder(block, donor.samples);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
@@ -93,21 +67,8 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
           );
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSampleDescription(section, ruiLocation, donor, provider);
-          ensureLink(
-            section,
-            block,
-            donor,
-            provider,
-            provider.defaults ? provider.defaults : ''
-          );
-          ensureDatasets(
-            section.datasets,
-            `TissueSection${sectionId + 1}`,
-            provider,
-            donor,
-            block,
-            ruiLocation
-          );
+          ensureLink(section, block, donor, provider, provider.defaults ? provider.defaults : '');
+          ensureDatasets(section.datasets, `TissueSection${sectionId + 1}`, provider, donor, block, ruiLocation);
           ensurePropertyOrder(section, block.sections);
         }
         ensurePropertyOrder(donor, provider.donors);
@@ -124,7 +85,7 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
  * @param { string } file - The name of file
  * @param { string } schema - The Zod schema with which the file has to be validated.
  */
-function loadFile(dir, file, schema) {
+export function loadFile(dir, file, schema) {
   const path = resolve(dir, file);
   const yaml = load(readFileSync(path));
   return schema.parse(yaml);
@@ -136,11 +97,7 @@ function loadFile(dir, file, schema) {
  * @param { object[] } container
  * @param { string[] } propOrder
  */
-export function ensurePropertyOrder(
-  obj,
-  container,
-  propOrder = DEFAULT_PROPERTY_ORDER
-) {
+export function ensurePropertyOrder(obj, container, propOrder = DEFAULT_PROPERTY_ORDER) {
   const newObj = {};
   for (const prop of propOrder) {
     newObj[prop] = obj[prop];
@@ -157,14 +114,7 @@ export function ensurePropertyOrder(
  * @param { object } block
  * @param { object } ruiLocation
  */
-function ensureDatasets(
-  container,
-  idPrefix,
-  provider,
-  donor,
-  block,
-  ruiLocation
-) {
+function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation) {
   for (const [dataset, datasetId] of enumerate(container ?? [])) {
     dataset['@type'] = 'Dataset';
     ensureId(
@@ -178,22 +128,17 @@ function ensureDatasets(
     );
     ensureLabel(dataset, ruiLocation, donor, provider);
     ensureDatasetDescription(dataset);
-    ensureLink(
-      dataset,
-      block,
-      donor,
-      provider,
-      provider.defaults ? provider.defaults : ''
-    );
+    ensureLink(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
     convertThumbnailPath(dataset);
     ensurePropertyOrder(dataset, container);
   }
 }
 
-/** This function converts absolute path to relative path for the thumbnails 
+/** This function converts absolute path to relative path for the thumbnails
  * @param { Object }  dataset - This is the dataset object which contains the thumbnail
-*/
+ */
 function convertThumbnailPath(dataset) {
+  // FIXME
   dataset.thumbnail = resolve(dataset.thumbnail);
   return dataset.thumbnail;
 }
@@ -205,11 +150,7 @@ function convertThumbnailPath(dataset) {
  */
 function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === 'string') {
-    block.rui_location = loadFile(
-      ruiLocationsDir,
-      block.rui_location,
-      SpatialEntity
-    );
+    block.rui_location = loadFile(ruiLocationsDir, block.rui_location, SpatialEntity);
   }
   return block.rui_location;
 }
@@ -227,9 +168,7 @@ function ensureLink(object, ...ancestors) {
         return;
       }
     }
-    throw new Error(
-      ' Link is missing. Please provide a link for the object or its parent Donor'
-    );
+    throw new Error(' Link is missing. Please provide a link for the object or its parent Donor');
   }
 }
 
@@ -242,11 +181,7 @@ function ensureLink(object, ...ancestors) {
 function ensureDescription(object, rui_location, provider) {
   if (!object.description) {
     const prefix = 'Entered';
-    object.description = makeLabel(
-      prefix,
-      rui_location,
-      provider.provider_name
-    );
+    object.description = makeLabel(prefix, rui_location, provider.provider_name);
   }
 }
 
@@ -319,9 +254,7 @@ function ensureSampleDescription(object, rui_location, ...ancestors) {
           return;
         }
       }
-      throw new Error(
-        'Description is missing. Please provide rui_locations or description to parent provider'
-      );
+      throw new Error('Description is missing. Please provide rui_locations or description to parent provider');
     }
   }
 }
@@ -337,17 +270,11 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   if (!object.id) {
     for (const ancestor of ancestors) {
       if (ancestor.id || ancestor['@id']) {
-        object['@id'] = makeId(
-          ancestor.id ? ancestor.id : ancestor['@id'],
-          objectType,
-          objectIndex
-        );
+        object['@id'] = makeId(ancestor.id ? ancestor.id : ancestor['@id'], objectType, objectIndex);
         return;
       }
     }
-    throw new Error(
-      `Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`
-    );
+    throw new Error(`Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`);
   }
   if (object.id && !object['@id']) {
     object['@id'] = object.id;
