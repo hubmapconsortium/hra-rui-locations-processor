@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ImportFromCSV, ImportMultiLocation } from './import-rui-location.js';
 import { SpatialEntity } from './spatial-schema.js';
 
 export const Dataset = z.object({
@@ -113,4 +114,6 @@ export const Provider = z.object({
   defaults: Default.optional(),
 });
 
-export const Providers = Provider.array();
+// export const Providers = Provider.array();
+
+export const Providers = z.union([Provider, ImportFromCSV, ImportMultiLocation]).array();

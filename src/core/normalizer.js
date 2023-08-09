@@ -1,8 +1,6 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { resolve } from 'path';
-import sh from 'shelljs';
-import { Providers } from '../utils/data-schema.js';
 import { SpatialEntity } from '../utils/spatial-schema.js';
 
 /** The default order that properties should show in objects */
@@ -19,34 +17,12 @@ const DEFAULT_PROPERTY_ORDER = [
 ];
 
 /**
- * This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
- *  @param { string } context - The directory path of registration.yaml file.
- */
-export function normalizeRegistrations(context) {
-  const ruiLocationsDir = resolve(context.doPath, 'registrations');
-  const data = loadFile(context.doPath, 'registrations.yaml', Providers);
-  const normalized = normalizeRegistration(data, ruiLocationsDir);
-
-  const final = convertToJsonLd(normalized);
-
-  const ruiLocationsOutputPath = resolve(
-    context.doPath,
-    'rui_locations.jsonld'
-  );
-  writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
-  sh.cp(
-    resolve(context.processorHome, 'src/ccf-eui-template.html'),
-    resolve(context.doPath, 'index.html')
-  );
-}
-
-/**
  * This function ensures the registration.yaml file has id, label, description, and link at Provider, Donor, Section, Block and Dataset levels.
  * If not, it creates one.
  * @param { string } data - The data which has to be normalized, here, the contents of registrations.yaml file which has the provider data.
  * @param { string } ruiLocationsDir - The directory where rui_locations can be found, if file name is mentioned in registration.yaml file.
  */
-export function normalizeRegistration(data, ruiLocationsDir) {
+export async function normalizeRegistration(data, ruiLocationsDir) {
   for (const provider of data) {
     if (provider.defaults) {
       if (!provider.defaults.thumbnail) {
@@ -62,42 +38,17 @@ export function normalizeRegistration(data, ruiLocationsDir) {
 
         const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
 
-        ensureId(
-          donorId,
-          donor,
-          'Donor',
-          provider,
-          provider.defaults ? provider.defaults : ''
-        );
+        ensureId(donorId, donor, 'Donor', provider, provider.defaults ? provider.defaults : '');
         ensureDonorLabel(donor, block);
         ensureDescription(donor, ruiLocation, provider);
         ensureLink(donor, provider, provider.defaults ? provider.defaults : '');
 
-        ensureId(
-          blockId,
-          block,
-          'TissueBlock',
-          donor,
-          provider,
-          provider.defaults ? provider.defaults : ''
-        );
+        ensureId(blockId, block, 'TissueBlock', donor, provider, provider.defaults ? provider.defaults : '');
         ensureLabel(block, ruiLocation, donor, provider);
-        ensureLink(
-          block,
-          donor,
-          provider,
-          provider.defaults ? provider.defaults : ''
-        );
+        ensureLink(block, donor, provider, provider.defaults ? provider.defaults : '');
         ensureSampleDescription(block, ruiLocation, provider);
         ensureSectionCount(block);
-        ensureDatasets(
-          block.datasets,
-          `TissueBlock${blockId + 1}`,
-          provider,
-          donor,
-          block,
-          ruiLocation
-        );
+        ensureDatasets(block.datasets, `TissueBlock${blockId + 1}`, provider, donor, block, ruiLocation);
         ensurePropertyOrder(block, donor.samples);
 
         for (const [section, sectionId] of enumerate(block.sections)) {
@@ -115,21 +66,8 @@ export function normalizeRegistration(data, ruiLocationsDir) {
           );
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSampleDescription(section, ruiLocation, donor, provider);
-          ensureLink(
-            section,
-            block,
-            donor,
-            provider,
-            provider.defaults ? provider.defaults : ''
-          );
-          ensureDatasets(
-            section.datasets,
-            `TissueSection${sectionId + 1}`,
-            provider,
-            donor,
-            block,
-            ruiLocation
-          );
+          ensureLink(section, block, donor, provider, provider.defaults ? provider.defaults : '');
+          ensureDatasets(section.datasets, `TissueSection${sectionId + 1}`, provider, donor, block, ruiLocation);
           ensurePropertyOrder(section, block.sections);
         }
         ensurePropertyOrder(donor, provider.donors);
@@ -146,7 +84,7 @@ export function normalizeRegistration(data, ruiLocationsDir) {
  * @param { string } file - The name of file
  * @param { string } schema - The Zod schema with which the file has to be validated.
  */
-function loadFile(dir, file, schema) {
+export function loadFile(dir, file, schema) {
   const path = resolve(dir, file);
   const yaml = load(readFileSync(path));
   return schema.parse(yaml);
@@ -158,11 +96,7 @@ function loadFile(dir, file, schema) {
  * @param { object[] } container
  * @param { string[] } propOrder
  */
-function ensurePropertyOrder(
-  obj,
-  container,
-  propOrder = DEFAULT_PROPERTY_ORDER
-) {
+export function ensurePropertyOrder(obj, container, propOrder = DEFAULT_PROPERTY_ORDER) {
   const newObj = {};
   for (const prop of propOrder) {
     newObj[prop] = obj[prop];
@@ -179,14 +113,7 @@ function ensurePropertyOrder(
  * @param { object } block
  * @param { object } ruiLocation
  */
-function ensureDatasets(
-  container,
-  idPrefix,
-  provider,
-  donor,
-  block,
-  ruiLocation
-) {
+function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation) {
   for (const [dataset, datasetId] of enumerate(container ?? [])) {
     dataset['@type'] = 'Dataset';
     ensureId(
@@ -200,15 +127,19 @@ function ensureDatasets(
     );
     ensureLabel(dataset, ruiLocation, donor, provider);
     ensureDatasetDescription(dataset);
-    ensureLink(
-      dataset,
-      block,
-      donor,
-      provider,
-      provider.defaults ? provider.defaults : ''
-    );
+    ensureLink(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
+    convertThumbnailPath(dataset);
     ensurePropertyOrder(dataset, container);
   }
+}
+
+/** This function converts absolute path to relative path for the thumbnails
+ * @param { Object }  dataset - This is the dataset object which contains the thumbnail
+ */
+function convertThumbnailPath(dataset) {
+  // FIXME
+  dataset.thumbnail = resolve(dataset.thumbnail);
+  return dataset.thumbnail;
 }
 
 /**
@@ -218,11 +149,7 @@ function ensureDatasets(
  */
 function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === 'string') {
-    block.rui_location = loadFile(
-      ruiLocationsDir,
-      block.rui_location,
-      SpatialEntity
-    );
+    block.rui_location = loadFile(ruiLocationsDir, block.rui_location, SpatialEntity);
   }
   return block.rui_location;
 }
@@ -240,9 +167,7 @@ function ensureLink(object, ...ancestors) {
         return;
       }
     }
-    throw new Error(
-      ' Link is missing. Please provide a link for the object or its parent Donor'
-    );
+    throw new Error(' Link is missing. Please provide a link for the object or its parent Donor');
   }
 }
 
@@ -255,11 +180,7 @@ function ensureLink(object, ...ancestors) {
 function ensureDescription(object, rui_location, provider) {
   if (!object.description) {
     const prefix = 'Entered';
-    object.description = makeLabel(
-      prefix,
-      rui_location,
-      provider.provider_name
-    );
+    object.description = makeLabel(prefix, rui_location, provider.provider_name);
   }
 }
 
@@ -332,9 +253,7 @@ function ensureSampleDescription(object, rui_location, ...ancestors) {
           return;
         }
       }
-      throw new Error(
-        'Description is missing. Please provide rui_locations or description to parent provider'
-      );
+      throw new Error('Description is missing. Please provide rui_locations or description to parent provider');
     }
   }
 }
@@ -350,17 +269,11 @@ function ensureId(objectIndex, object, objectType, ...ancestors) {
   if (!object.id) {
     for (const ancestor of ancestors) {
       if (ancestor.id || ancestor['@id']) {
-        object['@id'] = makeId(
-          ancestor.id ? ancestor.id : ancestor['@id'],
-          objectType,
-          objectIndex
-        );
+        object['@id'] = makeId(ancestor.id ? ancestor.id : ancestor['@id'], objectType, objectIndex);
         return;
       }
     }
-    throw new Error(
-      `Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`
-    );
+    throw new Error(`Id Missing for ${objectType}[${objectIndex}]. Add an ID to this object or it's parent Donor`);
   }
   if (object.id && !object['@id']) {
     object['@id'] = object.id;
@@ -424,68 +337,4 @@ function* enumerate(arr) {
   for (let i = 0; i < (arr ?? []).length; i++) {
     yield [arr[i], i];
   }
-}
-
-/**
- * This function is used to convert the above generated schema to JsonLd format.
- * @param { object } data - The data, which was ensured above, and which needs to be converted to JsonLd format.
- */
-export function convertToJsonLd(normalized) {
-  const data = {
-    '@context': {
-      '@base': 'http://purl.org/ccf/latest/ccf-entity.owl#',
-      '@vocab': 'http://purl.org/ccf/latest/ccf-entity.owl#',
-      ccf: 'http://purl.org/ccf/latest/ccf.owl#',
-      rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
-      label: 'rdfs:label',
-      description: 'rdfs:comment',
-      link: {
-        '@id': 'rdfs:seeAlso',
-        '@type': '@id',
-      },
-      samples: {
-        '@reverse': 'has_donor',
-      },
-      sections: {
-        '@id': 'has_tissue_section',
-        '@type': '@id',
-      },
-      datasets: {
-        '@id': 'has_dataset',
-        '@type': '@id',
-      },
-      rui_location: {
-        '@id': 'has_spatial_entity',
-        '@type': '@id',
-      },
-      ontologyTerms: {
-        '@id': 'has_ontology_term',
-        '@type': '@id',
-      },
-      cellTypeTerms: {
-        '@id': 'has_cell_type_term',
-        '@type': '@id',
-      },
-      thumbnail: {
-        '@id': 'has_thumbnail',
-      },
-    },
-    '@graph': [],
-  };
-  const donors = data['@graph'];
-
-  for (const provider of normalized) {
-    const providerDonors = provider.donors.map((donor) => ({
-      consortium_name: provider.consortium_name,
-      provider_name: provider.provider_name,
-      provider_uuid: provider.provider_uuid,
-      ...donor,
-    }));
-    providerDonors.forEach((donor) =>
-      ensurePropertyOrder(donor, providerDonors)
-    );
-    providerDonors.forEach((donor) => donors.push(donor));
-  }
-
-  return data;
 }
