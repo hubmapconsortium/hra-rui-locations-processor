@@ -128,17 +128,14 @@ function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation
     ensureLabel(dataset, ruiLocation, donor, provider);
     ensureDatasetDescription(dataset);
     ensureLink(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
-    convertThumbnailPath(dataset);
+    ensureDatasetThumbnail(dataset, provider?.defaults?.thumbnail);
     ensurePropertyOrder(dataset, container);
   }
 }
 
-/** This function converts absolute path to relative path for the thumbnails
- * @param { Object }  dataset - This is the dataset object which contains the thumbnail
- */
-function convertThumbnailPath(dataset) {
-  // FIXME
-  // dataset.thumbnail = resolve(dataset.thumbnail);
+
+function ensureDatasetThumbnail(dataset, fallbackThumbnail = undefined) {
+  dataset.thumbnail = dataset.thumbnail || fallbackThumbnail;
   return dataset.thumbnail;
 }
 
