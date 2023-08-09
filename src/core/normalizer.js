@@ -138,7 +138,7 @@ function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation
  */
 function convertThumbnailPath(dataset) {
   // FIXME
-  dataset.thumbnail = resolve(dataset.thumbnail);
+  // dataset.thumbnail = resolve(dataset.thumbnail);
   return dataset.thumbnail;
 }
 
