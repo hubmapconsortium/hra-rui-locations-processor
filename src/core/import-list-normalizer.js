@@ -1,6 +1,8 @@
-import { readFileSync } from 'fs';
-import { load } from 'js-yaml';
+import { existsSync, readFileSync } from 'fs';
 import { resolve } from 'path';
+import { Providers } from '../utils/data-schema.js';
+import { convertToJsonLd } from './main.js';
+import { loadFile, normalizeRegistration } from './normalizer.js';
 
 const FILTER_SPEC = {
   property: '',
@@ -50,11 +52,18 @@ export async function importFromList(rui_locations, filters) {
 
   for (const dataset of rui_locations) {
     let data = '';
+
     if (dataset.startsWith('http://') || dataset.startsWith('https://')) {
       data = await fetch(dataset).then((r) => r.json());
+    } else if (dataset.endsWith('rui_locations.jsonld') && existsSync(dataset)) {
+      data = JSON.parse(readFileSync(dataset).toString());
+    } else if (existsSync(resolve(dataset, 'registrations.yaml'))) {
+      const ruiLocationsDir = resolve(dataset, 'registrations');
+      data = loadFile(dataset, 'registrations.yaml', Providers);
+      data = await normalizeRegistration(data, ruiLocationsDir);
+      data = convertToJsonLd(data, '', '');
     } else {
-      const path = resolve(dataset, 'rui_locations.jsonld');
-      data = load(readFileSync(path));
+      console.log('Unable to import', dataset);
     }
 
     const filtered = filter(data, ids, FILTER_SPEC);

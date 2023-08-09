@@ -4,132 +4,82 @@
     "mySchema": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "@type": {
-            "type": "string"
-          },
-          "provider_name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "provider_uuid": {
-            "type": "string"
-          },
-          "consortium_name": {
-            "type": "string"
-          },
-          "default_dataset_technology": {
-            "type": "string"
-          },
-          "donors": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "@type": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "link": {
-                  "type": "string"
-                },
-                "age": {
-                  "type": "number"
-                },
-                "sex": {
-                  "type": "string",
-                  "enum": [
-                    "Male",
-                    "Female"
-                  ]
-                },
-                "bmi": {
-                  "type": "number"
-                },
-                "samples": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "sample_type": {
-                        "type": "string",
-                        "const": "Tissue Block"
-                      },
-                      "rui_location": {
-                        "anyOf": [
-                          {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string"
+              },
+              "provider_name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "provider_uuid": {
+                "type": "string"
+              },
+              "consortium_name": {
+                "type": "string"
+              },
+              "default_dataset_technology": {
+                "type": "string"
+              },
+              "donors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "@type": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "link": {
+                      "type": "string"
+                    },
+                    "age": {
+                      "type": "number"
+                    },
+                    "sex": {
+                      "type": "string",
+                      "enum": [
+                        "Male",
+                        "Female"
+                      ]
+                    },
+                    "bmi": {
+                      "type": "number"
+                    },
+                    "samples": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
                             "type": "string"
                           },
-                          {
-                            "type": "object",
-                            "properties": {
-                              "@id": {
+                          "@type": {
+                            "type": "string"
+                          },
+                          "sample_type": {
+                            "type": "string",
+                            "const": "Tissue Block"
+                          },
+                          "rui_location": {
+                            "anyOf": [
+                              {
                                 "type": "string"
                               },
-                              "@type": {
-                                "type": "string",
-                                "const": "SpatialEntity"
-                              },
-                              "@context": {
-                                "type": "string"
-                              },
-                              "label": {
-                                "type": "string"
-                              },
-                              "comment": {
-                                "type": "string"
-                              },
-                              "creator": {
-                                "type": "string"
-                              },
-                              "creator_first_name": {
-                                "type": "string"
-                              },
-                              "creator_last_name": {
-                                "type": "string"
-                              },
-                              "creator_orcid": {
-                                "type": "string"
-                              },
-                              "creation_date": {
-                                "type": "string"
-                              },
-                              "ccf_annotations": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              },
-                              "x_dimension": {
-                                "type": "number"
-                              },
-                              "y_dimension": {
-                                "type": "number"
-                              },
-                              "z_dimension": {
-                                "type": "number"
-                              },
-                              "dimension_units": {
-                                "type": "string"
-                              },
-                              "placement": {
+                              {
                                 "type": "object",
                                 "properties": {
                                   "@context": {
@@ -140,287 +90,423 @@
                                   },
                                   "@type": {
                                     "type": "string",
-                                    "const": "SpatialPlacement"
-                                  },
-                                  "placement_date": {
-                                    "type": "string"
-                                  },
-                                  "x_scaling": {
-                                    "type": "number"
-                                  },
-                                  "y_scaling": {
-                                    "type": "number"
-                                  },
-                                  "z_scaling": {
-                                    "type": "number"
-                                  },
-                                  "scaling_units": {
-                                    "type": "string"
-                                  },
-                                  "x_rotation": {
-                                    "type": "number"
-                                  },
-                                  "y_rotation": {
-                                    "type": "number"
-                                  },
-                                  "z_rotation": {
-                                    "type": "number"
-                                  },
-                                  "w_rotation": {
-                                    "type": "number"
-                                  },
-                                  "rotation_order": {
-                                    "type": "string"
-                                  },
-                                  "rotation_units": {
-                                    "type": "string"
-                                  },
-                                  "x_translation": {
-                                    "type": "number"
-                                  },
-                                  "y_translation": {
-                                    "type": "number"
-                                  },
-                                  "z_translation": {
-                                    "type": "number"
-                                  },
-                                  "translation_units": {
-                                    "type": "string"
-                                  },
-                                  "source": {
-                                    "anyOf": [
-                                      {
-                                        "type": "string"
-                                      },
-                                      {
-                                        "type": "object",
-                                        "properties": {
-                                          "@id": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@id"
-                                          },
-                                          "@type": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@type"
-                                          },
-                                          "@context": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@context"
-                                          },
-                                          "label": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/label"
-                                          },
-                                          "comment": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/comment"
-                                          },
-                                          "creator": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator"
-                                          },
-                                          "creator_first_name": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_first_name"
-                                          },
-                                          "creator_last_name": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_last_name"
-                                          },
-                                          "creator_orcid": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_orcid"
-                                          },
-                                          "creation_date": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creation_date"
-                                          },
-                                          "ccf_annotations": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/ccf_annotations"
-                                          },
-                                          "x_dimension": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/x_dimension"
-                                          },
-                                          "y_dimension": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/y_dimension"
-                                          },
-                                          "z_dimension": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/z_dimension"
-                                          },
-                                          "dimension_units": {
-                                            "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/dimension_units"
-                                          }
-                                        },
-                                        "required": [
-                                          "@id",
-                                          "@type",
-                                          "@context"
-                                        ],
-                                        "additionalProperties": false
-                                      }
-                                    ]
-                                  },
-                                  "target": {
-                                    "anyOf": [
-                                      {
-                                        "type": "string"
-                                      },
-                                      {
-                                        "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/placement/properties/source/anyOf/1"
-                                      }
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "@id",
-                                  "@type",
-                                  "placement_date",
-                                  "x_scaling",
-                                  "y_scaling",
-                                  "z_scaling",
-                                  "scaling_units",
-                                  "x_rotation",
-                                  "y_rotation",
-                                  "z_rotation",
-                                  "rotation_units",
-                                  "x_translation",
-                                  "y_translation",
-                                  "z_translation",
-                                  "translation_units",
-                                  "target"
-                                ],
-                                "additionalProperties": false
-                              }
-                            },
-                            "required": [
-                              "@id",
-                              "@type",
-                              "@context",
-                              "placement"
-                            ],
-                            "additionalProperties": false
-                          }
-                        ]
-                      },
-                      "label": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "link": {
-                        "type": "string"
-                      },
-                      "section_count": {
-                        "type": "number"
-                      },
-                      "section_size": {
-                        "type": "number"
-                      },
-                      "section_unit": {
-                        "type": "string"
-                      },
-                      "sections": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "@type": {
-                              "type": "string"
-                            },
-                            "sample_type": {
-                              "type": "string",
-                              "const": "Tissue Section"
-                            },
-                            "label": {
-                              "type": "string"
-                            },
-                            "description": {
-                              "type": "string"
-                            },
-                            "link": {
-                              "type": "string"
-                            },
-                            "section_number": {
-                              "type": "number"
-                            },
-                            "datasets": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "@type": {
-                                    "type": "string"
+                                    "const": "SpatialEntity"
                                   },
                                   "label": {
                                     "type": "string"
                                   },
-                                  "description": {
+                                  "comment": {
                                     "type": "string"
                                   },
-                                  "link": {
+                                  "creator": {
                                     "type": "string"
                                   },
-                                  "technology": {
+                                  "creator_first_name": {
                                     "type": "string"
                                   },
-                                  "thumbnail": {
+                                  "creator_last_name": {
                                     "type": "string"
+                                  },
+                                  "creator_orcid": {
+                                    "type": "string"
+                                  },
+                                  "creation_date": {
+                                    "type": "string"
+                                  },
+                                  "ccf_annotations": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "x_dimension": {
+                                    "type": "number"
+                                  },
+                                  "y_dimension": {
+                                    "type": "number"
+                                  },
+                                  "z_dimension": {
+                                    "type": "number"
+                                  },
+                                  "dimension_units": {
+                                    "type": "string"
+                                  },
+                                  "placement": {
+                                    "type": "object",
+                                    "properties": {
+                                      "@context": {
+                                        "type": "string"
+                                      },
+                                      "@id": {
+                                        "type": "string"
+                                      },
+                                      "@type": {
+                                        "type": "string",
+                                        "const": "SpatialPlacement"
+                                      },
+                                      "placement_date": {
+                                        "type": "string"
+                                      },
+                                      "x_scaling": {
+                                        "type": "number"
+                                      },
+                                      "y_scaling": {
+                                        "type": "number"
+                                      },
+                                      "z_scaling": {
+                                        "type": "number"
+                                      },
+                                      "scaling_units": {
+                                        "type": "string"
+                                      },
+                                      "x_rotation": {
+                                        "type": "number"
+                                      },
+                                      "y_rotation": {
+                                        "type": "number"
+                                      },
+                                      "z_rotation": {
+                                        "type": "number"
+                                      },
+                                      "w_rotation": {
+                                        "type": "number"
+                                      },
+                                      "rotation_order": {
+                                        "type": "string"
+                                      },
+                                      "rotation_units": {
+                                        "type": "string"
+                                      },
+                                      "x_translation": {
+                                        "type": "number"
+                                      },
+                                      "y_translation": {
+                                        "type": "number"
+                                      },
+                                      "z_translation": {
+                                        "type": "number"
+                                      },
+                                      "translation_units": {
+                                        "type": "string"
+                                      },
+                                      "source": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "object",
+                                            "properties": {
+                                              "@context": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@context"
+                                              },
+                                              "@id": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@id"
+                                              },
+                                              "@type": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/@type"
+                                              },
+                                              "label": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/label"
+                                              },
+                                              "comment": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/comment"
+                                              },
+                                              "creator": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator"
+                                              },
+                                              "creator_first_name": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_first_name"
+                                              },
+                                              "creator_last_name": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_last_name"
+                                              },
+                                              "creator_orcid": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creator_orcid"
+                                              },
+                                              "creation_date": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/creation_date"
+                                              },
+                                              "ccf_annotations": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/ccf_annotations"
+                                              },
+                                              "x_dimension": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/x_dimension"
+                                              },
+                                              "y_dimension": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/y_dimension"
+                                              },
+                                              "z_dimension": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/z_dimension"
+                                              },
+                                              "dimension_units": {
+                                                "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/dimension_units"
+                                              }
+                                            },
+                                            "required": [
+                                              "@context",
+                                              "@id",
+                                              "@type"
+                                            ],
+                                            "additionalProperties": false
+                                          }
+                                        ]
+                                      },
+                                      "target": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/rui_location/anyOf/1/properties/placement/properties/source/anyOf/1"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "@id",
+                                      "@type",
+                                      "placement_date",
+                                      "x_scaling",
+                                      "y_scaling",
+                                      "z_scaling",
+                                      "scaling_units",
+                                      "x_rotation",
+                                      "y_rotation",
+                                      "z_rotation",
+                                      "rotation_units",
+                                      "x_translation",
+                                      "y_translation",
+                                      "z_translation",
+                                      "translation_units",
+                                      "target"
+                                    ],
+                                    "additionalProperties": false
                                   }
                                 },
+                                "required": [
+                                  "@context",
+                                  "@id",
+                                  "@type",
+                                  "placement"
+                                ],
                                 "additionalProperties": false
                               }
+                            ]
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "link": {
+                            "type": "string"
+                          },
+                          "section_count": {
+                            "type": "number"
+                          },
+                          "section_size": {
+                            "type": "number"
+                          },
+                          "section_unit": {
+                            "type": "string"
+                          },
+                          "sections": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "@type": {
+                                  "type": "string"
+                                },
+                                "sample_type": {
+                                  "type": "string",
+                                  "const": "Tissue Section"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "link": {
+                                  "type": "string"
+                                },
+                                "section_number": {
+                                  "type": "number"
+                                },
+                                "datasets": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "@type": {
+                                        "type": "string"
+                                      },
+                                      "label": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "link": {
+                                        "type": "string"
+                                      },
+                                      "technology": {
+                                        "type": "string"
+                                      },
+                                      "thumbnail": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "additionalProperties": false
                             }
                           },
-                          "additionalProperties": false
-                        }
+                          "datasets": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/sections/items/properties/datasets/items"
+                            }
+                          }
+                        },
+                        "required": [
+                          "rui_location"
+                        ],
+                        "additionalProperties": false
                       },
-                      "datasets": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/definitions/mySchema/items/properties/donors/items/properties/samples/items/properties/sections/items/properties/datasets/items"
-                        }
-                      }
-                    },
-                    "required": [
-                      "rui_location"
-                    ],
-                    "additionalProperties": false
+                      "minItems": 1
+                    }
                   },
-                  "minItems": 1
-                }
+                  "required": [
+                    "sex",
+                    "samples"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 1
               },
-              "required": [
-                "sex",
-                "samples"
-              ],
-              "additionalProperties": false
-            },
-            "minItems": 1
-          },
-          "defaults": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "thumbnail": {
-                "type": "string"
+              "defaults": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "thumbnail": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "link"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
-              "id",
-              "link"
+              "provider_name",
+              "provider_uuid",
+              "consortium_name",
+              "donors"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "import_from_csv": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "object",
+                "properties": {
+                  "uniqueId": {
+                    "type": "string"
+                  },
+                  "endpoint": {
+                    "type": "string"
+                  },
+                  "paperId": {
+                    "type": "string"
+                  },
+                  "datasetId": {
+                    "type": "string"
+                  },
+                  "sampleId": {
+                    "type": "string"
+                  },
+                  "ruiLocationId": {
+                    "type": "string"
+                  },
+                  "donorId": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "defaults": {
+                "type": "object",
+                "properties": {
+                  "baseIri": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "baseIri"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "import_from_csv",
+              "fields"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "filter": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "ids"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "imports"
             ],
             "additionalProperties": false
           }
-        },
-        "required": [
-          "provider_name",
-          "provider_uuid",
-          "consortium_name",
-          "donors"
-        ],
-        "additionalProperties": false
+        ]
       }
     }
   },

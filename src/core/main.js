@@ -16,6 +16,7 @@ export async function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
   const data = loadFile(context.doPath, 'registrations.yaml', Providers);
 
+  // FIXME
   // Normal Normalization
   let normalized = '';
   for (const provider of data) {

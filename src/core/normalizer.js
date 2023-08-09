@@ -84,7 +84,7 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
  * @param { string } file - The name of file
  * @param { string } schema - The Zod schema with which the file has to be validated.
  */
-function loadFile(dir, file, schema) {
+export function loadFile(dir, file, schema) {
   const path = resolve(dir, file);
   const yaml = load(readFileSync(path));
   return schema.parse(yaml);
@@ -137,6 +137,7 @@ function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation
  * @param { Object }  dataset - This is the dataset object which contains the thumbnail
  */
 function convertThumbnailPath(dataset) {
+  // FIXME
   dataset.thumbnail = resolve(dataset.thumbnail);
   return dataset.thumbnail;
 }
