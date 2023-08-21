@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { ImportFromCSV, ImportMultiLocation } from './import-rui-location.js';
 import { SpatialEntity } from './spatial-schema.js';
-import { ImportMultiLocation, ImportFromCSV } from './import-rui-location.js'
 
 export const Dataset = z.object({
   /** id of the Dataset item */
@@ -18,6 +17,8 @@ export const Dataset = z.object({
   technology: z.string().optional(),
   /** thumbnail of the Dataset item */
   thumbnail: z.string().optional(),
+  /** publication */
+  publication: z.string().optional(),
 });
 
 export const Section = z.object({
@@ -37,6 +38,8 @@ export const Section = z.object({
   section_number: z.number().optional(),
   /** An array of Dataset */
   datasets: Dataset.array().optional(),
+  /** publication */
+  publication: z.string().optional(),
 });
 
 export const Block = z.object({
@@ -64,6 +67,8 @@ export const Block = z.object({
   sections: Section.array().optional(),
   /** An array of Dataset */
   datasets: Dataset.array().optional(),
+  /** publication */
+  publication: z.string().optional(),
 });
 
 export const Donor = z.object({
@@ -85,6 +90,8 @@ export const Donor = z.object({
   bmi: z.number().optional(),
   /** An array of Block */
   samples: Block.array().min(1),
+  /** publication */
+  publication: z.string().optional(),
 });
 
 export const Default = z.object({
@@ -94,6 +101,8 @@ export const Default = z.object({
   link: z.string(),
   /** default thumbnail */
   thumbnail: z.string().optional(),
+  /** default publication */
+  publication: z.string().optional(),
 });
 
 export const Provider = z.object({
@@ -114,7 +123,5 @@ export const Provider = z.object({
   /** Default id, link, and thumbnail if the Provider doesn't have it */
   defaults: Default.optional(),
 });
-
-// export const Providers = Provider.array();
 
 export const Providers = z.union([Provider, ImportFromCSV, ImportMultiLocation]).array();
