@@ -22,7 +22,7 @@ export const FieldMappingSchema = z
     sampleId: z.string(),
     ruiLocationId: z.string(),
     donorId: z.string(),
-    publication: z.string(),
+    publication: z.string()
   })
   .partial();
 
