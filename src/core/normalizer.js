@@ -187,7 +187,6 @@ function ensurePublication(object, ...ancestors) {
         return;
       }
     }
-    throw new Error(' Publication is missing. Please provide a publication for the object or its parent Donor');
   }
 }
 
