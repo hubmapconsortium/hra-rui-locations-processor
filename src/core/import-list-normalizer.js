@@ -47,11 +47,14 @@ const FILTER_SPEC = {
  * @param { string[] } filters - An array containing filtering criteria to apply to the imported rui_location data.
  */
 export async function importFromList(rui_locations, filters) {
-  const ids = new Set(filters.ids);
+  let ids;
+  if (filters && filters?.ids?.length > 0) {
+    ids = new Set(filters.ids);
+  }
   let results = [];
 
   for (const dataset of rui_locations) {
-    let data = '';
+    let data = [];
 
     if (dataset.startsWith('http://') || dataset.startsWith('https://')) {
       data = await fetch(dataset).then((r) => r.json());
@@ -66,8 +69,13 @@ export async function importFromList(rui_locations, filters) {
       console.log('Unable to import', dataset);
     }
 
-    const filtered = filter(data, ids, FILTER_SPEC);
-    results = results.concat(filtered?.['@graph'] ?? []);
+    if (!data['@graph'] && Array.isArray(data)) {
+      data = { '@graph': data };
+    }
+    if (ids) {
+      data = filter(data, ids, FILTER_SPEC);
+    }
+    results = results.concat(data['@graph']);
   }
   return results;
 }
