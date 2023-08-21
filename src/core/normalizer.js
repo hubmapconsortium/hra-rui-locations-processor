@@ -3,6 +3,7 @@ import { load } from 'js-yaml';
 import { resolve } from 'path';
 import { SpatialEntity } from '../utils/spatial-schema.js';
 
+
 /** The default order that properties should show in objects */
 const DEFAULT_PROPERTY_ORDER = [
   '@id',
@@ -11,6 +12,7 @@ const DEFAULT_PROPERTY_ORDER = [
   'label',
   'description',
   'link',
+  'publication',
   'section_count',
   'section_size',
   'rui_location',
@@ -42,10 +44,12 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
         ensureDonorLabel(donor, block);
         ensureDescription(donor, ruiLocation, provider);
         ensureLink(donor, provider, provider.defaults ? provider.defaults : '');
+        ensurePublication(donor, provider, provider.defaults ? provider.defaults : '');
 
         ensureId(blockId, block, 'TissueBlock', donor, provider, provider.defaults ? provider.defaults : '');
         ensureLabel(block, ruiLocation, donor, provider);
         ensureLink(block, donor, provider, provider.defaults ? provider.defaults : '');
+        ensurePublication(block, donor, provider, provider.defaults ? provider.defaults : '');
         ensureSampleDescription(block, ruiLocation, provider);
         ensureSectionCount(block);
         ensureDatasets(block.datasets, `TissueBlock${blockId + 1}`, provider, donor, block, ruiLocation);
@@ -67,6 +71,7 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
           ensureLabel(section, ruiLocation, donor, provider);
           ensureSampleDescription(section, ruiLocation, donor, provider);
           ensureLink(section, block, donor, provider, provider.defaults ? provider.defaults : '');
+          ensurePublication(section, block, donor, provider, provider.defaults ? provider.defaults : '');
           ensureDatasets(section.datasets, `TissueSection${sectionId + 1}`, provider, donor, block, ruiLocation);
           ensurePropertyOrder(section, block.sections);
         }
@@ -128,6 +133,7 @@ function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation
     ensureLabel(dataset, ruiLocation, donor, provider);
     ensureDatasetDescription(dataset);
     ensureLink(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
+    ensurePublication(dataset, block, donor, provider, provider.defaults ? provider.defaults : '');
     ensureDatasetThumbnail(dataset, provider?.defaults?.thumbnail);
     ensurePropertyOrder(dataset, container);
   }
@@ -165,6 +171,22 @@ function ensureLink(object, ...ancestors) {
       }
     }
     throw new Error(' Link is missing. Please provide a link for the object or its parent Donor');
+  }
+}
+
+/**
+ * This function ensures the publication is mentioned. If not, it generates it from ancestors(It searches upwards in the registration.yaml file or till the provider level), else it fetches the default.
+ * @param {Object} object - The object where publication has to checked
+ * @param {[Object]} ancestors  - The hierarchial structures to the top from where the publication can be fetched.
+ */
+function ensurePublication(object, ...ancestors) {
+  if (!object.publication) {
+    for (const ancestor of ancestors) {
+      if (ancestor.publication) {
+        object.publication = ancestor.publication;
+        return;
+      }
+    }
   }
 }
 

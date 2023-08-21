@@ -32,7 +32,6 @@ export async function normalizeRegistrations(context) {
       csv_normalized = await importCsv(csv.import_from_csv, csv.fields, csv.baseIri);
     }
   }
-
   //Importing from list (web or local) files using filters
   let import_list_normalized = '';
   for (const import_list of data) {

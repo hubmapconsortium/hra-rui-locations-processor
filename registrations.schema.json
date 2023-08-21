@@ -364,10 +364,16 @@
                                       },
                                       "thumbnail": {
                                         "type": "string"
+                                      },
+                                      "publication": {
+                                        "type": "string"
                                       }
                                     },
                                     "additionalProperties": false
                                   }
+                                },
+                                "publication": {
+                                  "type": "string"
                                 }
                               },
                               "additionalProperties": false
@@ -378,6 +384,9 @@
                             "items": {
                               "$ref": "#/definitions/mySchema/items/anyOf/0/properties/donors/items/properties/samples/items/properties/sections/items/properties/datasets/items"
                             }
+                          },
+                          "publication": {
+                            "type": "string"
                           }
                         },
                         "required": [
@@ -386,6 +395,9 @@
                         "additionalProperties": false
                       },
                       "minItems": 1
+                    },
+                    "publication": {
+                      "type": "string"
                     }
                   },
                   "required": [
@@ -406,6 +418,9 @@
                     "type": "string"
                   },
                   "thumbnail": {
+                    "type": "string"
+                  },
+                  "publication": {
                     "type": "string"
                   }
                 },
