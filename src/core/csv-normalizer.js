@@ -33,7 +33,7 @@ export async function getDataSource(url) {
  * @param { { donorId?, ruiLocation?, sampleId?, datasetId? } } param1 ids to search for
  * @returns returns object with matched donor, block, section, dataset depending on what is matched
  */
-function findInData(data, { donorId, ruiLocation, sampleId, datasetId }) {
+function findInData(data, { donorId, ruiLocation, sampleId, datasetId, publication }) {
   for (const donor of data) {
     // If a donor is found, return it
     if (donor['@id'] === donorId) {
@@ -54,7 +54,8 @@ function findInData(data, { donorId, ruiLocation, sampleId, datasetId }) {
 
         // Search section datasets
         for (const sectionDataset of section.datasets ?? []) {
-          if (sectionDataset['@id'] === datasetId) {
+          if (sectionDataset['@id'] === datasetId || sectionDataset.publication === publication) {
+            console.log('Section Dataset : ', sectionDataset.publication);
             return { donor, block, section, dataset: sectionDataset };
           }
         }
@@ -62,7 +63,8 @@ function findInData(data, { donorId, ruiLocation, sampleId, datasetId }) {
 
       // Search block datasets
       for (const blockDataset of block.datasets ?? []) {
-        if (blockDataset['@id'] === datasetId) {
+        if (blockDataset['@id'] === datasetId || blockDataset.publication === publication) {
+          console.log('Block Dataset : ', blockDataset.publication);
           return { donor, block, dataset: blockDataset };
         }
       }
@@ -108,7 +110,7 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
 
   for (const dataset of allDatasets) {
     const data = await getDataSource(dataset.endpoint);
-    const { datasetId, sampleId, ruiLocationId, donorId, uniqueId, paperId } = dataset;
+    const { datasetId, sampleId, ruiLocationId, donorId, uniqueId, paperId, publication } = dataset;
 
     let id;
     let result;
@@ -128,6 +130,14 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
     if (!result && donorId) {
       id = donorId;
       result = findInData(data, { donorId });
+    }
+    if (!result && publication) { // search by publication
+      console.log('searching by publication')
+      result = findInData(data, { publication: publication });
+      if (result){
+        console.log('SEARCHED BY PUBLICATION')
+      }
+
     }
 
     // If data is found, add it to the growing list of registrations to output
