@@ -13,6 +13,8 @@ const DEFAULT_PROPERTY_ORDER = [
   'description',
   'link',
   'publication',
+  'publicationTitle',
+  'publicationLeadAuthor',
   'section_count',
   'section_size',
   'rui_location',

@@ -168,7 +168,7 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
               '@id': datasetIri,
               link: linkId || result.dataset.link, 
               publicationId: publicationId,    // It should also fetch from result??
-              publicationTitle : publicationTitle,
+              publicationTitle: publicationTitle,
               publicationLeadAuthor: publicationLeadAuthor
             }
           );
@@ -179,9 +179,9 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
             '@type': 'Dataset',
             label: block.label,
             description: block.description,
-            link: linkId || block.link, 
-            publicationId: publicationId,   // It should also fetch from result??
-            publicationTitle : publicationTitle,
+            link: linkId || block.link,
+            publicationId: publicationId,
+            publicationTitle: publicationTitle,
             publicationLeadAuthor: publicationLeadAuthor,
             technology: 'OTHER',
             thumbnail: 'assets/icons/ico-unknown.svg',
