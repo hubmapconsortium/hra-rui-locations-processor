@@ -19,6 +19,8 @@ export const Dataset = z.object({
   thumbnail: z.string().optional(),
   /** publication */
   publication: z.string().optional(),
+  publicationTitle: z.string().optional(),
+  publicationLeadAuthor: z.string().optional(),
 });
 
 export const Section = z.object({
@@ -38,8 +40,6 @@ export const Section = z.object({
   section_number: z.number().optional(),
   /** An array of Dataset */
   datasets: Dataset.array().optional(),
-  /** publication */
-  publication: z.string().optional(),
 });
 
 export const Block = z.object({
@@ -67,8 +67,6 @@ export const Block = z.object({
   sections: Section.array().optional(),
   /** An array of Dataset */
   datasets: Dataset.array().optional(),
-  /** publication */
-  publication: z.string().optional(),
 });
 
 export const Donor = z.object({
@@ -90,8 +88,6 @@ export const Donor = z.object({
   bmi: z.number().optional(),
   /** An array of Block */
   samples: Block.array().min(1),
-  /** publication */
-  publication: z.string().optional(),
 });
 
 export const Default = z.object({
@@ -103,6 +99,9 @@ export const Default = z.object({
   thumbnail: z.string().optional(),
   /** default publication */
   publication: z.string().optional(),
+  publicationTitle: z.string().optional(),
+  publicationLeadAuthor: z.string().optional(),
+  
 });
 
 export const Provider = z.object({

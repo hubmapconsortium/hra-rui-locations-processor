@@ -17,12 +17,18 @@ export const FieldMappingSchema = z
   .object({
     uniqueId: z.string(),
     endpoint: z.string(),
-    paperId: z.string(),
+  
+    // For searching
     datasetId: z.string(),
     sampleId: z.string(),
     ruiLocationId: z.string(),
     donorId: z.string(),
-    publication: z.string()
+  
+    // For additional dataset metadata
+    linkId: z.string(),
+    publicationId: z.string(),
+    publicationTitle: z.string(),
+    publicationLeadAuthor: z.string()
   })
   .partial();
 
