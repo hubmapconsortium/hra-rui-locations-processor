@@ -55,7 +55,6 @@ function findInData(data, { donorId, ruiLocation, sampleId, datasetId, publicati
         // Search section datasets
         for (const sectionDataset of section.datasets ?? []) {
           if (sectionDataset['@id'] === datasetId) {
-            console.log('Section Dataset : ', sectionDataset.publication);
             return { donor, block, section, dataset: sectionDataset };
           }
         }
@@ -64,7 +63,6 @@ function findInData(data, { donorId, ruiLocation, sampleId, datasetId, publicati
       // Search block datasets
       for (const blockDataset of block.datasets ?? []) {
         if (blockDataset['@id'] === datasetId) {
-          console.log('Block Dataset : ', blockDataset.publication);
           return { donor, block, dataset: blockDataset };
         }
       }
@@ -167,9 +165,9 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
             {
               '@id': datasetIri,
               link: linkId || result.dataset.link, 
-              publicationId: publicationId,    // It should also fetch from result??
-              publicationTitle: publicationTitle,
-              publicationLeadAuthor: publicationLeadAuthor
+              publicationId: publicationId ? publicationId : undefined, 
+              publicationTitle: publicationTitle ? publicationTitle : undefined,
+              publicationLeadAuthor: publicationLeadAuthor ? publicationLeadAuthor : undefined,
             }
           );
         } else {
@@ -180,9 +178,9 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
             label: block.label,
             description: block.description,
             link: linkId || block.link,
-            publicationId: publicationId,
-            publicationTitle: publicationTitle,
-            publicationLeadAuthor: publicationLeadAuthor,
+            publicationId: publicationId ? publicationId : undefined, 
+            publicationTitle: publicationTitle ? publicationTitle : undefined,
+            publicationLeadAuthor: publicationLeadAuthor ? publicationLeadAuthor : undefined,
             technology: 'OTHER',
             thumbnail: 'assets/icons/ico-unknown.svg',
           };

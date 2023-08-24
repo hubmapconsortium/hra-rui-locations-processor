@@ -4,6 +4,23 @@ import { Providers } from '../utils/data-schema.js';
 import { convertToJsonLd } from './main.js';
 import { loadFile, normalizeRegistration } from './normalizer.js';
 
+function matches(item, ids) {
+  return ids.has(item['@id']);
+}
+
+function sampleMatches(sample, ids) {
+  return matches(sample, ids) || matches(sample.rui_location, ids);
+}
+
+function datasetMatches(dataset, ids) {
+  return (
+    matches(dataset, ids) ||
+    ids.has(dataset.publication) ||
+    ids.has(dataset.publicationTitle) ||
+    ids.has(dataset.publicationLeadAuthor)
+  );
+}
+
 const FILTER_SPEC = {
   property: '',
   test: () => false,
@@ -14,11 +31,11 @@ const FILTER_SPEC = {
       inner: [
         {
           property: 'samples',
-          test: (s, ids) => matches(s, ids) || matches(s.rui_location, ids),
+          test: sampleMatches,
           inner: [
             {
               property: 'datasets',
-              test: matches,
+              test: datasetMatches,
             },
             {
               property: 'sections',
@@ -30,7 +47,7 @@ const FILTER_SPEC = {
                 },
                 {
                   property: 'datasets',
-                  test: matches,
+                  test: datasetMatches,
                 },
               ],
             },
@@ -53,7 +70,8 @@ export async function importFromList(rui_locations, filters) {
   for (const dataset of rui_locations) {
     const data = await fetchData(dataset);
     const dataWithGraph = Array.isArray(data) ? { '@graph': data } : data;
-    const filteredData = ids.size > 0 ? filter(dataWithGraph, ids, FILTER_SPEC) : dataWithGraph;
+    const filteredData =
+      ids.size > 0 ? filter(dataWithGraph, ids, FILTER_SPEC) : dataWithGraph;
     results = results.concat(filteredData?.['@graph'] ?? []);
   }
 
@@ -76,10 +94,6 @@ async function fetchData(dataset) {
   }
 }
 
-function matches(item, ids) {
-  return ids.has(item['@id']);
-}
-
 function filter(item, ids, spec, level = 0) {
   if (spec.test(item, ids)) {
     return item;
@@ -89,7 +103,9 @@ function filter(item, ids, spec, level = 0) {
   let hasMatches = false;
   for (const innerSpec of spec.inner ?? []) {
     const { property } = innerSpec;
-    const innerItems = item[property]?.map((i) => filter(i, ids, innerSpec, level + 1))?.filter((i) => i !== undefined);
+    const innerItems = item[property]
+      ?.map((i) => filter(i, ids, innerSpec, level + 1))
+      ?.filter((i) => i !== undefined);
 
     copy[property] = innerItems;
     if (innerItems !== undefined && innerItems.length > 0) {
@@ -99,4 +115,3 @@ function filter(item, ids, spec, level = 0) {
 
   return hasMatches ? copy : undefined;
 }
-
