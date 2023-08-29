@@ -468,6 +468,9 @@
                   },
                   "donorId": {
                     "type": "string"
+                  },
+                  "publication": {
+                    "type": "string"
                   }
                 },
                 "additionalProperties": false

@@ -33,7 +33,7 @@ export async function getDataSource(url) {
  * @param { { donorId?, ruiLocation?, sampleId?, datasetId? } } param1 ids to search for
  * @returns returns object with matched donor, block, section, dataset depending on what is matched
  */
-function findInData(data, { donorId, ruiLocation, sampleId, datasetId }) {
+function findInData(data, { donorId, ruiLocation, sampleId, datasetId, publication }) {
   for (const donor of data) {
     // If a donor is found, return it
     if (donor['@id'] === donorId) {
@@ -108,7 +108,7 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
 
   for (const dataset of allDatasets) {
     const data = await getDataSource(dataset.endpoint);
-    const { datasetId, sampleId, ruiLocationId, donorId, uniqueId, paperId } = dataset;
+    const { datasetId, sampleId, ruiLocationId, donorId, uniqueId, linkId, publicationId, publicationTitle, publicationLeadAuthor } = dataset;
 
     let id;
     let result;
@@ -164,7 +164,10 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
             result.dataset,
             {
               '@id': datasetIri,
-              link: paperId || result.dataset.link,
+              link: linkId || result.dataset.link, 
+              publicationId: publicationId ? publicationId : undefined, 
+              publicationTitle: publicationTitle ? publicationTitle : undefined,
+              publicationLeadAuthor: publicationLeadAuthor ? publicationLeadAuthor : undefined,
             }
           );
         } else {
@@ -174,7 +177,10 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
             '@type': 'Dataset',
             label: block.label,
             description: block.description,
-            link: paperId || block.link,
+            link: linkId || block.link,
+            publicationId: publicationId ? publicationId : undefined, 
+            publicationTitle: publicationTitle ? publicationTitle : undefined,
+            publicationLeadAuthor: publicationLeadAuthor ? publicationLeadAuthor : undefined,
             technology: 'OTHER',
             thumbnail: 'assets/icons/ico-unknown.svg',
           };

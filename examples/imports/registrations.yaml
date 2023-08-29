@@ -12,7 +12,7 @@
       samples:
       - rui_location: registration-data-1.json
 
-- import_from_csv: https://docs.google.com/spreadsheets/d/1HyUCq8n2zOozOck_Nvrp0RNd1TL4iK9I0C5cb9DuHhY/export?format=csv&gid=2095065964
+- import_from_csv: https://docs.google.com/spreadsheets/d/e/2PACX-1vQa6snV86D9bCaQaK_YfKBmNzGHaqItnM5SyUi6lG28vpJNyFRgxxr7bGubBpPuJlw1gYK7EfQmUvhW/pub?output=csv
   fields:
     uniqueId: dataset_id
     endpoint: ccf_api_endpoint
@@ -22,15 +22,19 @@
     # sectionId: 'sample / tissue section ID'
     # ruiLocationId: CxG_dataset_id_donor_id_organ
     donorId: 'donor/participant ID'
+    publicationId: publicationId
+    publicationTitle: publication-title
+    publicationLeadAuthor: publication-Lead-Author
   defaults:
     baseIri: 'https://cns-iu.github.io/hra-registrations/hta-gtex-pilot2/rui_locations.jsonld'
 
 - imports: 
     - https://ccf-api.hubmapconsortium.org/v1/hubmap/rui_locations.jsonld
     - https://ccf-api.hubmapconsortium.org/v1/gtex/rui_locations.jsonld
-    - ./examples/all-features/
+    - ../examples/all-features/rui_locations.jsonld
   filter: #optional
     ids: 
+      - publication-Lead-Author # (publicationLeadAuthor) This is present in import 3 (only grab 1 dataset, 1 sample, donor)
       - https://entity.api.hubmapconsortium.org/entities/01d8b1a59c0326441167d8375c4437ec # (Donor id) This is present in import 1 (Donor 1) (GRAB ALL DATA)
       - https://entity.api.hubmapconsortium.org/entities/017eccf19e93969ce5cd8f30f78bab67 # (Sample id) This is present in import 1 (Donor 2) (ONLY GRAB 1 SAMPLE)
       - http://purl.org/ccf/1.5/b7ad0f82-7460-4fc5-8c91-cc46666ee4f2 # (Rui Location id) This is present in import 1  (Donor 3) (ONLY GRAB ONE SAMPLE)
