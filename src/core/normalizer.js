@@ -40,7 +40,7 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
         block['@type'] = 'Sample';
         block['sample_type'] = 'Tissue Block';
 
-        const ruiLocation = ensureRuiLocation(block, ruiLocationsDir);
+        const ruiLocation = await ensureRuiLocation(block, ruiLocationsDir);
 
         ensureId(donorId, donor, 'Donor', provider, provider.defaults ? provider.defaults : '');
         ensureDonorLabel(donor, block);
@@ -149,9 +149,18 @@ function ensureDatasetThumbnail(dataset, fallbackThumbnail = undefined) {
  * @param { string } block - This is the block object which contains rui_locations
  * @param { string } ruiLocationsDir - The directory where rui_location JSON file exists.
  */
-function ensureRuiLocation(block, ruiLocationsDir) {
+async function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === 'string') {
-    block.rui_location = loadFile(ruiLocationsDir, block.rui_location, SpatialEntity);
+    if (block.rui_location.startsWith('http')) {
+      const res = await fetch(`https://apps.humanatlas.io/api/v1/extraction-site?iri=${encodeURIComponent(block.rui_location)}`)
+      if (res.ok && res.status !== 404) {
+        block.rui_location = await res.json();
+      } else {
+        console.warn('Unable to locate rui_location:', block.rui_location);
+      }
+    } else {
+      block.rui_location = loadFile(ruiLocationsDir, block.rui_location, SpatialEntity);
+    }
   }
   return block.rui_location;
 }
