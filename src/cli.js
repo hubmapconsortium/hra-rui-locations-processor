@@ -29,8 +29,9 @@ program
   )
   .argument('<digital-object-path>', 'Path to the digital object')
   .option('--base-iri <string>', 'Base IRI for Digital Objects')
-  .action((str, str1) => {
-    normalizeRegistrations({ doPath: str, processorHome: getProcessorHome(), str1 });
+  .option('--add-collisions', 'Run mesh-based collision detection on RUI locations and update ccf_annotations', false)
+  .action((str, options) => {
+    normalizeRegistrations({ doPath: str, processorHome: getProcessorHome(), ...options });
   });
 
 program

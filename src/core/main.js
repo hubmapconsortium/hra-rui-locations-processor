@@ -3,6 +3,7 @@ import { load } from 'js-yaml';
 import { resolve } from 'path';
 import sh from 'shelljs';
 
+import { addMeshBasedCollisionsToAll } from '../utils/collisions.js';
 import { Providers } from '../utils/data-schema.js';
 import { importCsv } from './csv-normalizer.js';
 import { importFromList } from './import-list-normalizer.js';
@@ -41,6 +42,10 @@ export async function normalizeRegistrations(context) {
   }
 
   const final = convertToJsonLd(normalized, csv_normalized, import_list_normalized);
+
+  if (context.addCollisions) {
+    await addMeshBasedCollisionsToAll(final);
+  }
 
   const ruiLocationsOutputPath = resolve(context.doPath, 'rui_locations.jsonld');
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
