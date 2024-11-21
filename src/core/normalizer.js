@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { resolve } from 'path';
+import { v4 as uuidV4 } from 'uuid';
 import { SpatialEntity } from '../utils/spatial-schema.js';
-
 
 /** The default order that properties should show in objects */
 const DEFAULT_PROPERTY_ORDER = [
@@ -138,7 +138,6 @@ function ensureDatasets(container, idPrefix, provider, donor, block, ruiLocation
   }
 }
 
-
 function ensureDatasetThumbnail(dataset, fallbackThumbnail = undefined) {
   dataset.thumbnail = dataset.thumbnail || fallbackThumbnail;
   return dataset.thumbnail;
@@ -152,9 +151,14 @@ function ensureDatasetThumbnail(dataset, fallbackThumbnail = undefined) {
 async function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === 'string') {
     if (block.rui_location.startsWith('http')) {
-      const res = await fetch(`https://apps.humanatlas.io/api/v1/extraction-site?iri=${encodeURIComponent(block.rui_location)}`)
+      const res = await fetch(
+        `https://apps.humanatlas.io/api/v1/extraction-site?iri=${encodeURIComponent(block.rui_location)}`
+      );
       if (res.ok && res.status !== 404) {
         block.rui_location = await res.json();
+        block.rui_location['http://www.w3.org/2002/07/owl#sameAs'] = block.rui_location['@id'];
+        block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
+        block.rui_location.placement['@id'] = `${block.rui_location['@id']}_placement`;
       } else {
         console.warn('Unable to locate rui_location:', block.rui_location);
       }
