@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import sh from 'shelljs';
+import { writeIndexHtml } from '../utils/write-index-html.js';
 import { normalizeRegistrations } from './main.js';
 
 export function deployDir(context) {
@@ -23,5 +24,5 @@ export function deployDir(context) {
   }
 
   writeFileSync(resolve(deploymentHome, 'rui_locations.jsonld'), JSON.stringify(mergedRegistrations, null, 2));
-  sh.cp(resolve(context.processorHome, 'src/ccf-eui-template.html'), resolve(deploymentHome, 'index.html'));
+  writeIndexHtml(context, mergedRegistrations);
 }

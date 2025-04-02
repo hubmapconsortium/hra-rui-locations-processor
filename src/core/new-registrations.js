@@ -1,6 +1,7 @@
 import { existsSync } from 'fs';
 import { resolve } from 'path';
 import sh from 'shelljs';
+import { writeIndexHtml } from '../utils/write-index-html.js';
 
 export function newRegistrations(context) {
   if (!existsSync(context.doPath) || context.overwrite) {
@@ -9,6 +10,6 @@ export function newRegistrations(context) {
       resolve(context.processorHome, 'src/registrations-template.yaml'),
       resolve(context.doPath, 'registrations.yaml')
     );
-    sh.cp(resolve(context.processorHome, 'src/ccf-eui-template.html'), resolve(context.doPath, 'index.html'));
+    writeIndexHtml(context);
   }
 }

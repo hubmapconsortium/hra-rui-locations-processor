@@ -1,17 +1,17 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { resolve } from 'path';
-import sh from 'shelljs';
 
 import { addMeshBasedCollisionsToAll } from '../utils/collisions.js';
 import { Providers } from '../utils/data-schema.js';
+import { writeIndexHtml } from '../utils/write-index-html.js';
 import { importCsv } from './csv-normalizer.js';
 import { importFromList } from './import-list-normalizer.js';
 import { ensurePropertyOrder, normalizeRegistration } from './normalizer.js';
 
 /**
  * This function normalizes the registration data from a YAML file to a JSON-LD format and writes it to a file as output.
- *  @param { string } context - The directory path of registration.yaml file.
+ *  @param { object } context - The directory path of registration.yaml file.
  */
 export async function normalizeRegistrations(context) {
   const ruiLocationsDir = resolve(context.doPath, 'registrations');
@@ -49,7 +49,7 @@ export async function normalizeRegistrations(context) {
 
   const ruiLocationsOutputPath = resolve(context.doPath, 'rui_locations.jsonld');
   writeFileSync(ruiLocationsOutputPath, JSON.stringify(final, null, 2));
-  sh.cp(resolve(context.processorHome, 'src/ccf-eui-template.html'), resolve(context.doPath, 'index.html'));
+  writeIndexHtml(context, final);
 }
 
 /**
