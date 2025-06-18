@@ -118,7 +118,7 @@
                   "description": "Data/Assay Types: CODEX, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "CODEX",
-                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg"
                 },
                 {
                   "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection1_Dataset2",
@@ -127,7 +127,7 @@
                   "description": "Data/Assay Types: 10x, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "10x",
-                  "thumbnail": "assets/icons/ico-bulk-10x.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg"
                 }
               ]
             },
@@ -147,7 +147,7 @@
                   "description": "Data/Assay Types: CODEX, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "CODEX",
-                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg"
                 },
                 {
                   "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock1_TissueSection2_Dataset2",
@@ -156,7 +156,7 @@
                   "description": "Data/Assay Types: 10x, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "10x",
-                  "thumbnail": "assets/icons/ico-bulk-10x.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg"
                 }
               ]
             }
@@ -222,7 +222,7 @@
                   "description": "Data/Assay Types: OTHER, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "OTHER",
-                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg"
                 },
                 {
                   "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection1_Dataset2",
@@ -231,7 +231,7 @@
                   "description": "Data/Assay Types: 20x, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "20x",
-                  "thumbnail": "assets/icons/ico-bulk-10x.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg"
                 }
               ]
             },
@@ -251,7 +251,7 @@
                   "description": "Data/Assay Types: OTHER, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "OTHER",
-                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg"
                 },
                 {
                   "@id": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346#Donor1_TissueBlock2_TissueSection2_Dataset2",
@@ -260,7 +260,7 @@
                   "description": "Data/Assay Types: 30x, ",
                   "link": "https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346",
                   "technology": "30x",
-                  "thumbnail": "assets/icons/ico-bulk-10x.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg"
                 }
               ]
             }
@@ -340,7 +340,7 @@
                   "description": "Data/Assay Types: 50X, ",
                   "link": "https://portal.hubmapconsortium.org/browse/donor/f84ff583687f3407636d8ce843b48ff0",
                   "technology": "50X",
-                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg"
                 }
               ]
             }

@@ -5,7 +5,7 @@
   provider_uuid: 308f5ffc-ed43-11e8-b56a-0e8017bdda58
   defaults:
     id: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
-    thumbnail: assets/icons/ico-unknown.svg
+    thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-unknown.svg
     link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
   donors:
     - sex: Male
@@ -16,16 +16,16 @@
             link:  https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
             datasets:
               - technology: CODEX
-                thumbnail: assets/icons/ico-spatial-codex.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg
               - technology: 10x
-                thumbnail: assets/icons/ico-bulk-10x.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg
           - label: Registered 9/7/2021, Test cotter, TMC-Stanford
             link:  https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
             datasets:
               - technology: CODEX
-                thumbnail: assets/icons/ico-spatial-codex.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg
               - technology: 10x
-                thumbnail: assets/icons/ico-bulk-10x.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg
           
       - rui_location: registration-data-2.json
         sections:
@@ -33,16 +33,16 @@
             link:  https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
             datasets:
               - technology: OTHER
-                thumbnail: assets/icons/ico-spatial-codex.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg
               - technology: 20x
-                thumbnail: assets/icons/ico-bulk-10x.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg
           - label: Registered 9/7/2021, Test cotter, TMC-Stanford
             link:  https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
             datasets:
               - technology: OTHER
-                thumbnail: assets/icons/ico-spatial-codex.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg
               - technology: 30x
-                thumbnail: assets/icons/ico-bulk-10x.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-bulk-10x.svg
 - consortium_name: HuBMAP
   provider_name: TMC-Stanford
   provider_uuid: def5fd76-ed43-11e8-b56a-0e8017bdda58
@@ -59,7 +59,7 @@
               link:  https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
               datasets:
                 - technology: 50X
-                  thumbnail: assets/icons/ico-spatial-codex.svg
+                  thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg
     - sex: Female
       bmi: 50
       age: 20

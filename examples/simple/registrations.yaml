@@ -5,7 +5,7 @@
   provider_uuid: 308f5ffc-ed43-11e8-b56a-0e8017bdda58
   defaults:
     id: http://dx.doi.org/10.1681/ASN.2016091027
-    thumbnail: assets/icons/ico-unknown.svg
+    thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-unknown.svg
     link: https://entity.api.hubmapconsortium.org/entities/e5d3c8ea4ce06c7f1bca2c6419f49346
   donors:
     - sex: Male
@@ -18,4 +18,4 @@
             datasets:
               - technology: CODEX
                 link: https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041
-                thumbnail: assets/icons/ico-spatial-codex.svg
+                thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg

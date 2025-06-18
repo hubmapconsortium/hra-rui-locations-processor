@@ -182,7 +182,7 @@ export async function importCsv(csvUrl, fieldLookup, baseIri = undefined) {
             publicationTitle: publicationTitle ? publicationTitle : undefined,
             publicationLeadAuthor: publicationLeadAuthor ? publicationLeadAuthor : undefined,
             technology: 'OTHER',
-            thumbnail: 'assets/icons/ico-unknown.svg',
+            thumbnail: 'https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-unknown.svg',
           };
         }
         block.datasets.push(hraDataset);

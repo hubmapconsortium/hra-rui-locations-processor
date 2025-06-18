@@ -30,7 +30,7 @@ export async function normalizeRegistration(data, ruiLocationsDir) {
   for (const provider of data) {
     if (provider.defaults) {
       if (!provider.defaults.thumbnail) {
-        provider.defaults.thumbnail = 'assets/icons/ico-unknown.svg';
+        provider.defaults.thumbnail = 'https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-unknown.svg';
       }
     }
     for (const [donor, donorId] of enumerate(provider.donors)) {

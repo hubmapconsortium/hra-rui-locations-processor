@@ -5,7 +5,7 @@
   provider_uuid: <uuid>
   defaults:
     id: http://example.com/required/id
-    thumbnail: assets/icons/ico-unknown.svg
+    thumbnail: https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-unknown.svg
     link: http://example.com/user/link
   donors:
     - sex: Male

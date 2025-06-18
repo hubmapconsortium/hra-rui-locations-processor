@@ -118,7 +118,7 @@
                   "description": "Data/Assay Types: CODEX, ",
                   "link": "https://portal.hubmapconsortium.org/browse/sample/999801206f8611892c35fe86cbb5c041",
                   "technology": "CODEX",
-                  "thumbnail": "assets/icons/ico-spatial-codex.svg"
+                  "thumbnail": "https://cdn.humanatlas.io/ui/ccf-eui/assets/icons/ico-spatial-codex.svg"
                 }
               ]
             }
