@@ -154,7 +154,7 @@ async function ensureRuiLocation(block, ruiLocationsDir) {
       const res = await fetch(
         `https://apps.humanatlas.io/api/v1/extraction-site?iri=${encodeURIComponent(block.rui_location)}`
       );
-      if (res.ok && res.status !== 404) {
+      if (res.ok && res.status !== 404 && res.headers.get('content-type') !== 'text/html') {
         block.rui_location = await res.json();
         block.rui_location['http://www.w3.org/2002/07/owl#sameAs'] = block.rui_location['@id'];
         block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
