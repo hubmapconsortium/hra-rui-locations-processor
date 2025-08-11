@@ -10,27 +10,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet" />
     <link href="styles.css" rel="stylesheet" />
     <script src="wc.js" type="module"></script>
+    <script>
+      const basePath = location.href.replace(/\/[^\/]+\.html/, '/');
+      fetch(`${basePath}rui_locations.jsonld`)
+        .then((r) => r.json())
+        .then((ruiLocations) => {
+          const eui = document.createElement('ccf-eui');
+          eui.homeUrl = location.href;
+          eui.dataSources = JSON.stringify([JSON.stringify(ruiLocations)]);
+          // eui.selectedOrgans = [ 'http://purl.obolibrary.org/obo/UBERON_0002097' ];
+          document.body.appendChild(eui);
+        });
+    </script>
   </head>
 
-  <body>
-    <template id="eui-template">
-      <ccf-eui
-        home-url="HOME_URL"
-        data-sources='["SOURCE"]'
-        logo-tooltip=""
-        theme="hubmap"
-        login-disabled="true"
-      ></ccf-eui>
-    </template>
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        const basePath = location.href.replace(/\/[^\/]+\.html/, '/');
-        const homeUrl = location.href;
-        const source = `${basePath}rui_locations.jsonld`;
-        const euiTemplate = document.getElementById('eui-template');
-        const eui = euiTemplate.innerHTML.replace('SOURCE', source).replace('HOME_URL', homeUrl);
-        document.body.innerHTML = eui;
-      });
-    </script>
-  </body>
+  <body></body>
 </html>
