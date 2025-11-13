@@ -159,6 +159,7 @@ async function ensureRuiLocation(block, ruiLocationsDir) {
         block.rui_location['sameAs'] = block.rui_location['@id'];
         block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
         block.rui_location.placement['@id'] = `${block.rui_location['@id']}_placement`;
+        block.rui_location.placement.source = block.rui_location['@id'];
       } else {
         console.warn('Unable to locate rui_location:', block.rui_location);
       }
