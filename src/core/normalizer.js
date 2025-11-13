@@ -150,7 +150,24 @@ function ensureDatasetThumbnail(dataset, fallbackThumbnail = undefined) {
  */
 async function ensureRuiLocation(block, ruiLocationsDir) {
   if (typeof block.rui_location === 'string') {
-    if (block.rui_location.startsWith('http')) {
+    if (block.rui_location.startsWith('https://purl.humanatlas.io/millitome/')) {
+      // Get the extraction sites URL for a given millitome
+      const extractionSitesUrl = block.rui_location.split('#')[0].replace('https://purl.humanatlas.io', 'https://cdn.humanatlas.io/digital-objects') + '/assets/extraction-sites.jsonld';
+      const res = await fetch(extractionSitesUrl);
+      if (res.ok && res.status !== 404 && res.headers.get('content-type') !== 'text/html') {
+        const sites = await res.json();
+        // Check if the rui_location / millitome block URL is available
+        const site = sites?.find((x) => x['@id'] === block.rui_location) ?? undefined;
+        if (site) {
+          block.rui_location = site
+          block.rui_location['sameAs'] = block.rui_location['@id'];
+          block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
+          block.rui_location.placement['@id'] = `${block.rui_location['@id']}_placement`;
+        } else {
+          console.warn('Unable to locate rui_location:', block.rui_location);
+        }
+      }
+    } else if (block.rui_location.startsWith('http')) {
       const res = await fetch(
         `https://apps.humanatlas.io/api/v1/extraction-site?iri=${encodeURIComponent(block.rui_location)}`
       );
