@@ -156,7 +156,7 @@ async function ensureRuiLocation(block, ruiLocationsDir) {
       );
       if (res.ok && res.status !== 404 && res.headers.get('content-type') !== 'text/html') {
         block.rui_location = await res.json();
-        block.rui_location['http://www.w3.org/2002/07/owl#sameAs'] = block.rui_location['@id'];
+        block.rui_location['sameAs'] = block.rui_location['@id'];
         block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
         block.rui_location.placement['@id'] = `${block.rui_location['@id']}_placement`;
       } else {
