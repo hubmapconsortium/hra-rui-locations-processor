@@ -74,6 +74,9 @@ export const temp = z.object({
   z_dimension: z.number().optional(),
   /** Units dimensions are in */
   dimension_units: z.string().optional(),
+
+  /** IRI of the equivalent rui location (usually a millitome) */
+  sameAs: z.string().optional(),
 });
 
 export const SpatialPlacement = SpatialPlacementCommon.extend({

@@ -159,10 +159,7 @@ async function ensureRuiLocation(block, ruiLocationsDir) {
         // Check if the rui_location / millitome block URL is available
         const site = sites?.find((x) => x['@id'] === block.rui_location) ?? undefined;
         if (site) {
-          block.rui_location = site
-          block.rui_location['sameAs'] = block.rui_location['@id'];
-          block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
-          block.rui_location.placement['@id'] = `${block.rui_location['@id']}_placement`;
+          block.rui_location = addSameAs(site);
         } else {
           console.warn('Unable to locate rui_location:', block.rui_location);
         }
@@ -172,11 +169,7 @@ async function ensureRuiLocation(block, ruiLocationsDir) {
         `https://apps.humanatlas.io/api/v1/extraction-site?iri=${encodeURIComponent(block.rui_location)}`
       );
       if (res.ok && res.status !== 404 && res.headers.get('content-type') !== 'text/html') {
-        block.rui_location = await res.json();
-        block.rui_location['sameAs'] = block.rui_location['@id'];
-        block.rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
-        block.rui_location.placement['@id'] = `${block.rui_location['@id']}_placement`;
-        block.rui_location.placement.source = undefined;
+        block.rui_location = addSameAs(await res.json());
       } else {
         console.warn('Unable to locate rui_location:', block.rui_location);
       }
@@ -184,7 +177,18 @@ async function ensureRuiLocation(block, ruiLocationsDir) {
       block.rui_location = loadFile(ruiLocationsDir, block.rui_location, SpatialEntity);
     }
   }
+  if (block.rui_location?.['@id']?.startsWith('https://purl.humanatlas.io/millitome/')) {
+    block.rui_location = addSameAs(block.rui_location)
+  }
   return block.rui_location;
+}
+
+function addSameAs(rui_location) {
+  rui_location['sameAs'] = rui_location['@id'];
+  rui_location['@id'] = `http://purl.org/ccf/1.5/${uuidV4()}`;
+  rui_location.placement['@id'] = `${rui_location['@id']}_placement`;
+  rui_location.placement.source = undefined;
+  return rui_location;
 }
 
 /**
